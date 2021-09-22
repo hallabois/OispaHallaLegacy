@@ -1,0 +1,15 @@
+2-Hytönen
+4-Kohvakka
+8-Lampinen
+16-Larjo
+32-Saku
+64-Slone
+128-Franklin
+256-Temmes
+512-Paasonen
+1024-Mähönen
+2048-HALLA
+4096-Raksahalla
+8192-McHalla
+16384-Hallacoin
+32678-UNhalla
