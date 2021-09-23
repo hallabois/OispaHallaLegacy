@@ -53,6 +53,12 @@ h1.title {
   text-align: center;
 }
 
+.discord {
+  margin-top: 40px;
+  font-size: small;
+  text-align: center;
+}
+
 @include keyframes(move-up) {
   0% {
     top: 25px;

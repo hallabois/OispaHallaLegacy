@@ -27,6 +27,11 @@ h1.title {
   font-size: small;
   text-align: center; }
 
+.discord {
+  margin-top: 40px;
+  font-size: small;
+  text-align: center; }
+
 @-webkit-keyframes move-up {
   0% {
     top: 25px;
@@ -143,16 +148,16 @@ hr {
   100% {
     opacity: 1; } }
 .tile-2 .tile-inner {
-  background-image: url("../img/hytonen_crop.png"); }
+  background-image: url("../img/hytonen_crop_min.png"); }
 
 .tile-4 .tile-inner {
-  background-image: url("../img/kohvakka_crop.png"); }
+  background-image: url("../img/kohvakka_crop_min.png"); }
 
 .tile-8 .tile-inner {
-  background-image: url("../img/sirpa_crop.png"); }
+  background-image: url("../img/sirpa_crop_min.png"); }
 
 .tile-16 .tile-inner {
-  background-image: url("../img/larjo_crop.png"); }
+  background-image: url("../img/larjo_crop_min.png"); }
 
 .tile-32 .tile-inner {
   background-image: url("../img/snickers.png"); }
@@ -161,28 +166,28 @@ hr {
   background-image: url("../img/slone_crop.jpg"); }
 
 .tile-128 .tile-inner {
-  background-image: url("../img/christian_crop.png"); }
+  background-image: url("../img/christian_crop_min.png"); }
 
 .tile-256 .tile-inner {
-  background-image: url("../img/temmes_crop.png"); }
+  background-image: url("../img/temmes_crop_min.png"); }
 
 .tile-512 .tile-inner {
-  background-image: url("../img/marko_crop.png"); }
+  background-image: url("../img/marko_crop_min.png"); }
 
 .tile-1024 .tile-inner {
-  background-image: url("../img/mahonen_crop.png"); }
+  background-image: url("../img/mahonen_crop_min.png"); }
 
 .tile-2048 .tile-inner {
-  background-image: url("../img/HALLA.png"); }
+  background-image: url("../img/HALLA_min.png"); }
 
 .tile-4096 .tile-inner {
   background-image: url("../img/raksa_halla.png"); }
 
 .tile-8192 .tile-inner {
-  background-image: url("../img/mchalla_crop.png"); }
+  background-image: url("../img/mchalla_crop_min.png"); }
 
 .tile-16384 .tile-inner {
-  background-image: url("../img/hallacoin.png"); }
+  background-image: url("../img/hallacoin_min.png"); }
 
 .tile-32678 .tile-inner {
   background-image: url("../img/un_halla.png"); }
