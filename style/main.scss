@@ -47,6 +47,12 @@ h1.title {
   float: left;
 }
 
+.disclaimer {
+  margin-top: 80px;
+  font-size: small;
+  text-align: center;
+}
+
 @include keyframes(move-up) {
   0% {
     top: 25px;
@@ -107,11 +113,11 @@ h1.title {
 }
 
 .score-container:after {
-  content: "Score";
+  content: "Arvosana";
 }
 
 .best-container:after {
-  content: "Best";
+  content: "Paras Halla";
 }
 
 p {
@@ -308,8 +314,99 @@ hr {
   }
 }
 
+.tile-2 {
+  .tile-inner {
+    background-image: url('../img/hytonen_crop.png');
+  }
+}
+
+.tile-4 {
+  .tile-inner {
+    background-image: url('../img/kohvakka_crop.png');
+  }
+}
+
+.tile-8 {
+  .tile-inner {
+    background-image: url('../img/sirpa_crop.png');
+  }
+}
+
+.tile-16 {
+  .tile-inner {
+    background-image: url('../img/larjo_crop.png');
+  }
+}
+
+.tile-32 {
+  .tile-inner {
+    background-image: url('../img/snickers.png');
+  }
+}
+
+.tile-64 {
+  .tile-inner {
+    background-image: url('../img/slone_crop.jpg');
+  }
+}
+
+.tile-128 {
+  .tile-inner {
+    background-image: url('../img/christian_crop.png');
+  }
+}
+
+.tile-256 {
+  .tile-inner {
+    background-image: url('../img/temmes_crop.png');
+  }
+}
+
+.tile-512 {
+  .tile-inner {
+    background-image: url('../img/marko_crop.png');
+  }
+}
+
+.tile-1024 {
+  .tile-inner {
+    background-image: url('../img/mahonen_crop.png');
+  }
+}
+
+.tile-2048 {
+  .tile-inner {
+    background-image: url('../img/HALLA.png');
+  }
+}
+
+.tile-4096 {
+  .tile-inner {
+    background-image: url('../img/raksa_halla.png');
+  }
+}
+
+.tile-8192 {
+  .tile-inner {
+    background-image: url('../img/mchalla_crop.png');
+  }
+}
+
+.tile-16384 {
+  .tile-inner {
+    background-image: url('../img/hallacoin.png');
+  }
+}
+
+.tile-32678 {
+  .tile-inner {
+    background-image: url('../img/un_halla.png');
+  }
+}
+
 // End of game-field mixin
 @include game-field;
+
 
 .tile {
   position: absolute; // Makes transforms relative to the top-left corner
@@ -317,12 +414,13 @@ hr {
   .tile-inner {
     border-radius: $tile-border-radius;
 
-    background: $tile-color;
     text-align: center;
     font-weight: bold;
     z-index: 10;
 
     font-size: 55px;
+
+    background-size: cover;
   }
 
   // Movement transition
@@ -347,72 +445,6 @@ hr {
                    false true, // 512
                    false true, // 1024
                    false true; // 2048
-
-  // Build tile colors
-  @while $exponent <= $limit {
-    $power: pow($base, $exponent);
-
-    &.tile-#{$power} .tile-inner {
-      // Calculate base background color
-      $gold-percent: ($exponent - 1) / ($limit - 1) * 100;
-      $mixed-background: mix($tile-gold-color, $tile-color, $gold-percent);
-
-      $nth-color: nth($special-colors, $exponent);
-
-      $special-background: nth($nth-color, 1);
-      $bright-color: nth($nth-color, 2);
-
-      @if $special-background {
-        $mixed-background: mix($special-background, $mixed-background, 55%);
-      }
-
-      @if $bright-color {
-        color: $bright-text-color;
-      }
-
-      // Set background
-      background: $mixed-background;
-
-      // Add glow
-      $glow-opacity: max($exponent - 4, 0) / ($limit - 4);
-
-      @if not $special-background {
-        box-shadow: 0 0 30px 10px rgba($tile-gold-glow-color, $glow-opacity / 1.8),
-                    inset 0 0 0 1px rgba(white, $glow-opacity / 3);
-      }
-
-      // Adjust font size for bigger numbers
-      @if $power >= 100 and $power < 1000 {
-        font-size: 45px;
-
-        // Media queries placed here to avoid carrying over the rest of the logic
-        @include smaller($mobile-threshold) {
-          font-size: 25px;
-        }
-      } @else if $power >= 1000 {
-        font-size: 35px;
-
-        @include smaller($mobile-threshold) {
-          font-size: 15px;
-        }
-      }
-    }
-
-    $exponent: $exponent + 1;
-  }
-
-  // Super tiles (above 2048)
-  &.tile-super .tile-inner {
-    color: $bright-text-color;
-    background: mix(#333, $tile-gold-color, 95%);
-
-    font-size: 30px;
-
-    @include smaller($mobile-threshold) {
-      font-size: 10px;
-    }
-  }
-}
 
 @include keyframes(appear) {
   0% {
@@ -536,7 +568,7 @@ hr {
 
   .game-message {
     p {
-      font-size: 30px !important;
+      font-size: 150px !important;
       height: 30px !important;
       line-height: 30px !important;
       margin-top: 90px !important;
@@ -546,4 +578,5 @@ hr {
       margin-top: 30px !important;
     }
   }
+}
 }
