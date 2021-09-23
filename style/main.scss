@@ -517,9 +517,10 @@ $kuva_map: ("2", '../img/hytonen_crop_min.png');
   }
 
   h1.title {
-    font-size: 27px;
+    font-size: 38px;
     margin-top: 15px;
     max-width: 50%;
+    word-wrap: normal;
   }
 
   .container {
@@ -530,7 +531,11 @@ $kuva_map: ("2", '../img/hytonen_crop_min.png');
   .score-container, .best-container {
     margin-top: 0;
     padding: 15px 10px;
-    min-width: 40px;
+    min-width: 70px;
+  }
+
+  .score-container {
+    margin-bottom: 10px;
   }
 
   .heading {
@@ -563,7 +568,7 @@ $kuva_map: ("2", '../img/hytonen_crop_min.png');
 
   .game-message {
     p {
-      font-size: 150px !important;
+      font-size: 40px !important;
       height: 30px !important;
       line-height: 30px !important;
       margin-top: 90px !important;
