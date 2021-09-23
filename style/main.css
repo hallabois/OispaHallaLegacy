@@ -27,6 +27,9 @@ h1.title {
   font-size: small;
   text-align: center; }
 
+.disclaimer p {
+  margin-bottom: 20px; }
+
 .discord {
   margin-top: 40px;
   font-size: small;

@@ -53,6 +53,10 @@ h1.title {
   text-align: center;
 }
 
+.disclaimer p {
+  margin-bottom: 20px;
+}
+
 .discord {
   margin-top: 40px;
   font-size: small;
@@ -324,94 +328,70 @@ hr {
   }
 }
 
-.tile-2 {
-  .tile-inner {
-    background-image: url('../img/hytonen_crop_min.png');
-  }
+@mixin kuva($kuva_url){
+  background-image: url($kuva_url);
 }
 
-.tile-4 {
-  .tile-inner {
-    background-image: url('../img/kohvakka_crop_min.png');
-  }
+$kuva_map: ("2", '../img/hytonen_crop_min.png');
+
+.tile-2 .tile-inner {
+  @include kuva($kuva_url: '../img/hytonen_crop_min.png');
 }
 
-.tile-8 {
-  .tile-inner {
-    background-image: url('../img/sirpa_crop_min.png');
-  }
+.tile-4 .tile-inner {
+  @include kuva($kuva_url: '../img/kohvakka_crop_min.png');
 }
 
-.tile-16 {
-  .tile-inner {
-    background-image: url('../img/larjo_crop_min.png');
-  }
+.tile-8 .tile-inner {
+  @include kuva($kuva_url: '../img/sirpa_crop_min.png');
 }
 
-.tile-32 {
-  .tile-inner {
-    background-image: url('../img/snickers.png');
-  }
+.tile-16 .tile-inner {
+  @include kuva($kuva_url: '../img/larjo_crop_min.png');
 }
 
-.tile-64 {
-  .tile-inner {
-    background-image: url('../img/slone_crop.jpg');
-  }
+.tile-32 .tile-inner {
+  @include kuva($kuva_url: '../img/snickers.png');
 }
 
-.tile-128 {
-  .tile-inner {
-    background-image: url('../img/christian_crop_min.png');
-  }
+.tile-64 .tile-inner {
+  @include kuva($kuva_url: '../img/slone_crop.jpg');
 }
 
-.tile-256 {
-  .tile-inner {
-    background-image: url('../img/temmes_crop_min.png');
-  }
+.tile-128 .tile-inner {
+  @include kuva($kuva_url: '../img/christian_crop_min.png');
 }
 
-.tile-512 {
-  .tile-inner {
-    background-image: url('../img/marko_crop_min.png');
-  }
+.tile-256 .tile-inner {
+  @include kuva($kuva_url: '../img/temmes_crop_min.png');
 }
 
-.tile-1024 {
-  .tile-inner {
-    background-image: url('../img/mahonen_crop_min.png');
-  }
+.tile-512 .tile-inner {
+  @include kuva($kuva_url: '../img/marko_crop_min.png');
 }
 
-.tile-2048 {
-  .tile-inner {
-    background-image: url('../img/HALLA_min.png');
-  }
+.tile-1024 .tile-inner {
+  @include kuva($kuva_url: '../img/mahonen_crop_min.png');
 }
 
-.tile-4096 {
-  .tile-inner {
-    background-image: url('../img/raksa_halla.png');
-  }
+.tile-2048 .tile-inner {
+  @include kuva($kuva_url: '../img/HALLA_min.png');
 }
 
-.tile-8192 {
-  .tile-inner {
-    background-image: url('../img/mchalla_crop_min.png');
-  }
+.tile-4096 .tile-inner {
+  @include kuva($kuva_url: '../img/raksa_halla.png');
 }
 
-.tile-16384 {
-  .tile-inner {
-    background-image: url('../img/hallacoin_min.png');
-  }
+.tile-8192 .tile-inner {
+  @include kuva($kuva_url: '../img/mchalla_crop_min.png');
 }
 
-.tile-32678 {
-  .tile-inner {
-    background-image: url('../img/un_halla.png');
-  }
+.tile-16384 .tile-inner {
+  @include kuva($kuva_url: '../img/hallacoin_min.png');
+}
+
+.tile-32678 .tile-inner {
+  @include kuva($kuva_url: '../img/un_halla.png');
 }
 
 // End of game-field mixin
