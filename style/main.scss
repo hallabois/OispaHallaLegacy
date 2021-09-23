@@ -74,6 +74,8 @@ h1.title {
 .scores-container {
   float: right;
   text-align: right;
+  margin-bottom: 20px;
+  min-width: 20px;
 }
 
 .score-container, .best-container {
@@ -91,6 +93,7 @@ h1.title {
   color: white;
   margin-top: 8px;
   text-align: center;
+  min-width: 50px;
 
   &:after {
     position: absolute;
@@ -452,6 +455,8 @@ hr {
                    false true, // 1024
                    false true; // 2048
 
+}
+
 @include keyframes(appear) {
   0% {
     opacity: 0;
@@ -463,6 +468,7 @@ hr {
     @include transform(scale(1));
   }
 }
+
 
 .tile-new .tile-inner {
   @include animation(appear 200ms ease $transition-speed);
@@ -488,6 +494,7 @@ hr {
   @include animation(pop 200ms ease $transition-speed);
   @include animation-fill-mode(backwards);
 }
+
 
 .above-game {
   @include clearfix;
@@ -584,5 +591,4 @@ hr {
       margin-top: 30px !important;
     }
   }
-}
 }
