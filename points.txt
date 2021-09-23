@@ -1,6 +1,6 @@
 2-Hytönen
 4-Kohvakka
-8-Lampinen
+8-Sirpa
 16-Larjo
 32-Saku
 64-Slone
