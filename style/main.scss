@@ -203,8 +203,8 @@ hr {
   }
 }
 
-
-@-webkit-keyframes fade-in-out {
+//kurinpalautus
+@include keyframes(fade-in-out) {
   0% {
     opacity: 0; 
   }
@@ -218,33 +218,6 @@ hr {
   } 
 }
 
-@-moz-keyframes fade-in-out {
-  0% {
-    opacity: 0; 
-  }
-      
-  50% {
-    opacity: 1; 
-  }
-
-  100% {
-    opacity: 0; 
-  } 
-}
-
-@keyframes fade-in-out {
-  0% {
-    opacity: 0; 
-  }
-    
-  50% {
-    opacity: 1; 
-  }
-
-  100% {
-    opacity: 0; 
-  } 
-}
 
 // Styles for buttons
 @mixin button {
@@ -415,6 +388,43 @@ $i: 2;
   $i: $i * 2;
 }
 
+//kiillot tiettyjen opettajien taakse
+.tile-128 .tile-inner {
+  box-shadow: 0px 0px 15px -4px #a8fa8a;
+}
+
+.tile-256 .tile-inner {
+  box-shadow: 0px 0px 15px -4px #FFFB62;
+}
+
+.tile-512 .tile-inner {
+  box-shadow: 0px 0px 15px -3px #FFB42C;
+}
+
+.tile-1024 .tile-inner {
+  box-shadow: 0px 0px 15px -1px #8a84ff;
+}
+
+.tile-2048 .tile-inner {
+  box-shadow: 0px 0px 15px 6px #FF4646;
+}
+
+.tile-4096 .tile-inner {
+  box-shadow: 0px 0px 15px 6px #FF9B00;
+}
+
+.tile-8192 .tile-inner {
+  box-shadow: 0px 0px 15px 6px #00FF13;
+}
+
+.tile-16384 .tile-inner {
+  box-shadow: 0px 0px 15px 6px #FFC600;
+}
+
+.tile-32768 .tile-inner {
+  box-shadow: 0px 0px 15px 6px #0B00FF;
+}
+
 
 .game-container .kurin-palautus-viesti {
   width: 94%;
@@ -430,12 +440,8 @@ $i: 2;
   & img {
     width: 300px;
 
-     -webkit-animation: fade-in-out 4000ms ease-out;
-     -moz-animation: fade-in-out 4000ms ease-out;
-     animation: fade-in-out 4000ms ease-out;
-     -webkit-animation-fill-mode: both;
-     -moz-animation-fill-mode: both;
-     animation-fill-mode: both; 
+    @include animation(fade-in-out 4000ms ease-out);
+    @include animation-fill-mode(both);
   }
 }
 
