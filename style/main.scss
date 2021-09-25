@@ -31,10 +31,13 @@ html, body {
   color: $text-color;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px;
+
+  background-image: url("../img/OispaHallaTausta.png");
+  background-size: cover;
 }
 
 body {
-  margin: 80px 0;
+  padding: 80px 0;
 }
 
 .heading {
@@ -398,7 +401,7 @@ $i: 2;
 }
 
 .tile-512 .tile-inner {
-  box-shadow: 0px 0px 15px -3px #FFB42C;
+  box-shadow: 0px 0px 15px -3px #ffa600;
 }
 
 .tile-1024 .tile-inner {
@@ -406,23 +409,23 @@ $i: 2;
 }
 
 .tile-2048 .tile-inner {
-  box-shadow: 0px 0px 15px 6px #FF4646;
+  box-shadow: 0px 0px 15px 0px #FF4646;
 }
 
 .tile-4096 .tile-inner {
-  box-shadow: 0px 0px 15px 6px #FF9B00;
+  box-shadow: 0px 0px 15px 0px #FF9B00;
 }
 
 .tile-8192 .tile-inner {
-  box-shadow: 0px 0px 15px 6px #00FF13;
+  box-shadow: 0px 0px 15px 0px #00FF13;
 }
 
 .tile-16384 .tile-inner {
-  box-shadow: 0px 0px 15px 6px #FFC600;
+  box-shadow: 0px 0px 15px 1px #FFC600;
 }
 
 .tile-32768 .tile-inner {
-  box-shadow: 0px 0px 15px 6px #0B00FF;
+  box-shadow: 0px 0px 15px 2px #0B00FF;
 }
 
 
