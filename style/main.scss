@@ -630,4 +630,17 @@ $i: 2;
       margin-top: 30px !important;
     }
   }
+
+  .kurin-palautus {
+    width: 40%;
+  }
+  
+  .game-container .kurin-palautus-viesti {
+    top: 20px;
+  
+    & img {
+      width: 170px;
+    }
+  }
+  
 }
