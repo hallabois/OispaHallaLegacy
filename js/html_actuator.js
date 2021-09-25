@@ -4,6 +4,9 @@ function HTMLActuator() {
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
 
+  this.kurinPalautusViesti = document.querySelector(".kurin-palautus-viesti");
+  this.kurinPalautusColor = document.querySelector(".kurin-palautus-color");
+
   this.score = 0;
 }
 
@@ -117,6 +120,13 @@ HTMLActuator.prototype.updateScore = function (score) {
 
     this.scoreContainer.appendChild(addition);
   }
+
+  if (this.score >= 1000) {
+    this.kurinPalautusColor.setAttribute('style', 'background-color: #0c0!important');            
+  }
+  else {
+    this.kurinPalautusColor.setAttribute('style', 'background-color: #c00!important');
+  }
 };
 
 HTMLActuator.prototype.updateBestScore = function (bestScore) {
@@ -126,6 +136,7 @@ HTMLActuator.prototype.updateBestScore = function (bestScore) {
 HTMLActuator.prototype.message = function (won) {
   var type    = won ? "game-won" : "game-over";
   var message = won ? "HALLA!" : "Improbatur...";
+  //TODO: eri viestejä riippuen parhaimmasta ruudusta pelissä
 
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
@@ -136,3 +147,21 @@ HTMLActuator.prototype.clearMessage = function () {
   this.messageContainer.classList.remove("game-won");
   this.messageContainer.classList.remove("game-over");
 };
+
+HTMLActuator.prototype.paritaKuli = function () {
+    this.clearContainer(this.scoreContainer);    
+    this.clearContainer(this.kurinPalautusViesti);
+    this.scoreContainer.textContent = this.score-1000;
+
+    var addition = document.createElement("div");
+    addition.classList.add("score-addition");
+    addition.textContent = "-1000";
+    this.scoreContainer.appendChild(addition);
+    
+    var messageElement = document.createElement("img");
+    messageElement.setAttribute('src',"./img/parinkulautus.png");
+
+    this.kurinPalautusViesti.appendChild(messageElement);
+    return true;
+}
+

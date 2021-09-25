@@ -9,9 +9,11 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
+  this.inputManager.on("paritaKuli", this.paritaKuli.bind(this));
 
   this.setup();
 }
+
 
 // Restart the game
 GameManager.prototype.restart = function () {
@@ -24,6 +26,20 @@ GameManager.prototype.restart = function () {
 GameManager.prototype.keepPlaying = function () {
   this.keepPlaying = true;
   this.actuator.continueGame(); // Clear the game won/lost message
+};
+
+//kiitoksia Antti R:lle, eli alkuperäiselle oispakaljaa.com-deville tästä pätkästä :D
+//oon pahoillani näist nimistä
+GameManager.prototype.paritaKuli = function () { 
+  if (this.score >= 1000) {
+      this.score -= 1000;
+      this.grid.palautaKuri();
+      this.actuate();  
+      this.actuator.paritaKuli();  
+  }
+  else {
+      alert("Et ole tarpeeksi suosittu opettajien keskuudessa lahjomaan heitä!");
+  }
 };
 
 // Return true if the game is lost, or has won and the user hasn't kept playing

@@ -1,0 +1,7 @@
+buttons-container: kurin-palautus-container
+katko-container: kurin-palautus
+katko-container-color: kurin-palautus-color
+go-katko: parin-kulautus                        (a)
+goKatko: paritaKuli                             (game_manager ja keyboard_input_manager)
+katkoviesti: kurin-palautus-viesti
+katkoReissu: palautaKuri                        (grid), sisältää for-loopin joka oikeasti poistaa tilet

@@ -16,14 +16,35 @@ body {
   clear: both; }
 
 h1.title {
-  font-size: 50px;
+  font-size: 45px;
   font-weight: bold;
   margin: 0;
   display: block;
   float: left; }
 
+.kurin-palautus-container {
+  margin-top: 15px;
+  justify-content: center;
+  display: flex;
+  text-align: center; }
+
+.kurin-palautus {
+  padding-bottom: 5px;
+  background-color: #c00;
+  cursor: pointer;
+  width: 25%;
+  border: 1px #faf8ef solid;
+  border-radius: 3px; }
+  .kurin-palautus:hover {
+    border: 1px black solid; }
+
+.parin-kulautus {
+  text-decoration: none;
+  color: #222;
+  font-size: 11px; }
+
 .disclaimer {
-  margin-top: 80px;
+  margin-top: 60px;
   font-size: small;
   text-align: center; }
 
@@ -154,50 +175,94 @@ hr {
 
   100% {
     opacity: 1; } }
+@-webkit-keyframes fade-in-out {
+  0% {
+    opacity: 0; }
+
+  50% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+@-moz-keyframes fade-in-out {
+  0% {
+    opacity: 0; }
+
+  50% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+@keyframes fade-in-out {
+  0% {
+    opacity: 0; }
+
+  50% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
 .tile-2 .tile-inner {
-  background-image: url("../img/hytonen_crop_min.png"); }
+  background-image: url("../img/2.png"); }
 
 .tile-4 .tile-inner {
-  background-image: url("../img/kohvakka_crop_min.png"); }
+  background-image: url("../img/4.png"); }
 
 .tile-8 .tile-inner {
-  background-image: url("../img/sirpa_crop_min.png"); }
+  background-image: url("../img/8.png"); }
 
 .tile-16 .tile-inner {
-  background-image: url("../img/larjo_crop_min.png"); }
+  background-image: url("../img/16.png"); }
 
 .tile-32 .tile-inner {
-  background-image: url("../img/snickers.png"); }
+  background-image: url("../img/32.png"); }
 
 .tile-64 .tile-inner {
-  background-image: url("../img/slone_crop.jpg"); }
+  background-image: url("../img/64.png"); }
 
 .tile-128 .tile-inner {
-  background-image: url("../img/christian_crop_min.png"); }
+  background-image: url("../img/128.png"); }
 
 .tile-256 .tile-inner {
-  background-image: url("../img/temmes_crop_min.png"); }
+  background-image: url("../img/256.png"); }
 
 .tile-512 .tile-inner {
-  background-image: url("../img/marko_crop_min.png"); }
+  background-image: url("../img/512.png"); }
 
 .tile-1024 .tile-inner {
-  background-image: url("../img/mahonen_crop_min.png"); }
+  background-image: url("../img/1024.png"); }
 
 .tile-2048 .tile-inner {
-  background-image: url("../img/HALLA_min.png"); }
+  background-image: url("../img/2048.png"); }
 
 .tile-4096 .tile-inner {
-  background-image: url("../img/raksa_halla.png"); }
+  background-image: url("../img/4096.png"); }
 
 .tile-8192 .tile-inner {
-  background-image: url("../img/mchalla_crop_min.png"); }
+  background-image: url("../img/8192.png"); }
 
 .tile-16384 .tile-inner {
-  background-image: url("../img/hallacoin_min.png"); }
+  background-image: url("../img/16384.png"); }
 
-.tile-32678 .tile-inner {
-  background-image: url("../img/un_halla.png"); }
+.tile-32768 .tile-inner {
+  background-image: url("../img/32768.png"); }
+
+.game-container .kurin-palautus-viesti {
+  width: 94%;
+  position: absolute;
+  top: 25px;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  pointer-events: none; }
+  .game-container .kurin-palautus-viesti img {
+    width: 300px;
+    -webkit-animation: fade-in-out 4000ms ease-out;
+    -moz-animation: fade-in-out 4000ms ease-out;
+    animation: fade-in-out 4000ms ease-out;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    animation-fill-mode: both; }
 
 .game-container {
   margin-top: 40px;
@@ -206,6 +271,7 @@ hr {
   cursor: default;
   -webkit-touch-callout: none;
   -ms-touch-callout: none;
+  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -579,6 +645,7 @@ hr {
     cursor: default;
     -webkit-touch-callout: none;
     -ms-touch-callout: none;
+    user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

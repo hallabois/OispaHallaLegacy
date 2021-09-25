@@ -72,6 +72,7 @@ KeyboardInputManager.prototype.listen = function () {
   this.bindButtonPress(".retry-button", this.restart);
   this.bindButtonPress(".restart-button", this.restart);
   this.bindButtonPress(".keep-playing-button", this.keepPlaying);
+  this.bindButtonPress(".parin-kulautus", this.paritaKuli);
 
   // Respond to swipe events
   var touchStartClientX, touchStartClientY;
@@ -142,3 +143,9 @@ KeyboardInputManager.prototype.bindButtonPress = function (selector, fn) {
   button.addEventListener("click", fn.bind(this));
   button.addEventListener(this.eventTouchend, fn.bind(this));
 };
+
+KeyboardInputManager.prototype.paritaKuli = function (event) {
+  event.preventDefault();
+  this.emit("paritaKuli");
+};
+
