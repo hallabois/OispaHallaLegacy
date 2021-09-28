@@ -632,7 +632,7 @@ hr {
   body {
     margin: 20px 0;
     padding: 0 20px;
-    background-image: none; }
+    background-image: none !important; }
 
   h1.title {
     font-size: 38px;
