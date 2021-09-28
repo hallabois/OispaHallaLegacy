@@ -1,0 +1,22 @@
+{
+  "short_name": "OispaHalla",
+  "name": "Oispa Halla - Yhdistä opettajat ja saavuta Halla!",
+  "icons": [
+    {
+      "src": "/img/raksahalla_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/img/raksahalla_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "background_color": "#FAF8EF",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#FAF8EF",
+  "description": "Yhdistä opettajat ja saavuta halla!"
+}
