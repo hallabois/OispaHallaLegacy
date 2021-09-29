@@ -384,15 +384,11 @@ hr {
 
 //jumalauta mitae koodia
 
-@mixin kuva($kuva_url){
-  background-image: url($kuva_url);
-}
-
 $i: 2;
 
 @while $i <= 32768 {
   .tile-#{$i} .tile-inner {
-    @include kuva($kuva_url: '../img/#{$i}.png');
+    background-image: url('../img/#{$i}.png');;
   }
   $i: $i * 2;
 }
