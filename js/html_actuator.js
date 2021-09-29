@@ -24,14 +24,14 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
       });
     });
 
-    self.updateScore(metadata.score);
+    self.updateScore(metadata.score, metadata.palautukset);
     self.updateBestScore(metadata.bestScore);
 
     if (metadata.terminated) {
       if (metadata.over) {
-        self.message(false); // You lose
+        self.message(false, metadata.palautukset); // You lose
       } else if (metadata.won) {
-        self.message(true); // You win!
+        self.message(true, metadata.palautukset); // You win!
       }
     }
 
@@ -105,7 +105,7 @@ HTMLActuator.prototype.positionClass = function (position) {
   return "tile-position-" + position.x + "-" + position.y;
 };
 
-HTMLActuator.prototype.updateScore = function (score) {
+HTMLActuator.prototype.updateScore = function (score, palautukset) {
   this.clearContainer(this.scoreContainer);
 
   var difference = score - this.score;
@@ -121,7 +121,7 @@ HTMLActuator.prototype.updateScore = function (score) {
     this.scoreContainer.appendChild(addition);
   }
 
-  if (this.score >= 1000) {
+  if (this.score >= 1000 && palautukset < 3) {
     this.kurinPalautusColor.setAttribute('style', 'background-color: #0c0!important');            
   }
   else {
@@ -133,13 +133,15 @@ HTMLActuator.prototype.updateBestScore = function (bestScore) {
   this.bestContainer.textContent = bestScore;
 };
 
-HTMLActuator.prototype.message = function (won) {
+HTMLActuator.prototype.message = function (won, kurinPalautukset) {
   var type    = won ? "game-won" : "game-over";
   var message = won ? "HALLA!" : "Improbatur...";
   //TODO: eri viestejä riippuen parhaimmasta ruudusta pelissä
 
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
+
+  this.messageContainer.getElementsByTagName("p")[1].textContent = `Kurinpalautukset: ${kurinPalautukset}/3`;
 };
 
 HTMLActuator.prototype.clearMessage = function () {
