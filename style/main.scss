@@ -24,7 +24,7 @@ $game-background: #faf8ef;
 $transition-speed: 100ms;
 
 html, body {
-  margin: 0;
+  margin: 40px 0;
   padding: 0;
 
   background: $game-background;
@@ -34,10 +34,8 @@ html, body {
 
   background-image: url("../img/OispaHallaTausta.png");
   background-size: cover;
-}
-
-body {
-  padding: 80px 0;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .heading {
