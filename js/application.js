@@ -28,3 +28,28 @@ window.requestAnimationFrame(function () {
     imageObject.src = imageList[i];
   }
 //}
+
+const darkModeComponents = [
+  document.querySelector("html"),
+  document.querySelector("body"),
+  document.querySelector(".title")
+];
+const darkModeClassName = "dark";
+function toggleDarkMode(toggled){
+  if(toggled){
+    for(let i in darkModeComponents){
+      let component = darkModeComponents[i];
+      if( !(component.classList.contains(darkModeClassName)) ){
+        component.classList.add(darkModeClassName);
+      }
+    }
+  }
+  else{
+    for(let i in darkModeComponents){
+      let component = darkModeComponents[i];
+      if( component.classList.contains(darkModeClassName) ){
+        component.classList.classList.remove(darkModeClassName);
+      }
+    }
+  }
+}

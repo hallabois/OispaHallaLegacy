@@ -21,6 +21,12 @@ $game-container-background: #bbada0;
 
 $game-background: #faf8ef;
 
+/* Dark theme: */
+$text-color-dark: #ccbbab;
+$game-background-dark: #131313;
+$title-color-dark: #e6d2bf;
+
+
 $transition-speed: 100ms;
 
 html, body {
@@ -38,6 +44,16 @@ html, body {
   background-position: top center;
 }
 
+html.dark, body.dark{
+  color: $text-color-dark;
+
+  background: $game-background-dark;
+  background-image: url("../img/OispaHallaTausta2_dark.webp");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
 .heading {
   @include clearfix;
 }
@@ -48,6 +64,9 @@ h1.title {
   margin: 0;
   display: block;
   float: left;
+}
+h1.title.dark{
+  color: $title-color-dark;
 }
 
 .kurin-palautus-container {
