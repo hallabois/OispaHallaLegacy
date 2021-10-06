@@ -48,7 +48,7 @@ function toggleDarkMode(toggled){
     for(let i in darkModeComponents){
       let component = darkModeComponents[i];
       if( component.classList.contains(darkModeClassName) ){
-        component.classList.classList.remove(darkModeClassName);
+        component.classList.remove(darkModeClassName);
       }
     }
   }
