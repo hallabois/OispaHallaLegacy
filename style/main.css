@@ -628,12 +628,10 @@ hr {
 
 @media screen and (max-width: 520px) {
   html, body {
-    font-size: 15px; }
-
-  body {
-    padding: 20px 0;
-    margin: 0;
-    background-image: none; }
+    font-size: 15px;
+    padding: 0;
+    margin: 20px 0;
+    background-image: none !important; }
 
   h1.title {
     font-size: 38px;
