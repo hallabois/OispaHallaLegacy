@@ -31,19 +31,19 @@ GameManager.prototype.keepPlaying = function () {
 //kiitoksia Antti R:lle, eli alkuperäiselle oispakaljaa.com-deville tästä pätkästä :D
 //oon pahoillani näist nimistä
 GameManager.prototype.paritaKuli = function () { 
-  if (this.score >= 1000) {
-    if(this.palautukset < 3) {
-      if(!this.isGameTerminated()) {
+  if(!this.isGameTerminated()) {
+    if (this.score >= 1000) {
+      if(this.palautukset < 3) {
         this.palautukset++;
         this.score -= 1000;
         this.grid.palautaKuri();
         this.actuate();  
         this.actuator.paritaKuli();
       }
+      else alert("Olet lahjonut opettajia liikaa! Halla on pettynyt sinuun.");
     }
-    else alert("Olet lahjonut opettajia liikaa! Halla on pettynyt sinuun.");
+    else alert("Et ole tarpeeksi suosittu opettajien keskuudessa lahjomaan heitä!");
   }
-  else alert("Et ole tarpeeksi suosittu opettajien keskuudessa lahjomaan heitä!");
 };
 
 // Return true if the game is lost, or has won and the user hasn't kept playing
