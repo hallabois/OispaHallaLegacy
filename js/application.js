@@ -27,8 +27,8 @@ window.requestAnimationFrame(function () {
     //var imageObject = new Image();
     let img = document.createElement("img");
     img.src = imageList[i];
-    img.style="height:0!important;"
-    document.querySelector("body").appendChild(img);
+    img.style="height:0!important;";
+    document.getElementsByClassName("preload-container")[0].appendChild(img);
     //imageObject.src = imageList[i];
   }
 //}

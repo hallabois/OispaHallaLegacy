@@ -282,73 +282,46 @@ hr {
 
 .tile-128 .tile-inner {
   background-image: url("../img/128.png");
-}
-
-.tile-256 .tile-inner {
-  background-image: url("../img/256.png");
-}
-
-.tile-512 .tile-inner {
-  background-image: url("../img/512.png");
-}
-
-.tile-1024 .tile-inner {
-  background-image: url("../img/1024.png");
-}
-
-.tile-2048 .tile-inner {
-  background-image: url("../img/2048.png");
-}
-
-.tile-4096 .tile-inner {
-  background-image: url("../img/4096.png");
-}
-
-.tile-8192 .tile-inner {
-  background-image: url("../img/8192.png");
-}
-
-.tile-16384 .tile-inner {
-  background-image: url("../img/16384.png");
-}
-
-.tile-32768 .tile-inner {
-  background-image: url("../img/32768.png");
-}
-
-.tile-128 .tile-inner {
   box-shadow: 0px 0px 15px -4px #a8fa8a;
 }
 
 .tile-256 .tile-inner {
+  background-image: url("../img/256.png");
   box-shadow: 0px 0px 15px -4px #FFFB62;
 }
 
 .tile-512 .tile-inner {
+  background-image: url("../img/512.png");
   box-shadow: 0px 0px 15px -3px #ffa600;
 }
 
 .tile-1024 .tile-inner {
+  background-image: url("../img/1024.png");
   box-shadow: 0px 0px 15px -1px #5000ff;
 }
 
 .tile-2048 .tile-inner {
+  background-image: url("../img/2048.png");
   box-shadow: 0px 0px 15px 0px #FF4646;
 }
 
 .tile-4096 .tile-inner {
+  background-image: url("../img/4096.png");
   box-shadow: 0px 0px 15px 0px #FF9B00;
 }
 
 .tile-8192 .tile-inner {
+  background-image: url("../img/8192.png");
   box-shadow: 0px 0px 15px 0px #00FF13;
 }
 
 .tile-16384 .tile-inner {
+  background-image: url("../img/16384.png");
   box-shadow: 0px 0px 15px 1px #FFC600;
 }
 
 .tile-32768 .tile-inner {
+  background-image: url("../img/32768.png");
   box-shadow: 0px 0px 15px 2px #0B00FF;
 }
 
