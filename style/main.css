@@ -776,7 +776,7 @@ hr {
   }
 
   .container {
-    width: 280px;
+    width: 320px;
     margin: 0 auto;
   }
 
@@ -824,8 +824,8 @@ hr {
     touch-action: none;
     background: #bbada0;
     border-radius: 6px;
-    width: 280px;
-    height: 280px;
+    width: 320px;
+    height: 320px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -905,8 +905,8 @@ hr {
   }
 
   .grid-cell {
-    width: 57.5px;
-    height: 57.5px;
+    width: 67.5px;
+    height: 67.5px;
     margin-right: 10px;
     float: left;
     border-radius: 3px;
@@ -922,9 +922,9 @@ hr {
   }
 
   .tile, .tile .tile-inner {
-    width: 58px;
-    height: 58px;
-    line-height: 58px;
+    width: 68px;
+    height: 68px;
+    line-height: 68px;
   }
   .tile.tile-position-1-1 {
     -webkit-transform: translate(0px, 0px);
@@ -933,94 +933,94 @@ hr {
     transform: translate(0px, 0px);
   }
   .tile.tile-position-1-2 {
-    -webkit-transform: translate(0px, 67px);
-    -moz-transform: translate(0px, 67px);
-    -ms-transform: translate(0px, 67px);
-    transform: translate(0px, 67px);
+    -webkit-transform: translate(0px, 77px);
+    -moz-transform: translate(0px, 77px);
+    -ms-transform: translate(0px, 77px);
+    transform: translate(0px, 77px);
   }
   .tile.tile-position-1-3 {
-    -webkit-transform: translate(0px, 135px);
-    -moz-transform: translate(0px, 135px);
-    -ms-transform: translate(0px, 135px);
-    transform: translate(0px, 135px);
+    -webkit-transform: translate(0px, 155px);
+    -moz-transform: translate(0px, 155px);
+    -ms-transform: translate(0px, 155px);
+    transform: translate(0px, 155px);
   }
   .tile.tile-position-1-4 {
-    -webkit-transform: translate(0px, 202px);
-    -moz-transform: translate(0px, 202px);
-    -ms-transform: translate(0px, 202px);
-    transform: translate(0px, 202px);
+    -webkit-transform: translate(0px, 232px);
+    -moz-transform: translate(0px, 232px);
+    -ms-transform: translate(0px, 232px);
+    transform: translate(0px, 232px);
   }
   .tile.tile-position-2-1 {
-    -webkit-transform: translate(67px, 0px);
-    -moz-transform: translate(67px, 0px);
-    -ms-transform: translate(67px, 0px);
-    transform: translate(67px, 0px);
+    -webkit-transform: translate(77px, 0px);
+    -moz-transform: translate(77px, 0px);
+    -ms-transform: translate(77px, 0px);
+    transform: translate(77px, 0px);
   }
   .tile.tile-position-2-2 {
-    -webkit-transform: translate(67px, 67px);
-    -moz-transform: translate(67px, 67px);
-    -ms-transform: translate(67px, 67px);
-    transform: translate(67px, 67px);
+    -webkit-transform: translate(77px, 77px);
+    -moz-transform: translate(77px, 77px);
+    -ms-transform: translate(77px, 77px);
+    transform: translate(77px, 77px);
   }
   .tile.tile-position-2-3 {
-    -webkit-transform: translate(67px, 135px);
-    -moz-transform: translate(67px, 135px);
-    -ms-transform: translate(67px, 135px);
-    transform: translate(67px, 135px);
+    -webkit-transform: translate(77px, 155px);
+    -moz-transform: translate(77px, 155px);
+    -ms-transform: translate(77px, 155px);
+    transform: translate(77px, 155px);
   }
   .tile.tile-position-2-4 {
-    -webkit-transform: translate(67px, 202px);
-    -moz-transform: translate(67px, 202px);
-    -ms-transform: translate(67px, 202px);
-    transform: translate(67px, 202px);
+    -webkit-transform: translate(77px, 232px);
+    -moz-transform: translate(77px, 232px);
+    -ms-transform: translate(77px, 232px);
+    transform: translate(77px, 232px);
   }
   .tile.tile-position-3-1 {
-    -webkit-transform: translate(135px, 0px);
-    -moz-transform: translate(135px, 0px);
-    -ms-transform: translate(135px, 0px);
-    transform: translate(135px, 0px);
+    -webkit-transform: translate(155px, 0px);
+    -moz-transform: translate(155px, 0px);
+    -ms-transform: translate(155px, 0px);
+    transform: translate(155px, 0px);
   }
   .tile.tile-position-3-2 {
-    -webkit-transform: translate(135px, 67px);
-    -moz-transform: translate(135px, 67px);
-    -ms-transform: translate(135px, 67px);
-    transform: translate(135px, 67px);
+    -webkit-transform: translate(155px, 77px);
+    -moz-transform: translate(155px, 77px);
+    -ms-transform: translate(155px, 77px);
+    transform: translate(155px, 77px);
   }
   .tile.tile-position-3-3 {
-    -webkit-transform: translate(135px, 135px);
-    -moz-transform: translate(135px, 135px);
-    -ms-transform: translate(135px, 135px);
-    transform: translate(135px, 135px);
+    -webkit-transform: translate(155px, 155px);
+    -moz-transform: translate(155px, 155px);
+    -ms-transform: translate(155px, 155px);
+    transform: translate(155px, 155px);
   }
   .tile.tile-position-3-4 {
-    -webkit-transform: translate(135px, 202px);
-    -moz-transform: translate(135px, 202px);
-    -ms-transform: translate(135px, 202px);
-    transform: translate(135px, 202px);
+    -webkit-transform: translate(155px, 232px);
+    -moz-transform: translate(155px, 232px);
+    -ms-transform: translate(155px, 232px);
+    transform: translate(155px, 232px);
   }
   .tile.tile-position-4-1 {
-    -webkit-transform: translate(202px, 0px);
-    -moz-transform: translate(202px, 0px);
-    -ms-transform: translate(202px, 0px);
-    transform: translate(202px, 0px);
+    -webkit-transform: translate(232px, 0px);
+    -moz-transform: translate(232px, 0px);
+    -ms-transform: translate(232px, 0px);
+    transform: translate(232px, 0px);
   }
   .tile.tile-position-4-2 {
-    -webkit-transform: translate(202px, 67px);
-    -moz-transform: translate(202px, 67px);
-    -ms-transform: translate(202px, 67px);
-    transform: translate(202px, 67px);
+    -webkit-transform: translate(232px, 77px);
+    -moz-transform: translate(232px, 77px);
+    -ms-transform: translate(232px, 77px);
+    transform: translate(232px, 77px);
   }
   .tile.tile-position-4-3 {
-    -webkit-transform: translate(202px, 135px);
-    -moz-transform: translate(202px, 135px);
-    -ms-transform: translate(202px, 135px);
-    transform: translate(202px, 135px);
+    -webkit-transform: translate(232px, 155px);
+    -moz-transform: translate(232px, 155px);
+    -ms-transform: translate(232px, 155px);
+    transform: translate(232px, 155px);
   }
   .tile.tile-position-4-4 {
-    -webkit-transform: translate(202px, 202px);
-    -moz-transform: translate(202px, 202px);
-    -ms-transform: translate(202px, 202px);
-    transform: translate(202px, 202px);
+    -webkit-transform: translate(232px, 232px);
+    -moz-transform: translate(232px, 232px);
+    -ms-transform: translate(232px, 232px);
+    transform: translate(232px, 232px);
   }
 
   .tile .tile-inner {
