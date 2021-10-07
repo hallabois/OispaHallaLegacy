@@ -24,8 +24,12 @@ window.requestAnimationFrame(function () {
     "../img/parinkulautus.png" ];
             
   for(var i = 0; i < imageList.length; i++ ) {
-    var imageObject = new Image();
-    imageObject.src = imageList[i];
+    //var imageObject = new Image();
+    let img = document.createElement("img");
+    img.src = imageList[i];
+    img.style="height:0!important;"
+    document.querySelector("body").appendChild(img);
+    //imageObject.src = imageList[i];
   }
 //}
 
