@@ -49,6 +49,14 @@ HTMLActuator.prototype.clearContainer = function (container) {
   }
 };
 
+
+//Remove merged tiles (call after 100ms)
+HTMLActuator.prototype.removeMergedTile = function (tile) {
+  if(tile.parentElement){
+    tile.parentElement.removeChild(tile);
+  }
+}
+
 HTMLActuator.prototype.addTile = function (tile) {
   var self = this;
 
@@ -83,6 +91,11 @@ HTMLActuator.prototype.addTile = function (tile) {
   } else {
     classes.push("tile-new");
     this.applyClasses(wrapper, classes);
+  }
+
+  if(tile.hasBeenMerged){
+    // Remove this tile from the dom after it's animation has finished (animation lenght 100ms)
+    setTimeout(()=>{self.removeMergedTile(wrapper)}, 100);
   }
 
   // Add the inner part of the tile to the wrapper
