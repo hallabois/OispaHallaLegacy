@@ -16,7 +16,7 @@ html, body {
 html.dark, body.dark {
   color: #ccbbab;
   background: #131313;
-  background-image: url("../img/OispaHallaTausta2_dark.webp");
+  background-image: url("../img/OispaHallaTausta2.webp");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: top center;
