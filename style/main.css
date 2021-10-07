@@ -54,6 +54,7 @@ h1.title.dark {
   width: 25%;
   border: 1px #faf8ef solid;
   border-radius: 3px;
+  transition: 1s background;
 }
 .kurin-palautus:hover {
   border: 1px black solid;

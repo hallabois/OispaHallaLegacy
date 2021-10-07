@@ -24,7 +24,7 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
       });
     });
 
-    self.updateScore(metadata.score, metadata.palautukset);
+    self.updateScore(metadata.score, metadata.palautukset, metadata.terminated);
     self.updateBestScore(metadata.bestScore);
 
     if (metadata.terminated) {
@@ -118,7 +118,7 @@ HTMLActuator.prototype.positionClass = function (position) {
   return "tile-position-" + position.x + "-" + position.y;
 };
 
-HTMLActuator.prototype.updateScore = function (score, palautukset) {
+HTMLActuator.prototype.updateScore = function (score, palautukset, terminated) {
   this.clearContainer(this.scoreContainer);
 
   var difference = score - this.score;
@@ -134,7 +134,7 @@ HTMLActuator.prototype.updateScore = function (score, palautukset) {
     this.scoreContainer.appendChild(addition);
   }
 
-  if (this.score >= 1000 && palautukset < 3) {
+  if (this.score >= 1000 && palautukset < 3 && !terminated) {
     this.kurinPalautusColor.setAttribute('style', 'background-color: #0c0!important');            
   }
   else {

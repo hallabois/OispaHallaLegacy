@@ -60,7 +60,7 @@ GameManager.prototype.setup = function () {
     this.grid        = new Grid(previousState.grid.size,
                                 previousState.grid.cells); // Reload grid
     this.score       = previousState.score;
-    if(typeof(previousState.palautukset) == undefined) {
+    if(!previousState.palautukset) {
        this.palautukset = 0;
     }
     else this.palautukset = previousState.palautukset;
