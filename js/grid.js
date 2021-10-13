@@ -116,6 +116,21 @@ Grid.prototype.serialize = function () {
   };
 };
 
+Grid.prototype.serialize_HAC = function () {
+  var state = [];
+  for (var y = 0; y < this.size; y++) {
+    for (var x = 0; x < this.size; x++) {
+      if(this.cells[x][y]){
+        state.push(this.cells[x][y].value);
+      }
+      else{
+        state.push(0);
+      }
+    }
+  }
+  return state;
+}
+
 Grid.prototype.palautaKuri = function () {
   for (var x = 0; x < this.size; x++) {
     for (var y = 0; y < this.size; y++) {

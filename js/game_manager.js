@@ -15,6 +15,12 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 }
 
 
+// Export the current game for later analysis
+GameManager.prototype.serialize_HAC = function (direction) {
+  let gridState = this.grid.serialize_HAC();
+  return gridState.join(".") + ";" + direction;
+}
+
 // Restart the game
 GameManager.prototype.restart = function () {
   this.storageManager.clearGameState();
@@ -85,6 +91,7 @@ GameManager.prototype.addStartTiles = function () {
   for (var i = 0; i < this.startTiles; i++) {
     this.addRandomTile();
   }
+  HallaAntiCheat.clearHistory();
 };
 
 // Adds a tile in a random position
@@ -154,6 +161,10 @@ GameManager.prototype.moveTile = function (tile, cell) {
 
 // Move tiles on the grid in the specified direction
 GameManager.prototype.move = function (direction) {
+
+  let state = this.serialize_HAC(direction);
+  HallaAntiCheat.recordState(state);
+
   // 0: up, 1: right, 2: down, 3: left
   var self = this;
 
@@ -212,6 +223,8 @@ GameManager.prototype.move = function (direction) {
 
     if (!this.movesAvailable()) {
       this.over = true; // Game over!
+      HallaAntiCheat.validate();
+      HallaAntiCheat.clearHistory();
     }
 
     this.actuate();
