@@ -24,7 +24,7 @@ class HAC {
         }
     }
     async validate(){
-        let response = await fetch("http://localhost:8000/HAC/validate/" + this.history.join("\n"));
+        let response = await fetch("http://localhost:8000/HAC/validate/" + this.history.join(":"));
         let data = await response.json();
         console.log(response);
         console.log(data);
