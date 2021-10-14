@@ -1,6 +1,7 @@
 // Halla Anti Cheat
 class HAC {
     constructor() {
+    	this.debug = false;
         this.history = [];
         if(localStorage && localStorage["HAC_history"]){
             try {
@@ -23,11 +24,16 @@ class HAC {
             localStorage["HAC_history"] = JSON.stringify(this.history);
         }
     }
+    toggleDebug(){
+    	this.debug = !this.debug;
+    }
     async validate(){
         let response = await fetch("http://localhost:8000/HAC/validate/" + this.history.join(":"));
         let data = await response.json();
-        console.log(response);
-        console.log(data);
+        if(this.debug){
+	        //console.log(response);
+	        console.log("Validation result: ", data);
+        }
     }
 }
 

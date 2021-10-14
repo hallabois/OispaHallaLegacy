@@ -16,9 +16,8 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 
 
 // Export the current game for later analysis
-GameManager.prototype.serialize_HAC = function (direction) {
-  let gridState = this.grid.serialize_HAC();
-  return gridState.join(".") + ";" + direction;
+GameManager.prototype.serialize_HAC = function (gridState, direction, added) {
+  return gridState.join(".") + "+" + added + ";" + direction;
 }
 
 // Restart the game
@@ -101,6 +100,7 @@ GameManager.prototype.addRandomTile = function () {
     var tile = new Tile(this.grid.randomAvailableCell(), value);
 
     this.grid.insertTile(tile);
+    return "" + tile.x + "," + tile.y + "." + tile.value; // for HAC
   }
 };
 
@@ -162,8 +162,7 @@ GameManager.prototype.moveTile = function (tile, cell) {
 // Move tiles on the grid in the specified direction
 GameManager.prototype.move = function (direction) {
 
-  let state = this.serialize_HAC(direction);
-  HallaAntiCheat.recordState(state);
+  let HAC_grid = this.grid.serialize_HAC();
 
   // 0: up, 1: right, 2: down, 3: left
   var self = this;
@@ -217,17 +216,30 @@ GameManager.prototype.move = function (direction) {
       }
     });
   });
-
+  let ended = false;
+  
+  let added = "";
   if (moved) {
-    this.addRandomTile();
+	
+    added = this.addRandomTile();
 
     if (!this.movesAvailable()) {
       this.over = true; // Game over!
+      
+	  let state = this.serialize_HAC(HAC_grid, "f", added);
+	  HallaAntiCheat.recordState(state);
       HallaAntiCheat.validate();
       HallaAntiCheat.clearHistory();
+      ended = true;
     }
 
     this.actuate();
+  }
+  if(!ended){
+	  let HAC_direction = moved ? direction : "e";
+	  let state = this.serialize_HAC(HAC_grid, HAC_direction, added);
+	  HallaAntiCheat.recordState(state);
+      HallaAntiCheat.validate();
   }
 };
 
