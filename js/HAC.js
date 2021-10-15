@@ -4,7 +4,7 @@ class HAC {
     	this.debug = false;
         this.history = [];
         this.secure = false;
-        this.urls = ["localhost:8000", "35.225.19.22:8000"];
+        this.urls = ["https://localhost:8000", "http://localhost:8000", "https://35.225.19.22:8000", "http://35.225.19.22:8000"];
         this.url = "";
         if(localStorage && localStorage["HAC_history"]){
             try {
@@ -18,12 +18,14 @@ class HAC {
     }
     async chooseServer(){
     	for(let i in this.urls){
-    		let result = this.connectivityCheck(this.urls[i]);
+    		let result = await this.connectivityCheck(this.urls[i]);
     		if(result){
     			this.url = this.urls[i];
     			return;
     		}
     	}
+    	let visual = document.querySelector(".HAC-container");
+    	visual.innerHTML = "🚫📶";
     }
     recordState(state) {
         this.history.push(state);
@@ -44,13 +46,15 @@ class HAC {
     }
     async connectivityCheck(url){
     	try{
-        	let response = await fetch("http://" + url + "/HAC/alive/");
+        	let response = await fetch(url + "/HAC/alive/");
 	        let data = await response.json();
 	        if(this.debug){
 		        //console.log(response);
 		        console.log("Connectivity check result: ", data);
 	        }
-	        return true;
+	        if(data){
+	        	return true;
+	        }
         }
         catch(e){
         	return false;
@@ -59,7 +63,7 @@ class HAC {
     async validate(){
     	let visual = document.querySelector(".HAC-container");
         try{
-        	let response = await fetch("http://" + this.url + "/HAC/validate/" + this.history.join(":"));
+        	let response = await fetch(this.url + "/HAC/validate/" + this.history.join(":"));
 	        let data = await response.json();
 	        if(this.debug){
 		        //console.log(response);
@@ -70,7 +74,7 @@ class HAC {
 	        return true;
         }
         catch(e){
-        	visual.innerHTML = "🚫📶"
+        	visual.innerHTML = "🚫📶";
         	return false;
         }
     }
