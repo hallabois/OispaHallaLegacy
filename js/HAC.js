@@ -3,6 +3,8 @@ class HAC {
     constructor() {
     	this.debug = false;
         this.history = [];
+        this.secure = false;
+        this.url = "localhost:8000";
         if(localStorage && localStorage["HAC_history"]){
             try {
                 this.history = JSON.parse(localStorage["HAC_history"]);
@@ -23,17 +25,22 @@ class HAC {
         if(localStorage){
             localStorage["HAC_history"] = JSON.stringify(this.history);
         }
+        let visual = document.querySelector(".HAC-container");
+        visual.innerHTML = "?";
     }
     toggleDebug(){
     	this.debug = !this.debug;
     }
     async validate(){
-        let response = await fetch("http://localhost:8000/HAC/validate/" + this.history.join(":"));
+        let response = await fetch("http://" + this.url + "/HAC/validate/" + this.history.join(":"));
         let data = await response.json();
         if(this.debug){
 	        //console.log(response);
 	        console.log("Validation result: ", data);
         }
+        this.secure = data.valid;
+        let visual = document.querySelector(".HAC-container");
+        visual.innerHTML = this.secure ? "🛡️ " : "⚠️";
     }
 }
 

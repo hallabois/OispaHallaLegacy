@@ -60,6 +60,14 @@ h1.title.dark {
   border: 1px black solid;
 }
 
+.HAC-container {
+  display: block;
+  position: relative;
+  right: -1.5em;
+  height: 0;
+  top: 5px;
+}
+
 .parin-kulautus {
   text-decoration: none;
   color: #222;
