@@ -4,7 +4,8 @@ class HAC {
     	this.debug = false;
         this.history = [];
         this.secure = false;
-        this.url = "35.225.19.22:8000";
+        this.urls = ["localhost:8000", "35.225.19.22:8000"];
+        this.url = "";
         if(localStorage && localStorage["HAC_history"]){
             try {
                 this.history = JSON.parse(localStorage["HAC_history"]);
@@ -12,7 +13,17 @@ class HAC {
                 console.log("Failed to load HAC history from localstorage: ", error)
             }
         }
+        this.chooseServer();
         console.log("HAC loaded!");
+    }
+    async chooseServer(){
+    	for(let i in this.urls){
+    		let result = this.connectivityCheck(this.urls[i]);
+    		if(result){
+    			this.url = this.urls[i];
+    			return;
+    		}
+    	}
     }
     recordState(state) {
         this.history.push(state);
@@ -31,16 +42,37 @@ class HAC {
     toggleDebug(){
     	this.debug = !this.debug;
     }
-    async validate(){
-        let response = await fetch("http://" + this.url + "/HAC/validate/" + this.history.join(":"));
-        let data = await response.json();
-        if(this.debug){
-	        //console.log(response);
-	        console.log("Validation result: ", data);
+    async connectivityCheck(url){
+    	try{
+        	let response = await fetch("http://" + url + "/HAC/alive/");
+	        let data = await response.json();
+	        if(this.debug){
+		        //console.log(response);
+		        console.log("Connectivity check result: ", data);
+	        }
+	        return true;
         }
-        this.secure = data.valid;
-        let visual = document.querySelector(".HAC-container");
-        visual.innerHTML = this.secure ? "🛡️ " : "⚠️";
+        catch(e){
+        	return false;
+        }
+    }
+    async validate(){
+    	let visual = document.querySelector(".HAC-container");
+        try{
+        	let response = await fetch("http://" + this.url + "/HAC/validate/" + this.history.join(":"));
+	        let data = await response.json();
+	        if(this.debug){
+		        //console.log(response);
+		        console.log("Validation result: ", data);
+	        }
+	        this.secure = data.valid;
+	        visual.innerHTML = this.secure ? "🛡️ " : "⚠️";
+	        return true;
+        }
+        catch(e){
+        	visual.innerHTML = "🚫📶"
+        	return false;
+        }
     }
 }
 
