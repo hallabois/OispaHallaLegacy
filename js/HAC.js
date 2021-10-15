@@ -4,7 +4,7 @@ class HAC {
     	this.debug = false;
         this.history = [];
         this.secure = false;
-        this.urls = ["https://localhost:8000", "http://localhost:8000", "https://hac.hallacoin.ml:8000", "http://35.225.19.22:8000"];
+        this.urls = ["https://localhost:8000", "http://localhost:8000", "https://hac.oispahalla.com:8000", "https://hac.hallacoin.ml:8000", "http://35.225.19.22:8000"];
         this.url = "";
         if(localStorage && localStorage["HAC_history"]){
             try {
@@ -63,6 +63,7 @@ class HAC {
     async validate(){
     	let visual = document.querySelector(".HAC-container");
         try{
+	        visual.innerHTML = "...";
         	let response = await fetch(this.url + "/HAC/validate/" + this.history.join(":"));
 	        let data = await response.json();
 	        if(this.debug){
