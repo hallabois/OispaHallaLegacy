@@ -4,7 +4,7 @@ class HAC {
     	this.debug = false;
         this.history = [];
         this.secure = false;
-        this.url = "localhost:8000";
+        this.url = "35.225.19.22:8000";
         if(localStorage && localStorage["HAC_history"]){
             try {
                 this.history = JSON.parse(localStorage["HAC_history"]);
