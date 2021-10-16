@@ -9,6 +9,7 @@ class HAC {
         this.secure = false;
         this.urls = ["https://localhost:8000", "http://localhost:8000", "https://hac.oispahalla.com:8000", "https://hac.hallacoin.ml:8000", "http://35.225.19.22:8000"];
         this.url = "";
+        this.connected = false;
         if(localStorage && localStorage["HAC_history"]){
             try {
                 this.history = JSON.parse(localStorage["HAC_history"]);
@@ -25,11 +26,13 @@ class HAC {
     		let result = await this.connectivityCheck(this.urls[i]);
     		if(result){
     			this.url = this.urls[i];
+                this.connected = true;
                 HAC_status.innerHTML = "✅📶";
                 HAC_container.title = "Yhdistetty palvelimeen " + this.url;
     			return;
     		}
     	}
+        this.connected = true;
     	HAC_status.innerHTML = "🚫📶";
         HAC_container.title = "Yhteyttä yhteenkään HAC-palvelimeen ei saatu muodostettua.";
     }
@@ -44,7 +47,7 @@ class HAC {
         if(localStorage){
             localStorage["HAC_history"] = JSON.stringify(this.history);
         }
-        HAC_status.innerHTML = "?";
+        HAC_status.innerHTML = this.connected ? "✅📶" : "🚫📶";
     }
     toggleDebug(){
     	this.debug = !this.debug;
