@@ -1,4 +1,6 @@
 // Halla Anti Cheat
+const HAC_class_name = ".HAC-status";
+
 class HAC {
     constructor() {
     	this.debug = false;
@@ -21,10 +23,11 @@ class HAC {
     		let result = await this.connectivityCheck(this.urls[i]);
     		if(result){
     			this.url = this.urls[i];
+                visual.innerHTML = "connected to " + this.url;
     			return;
     		}
     	}
-    	let visual = document.querySelector(".HAC-container");
+    	let visual = document.querySelector(HAC_class_name);
     	visual.innerHTML = "🚫📶";
     }
     recordState(state) {
@@ -38,7 +41,7 @@ class HAC {
         if(localStorage){
             localStorage["HAC_history"] = JSON.stringify(this.history);
         }
-        let visual = document.querySelector(".HAC-container");
+        let visual = document.querySelector(HAC_class_name);
         visual.innerHTML = "?";
     }
     toggleDebug(){
@@ -61,7 +64,7 @@ class HAC {
         }
     }
     async validate(){
-    	let visual = document.querySelector(".HAC-container");
+    	let visual = document.querySelector(HAC_class_name);
         try{
 	        visual.innerHTML = "...";
         	let response = await fetch(this.url + "/HAC/validate/" + this.history.join(":"));
