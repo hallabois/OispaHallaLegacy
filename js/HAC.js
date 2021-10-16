@@ -1,5 +1,6 @@
 // Halla Anti Cheat
-const HAC_class_name = ".HAC-status";
+const HAC_status = document.querySelector(".HAC-status");
+const HAC_container = document.querySelector(".HAC-status");
 
 class HAC {
     constructor() {
@@ -19,16 +20,18 @@ class HAC {
         console.log("HAC loaded!");
     }
     async chooseServer(){
+        HAC_container.title = "Etsitään HAC-palvelimia...";
     	for(let i in this.urls){
     		let result = await this.connectivityCheck(this.urls[i]);
     		if(result){
     			this.url = this.urls[i];
-                visual.innerHTML = "connected to " + this.url;
+                HAC_status.innerHTML = "✅📶";
+                HAC_container.title = "Yhdistetty kohteeseen " + this.url;
     			return;
     		}
     	}
-    	let visual = document.querySelector(HAC_class_name);
-    	visual.innerHTML = "🚫📶";
+    	HAC_status.innerHTML = "🚫📶";
+        HAC_container.title = "Yhteyttä yhteenkään HAC-palvelimeen ei saatu muodostettua.";
     }
     recordState(state) {
         this.history.push(state);
@@ -41,8 +44,7 @@ class HAC {
         if(localStorage){
             localStorage["HAC_history"] = JSON.stringify(this.history);
         }
-        let visual = document.querySelector(HAC_class_name);
-        visual.innerHTML = "?";
+        HAC_status.innerHTML = "?";
     }
     toggleDebug(){
     	this.debug = !this.debug;
@@ -64,9 +66,8 @@ class HAC {
         }
     }
     async validate(){
-    	let visual = document.querySelector(HAC_class_name);
         try{
-	        visual.innerHTML = "...";
+	        HAC_status.innerHTML = "...";
         	let response = await fetch(this.url + "/HAC/validate/" + this.history.join(":"));
 	        let data = await response.json();
 	        if(this.debug){
@@ -74,11 +75,11 @@ class HAC {
 		        console.log("Validation result: ", data);
 	        }
 	        this.secure = data.valid;
-	        visual.innerHTML = this.secure ? "🛡️ " : "⚠️";
+	        HAC_status.innerHTML = this.secure ? "🛡️ " : "⚠️";
 	        return true;
         }
         catch(e){
-        	visual.innerHTML = "🚫📶";
+        	HAC_status.innerHTML = "🚫📶";
         	return false;
         }
     }

@@ -77,7 +77,7 @@ h1.title.dark {
 }
 
 .HAC-container::after {
-  content: "HAC status";
+  content: "HAC:n tila";
   position: absolute;
   width: 100%;
   top: 10px;
