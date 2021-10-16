@@ -1,6 +1,6 @@
 // Halla Anti Cheat
 const HAC_status = document.querySelector(".HAC-status");
-const HAC_container = document.querySelector(".HAC-status");
+const HAC_container = document.querySelector(".HAC-container");
 
 class HAC {
     constructor() {
