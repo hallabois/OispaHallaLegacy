@@ -89,6 +89,10 @@ h1.title.dark {
   color: #eee4da;
 }
 
+.HAC-status {
+  cursor: pointer;
+}
+
 .parin-kulautus {
   text-decoration: none;
   color: #222;
