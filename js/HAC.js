@@ -26,7 +26,7 @@ class HAC {
     		if(result){
     			this.url = this.urls[i];
                 HAC_status.innerHTML = "✅📶";
-                HAC_container.title = "Yhdistetty kohteeseen " + this.url;
+                HAC_container.title = "Yhdistetty palvelimeen " + this.url;
     			return;
     		}
     	}
