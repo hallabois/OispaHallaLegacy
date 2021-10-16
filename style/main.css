@@ -90,7 +90,7 @@ h1.title.dark {
 }
 
 .HAC-status {
-  cursor: pointer;
+  cursor: default;
 }
 
 .parin-kulautus {
