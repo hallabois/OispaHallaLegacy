@@ -787,13 +787,13 @@ hr {
     margin: 0 auto;
   }
 
-  .score-container, .best-container {
+  .score-container, .best-container, .HAC-container {
     margin-top: 0;
     padding: 15px 10px;
     min-width: 70px;
   }
 
-  .score-container {
+  .score-container, .HAC-container {
     margin-bottom: 10px;
   }
 
