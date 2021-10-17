@@ -29,6 +29,9 @@ class HAC {
                 this.connected = true;
                 HAC_status.innerHTML = "✅📶";
                 HAC_container.title = "Yhdistetty palvelimeen " + this.url;
+                if(this.history.length > 0){
+                	this.validate();
+                }
     			return;
     		}
     	}
@@ -76,6 +79,7 @@ class HAC {
 	        if(this.debug){
 		        //console.log(response);
 		        console.log("Validation result: ", data);
+		        console.log("Score: ", data["score"])
 	        }
 	        this.secure = data.valid;
 	        HAC_status.innerHTML = this.secure ? "🛡️ " : "⚠️";

@@ -228,6 +228,7 @@ GameManager.prototype.move = function (direction) {
       
 	  let state = this.serialize_HAC(HAC_grid, "f", added);
 	  HallaAntiCheat.recordState(state);
+	  
       HallaAntiCheat.validate();
       HallaAntiCheat.clearHistory();
       ended = true;
@@ -235,7 +236,7 @@ GameManager.prototype.move = function (direction) {
 
     this.actuate();
   }
-  if(!ended){
+  if(!ended && moved){
 	  let HAC_direction = moved ? direction : "e";
 	  //HAC_grid = this.grid.serialize_HAC();
 	  let state = this.serialize_HAC(HAC_grid, HAC_direction, added);
