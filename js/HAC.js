@@ -2,6 +2,8 @@
 const HAC_status = document.querySelector(".HAC-status");
 const HAC_container = document.querySelector(".HAC-container");
 
+let HAC_valid = '<img src="https://oispahalla-dev.netlify.app/img/HAC.svg" style="width: 1em;margin: -.1em;">';
+
 class HAC {
     constructor() {
     	this.debug = false;
@@ -35,7 +37,7 @@ class HAC {
     			return;
     		}
     	}
-        this.connected = true;
+        this.connected = false;
     	HAC_status.innerHTML = "🚫📶";
         HAC_container.title = "Yhteyttä yhteenkään HAC-palvelimeen ei saatu muodostettua.";
     }
@@ -82,7 +84,7 @@ class HAC {
 		        console.log("Score: ", data["score"])
 	        }
 	        this.secure = data.valid;
-	        HAC_status.innerHTML = this.secure ? "🛡️ " : "⚠️";
+	        HAC_status.innerHTML = this.secure ? HAC_valid : "⚠️";
 	        return true;
         }
         catch(e){
