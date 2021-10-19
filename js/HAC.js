@@ -2,7 +2,7 @@
 const HAC_status = document.querySelector(".HAC-status");
 const HAC_container = document.querySelector(".HAC-container");
 
-let HAC_valid = '<img src="https://oispahalla-dev.netlify.app/img/HAC.svg" style="width: 1em;margin: -.1em;">';
+let HAC_valid = '<img src="img/HAC_small.svg" style="width: 1em;margin: -.1em;">';
 
 class HAC {
     constructor() {

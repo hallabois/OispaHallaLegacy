@@ -8,7 +8,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
-   sodipodi:docname="HAC.svg"
+   sodipodi:docname="HAC_small.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -51,7 +51,7 @@
        inkscape:collect="always"
        id="linearGradient6071">
       <stop
-         style="stop-color:#5b5a66;stop-opacity:1"
+         style="stop-color:#5b5a66;stop-opacity:0.98651868"
          offset="0"
          id="stop6067" />
       <stop
@@ -93,9 +93,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="87.25"
-     inkscape:cy="178.25"
+     inkscape:zoom="1.3290783"
+     inkscape:cx="235.12535"
+     inkscape:cy="50.034674"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -117,7 +117,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -161,15 +160,15 @@
        sodipodi:type="inkscape:offset"
        inkscape:label="outline" />
     <path
-       style="fill:#009a34;fill-opacity:1;stroke:#bbada0;stroke-width:0.568222;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 35.012257,59.543992 6.526892,6.401489 14.472021,-15.642443 3.39482,3.133565 -17.689089,19.241816 -9.945696,-9.751551 z"
+       style="fill:#00e01c;fill-opacity:1;stroke:#bbada0;stroke-width:1.292;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 22.632181,39.489295 37.472788,54.044764 70.378735,18.477554 78.097752,25.602539 37.876954,69.35387 15.262797,47.181153 Z"
        id="path843"
        inkscape:connector-curvature="0"
        inkscape:label="Check" />
     <g
        aria-label="H.A.C"
        transform="matrix(0.67396267,0,0,0.76284879,-7.731695,-66.907372)"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#faf8ef;fill-opacity:1;stroke:#bbada0;stroke-width:0.779715;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:none;fill:#faf8ef;fill-opacity:1;stroke:#bbada0;stroke-width:0.779715;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="flowRoot6167">
       <path
          d="M 51.179687,148.90322 H 44.851562 V 137.49697 H 33.25 v 11.40625 H 26.941406 V 120.89541 H 33.25 v 11.17188 h 11.601562 v -11.17188 h 6.328125 z"
