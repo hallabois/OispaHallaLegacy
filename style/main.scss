@@ -671,3 +671,19 @@ $i: 2;
   }
   
 }
+
+// Themes
+$t: 0;
+@while $t <= 20 {
+  $i: 2;
+  @while $i <= 32768 {
+    .theme-#{$t} .tile-#{$i} .tile-inner {
+      background-image: url('../img/theme-#{$t}/#{$i}.png');
+      @if($i >= 128) {
+        box-shadow: 0px 0px 15px nth(map.get($kiillot, $i), 1) nth(map.get($kiillot, $i), 2);
+      }
+    }
+    $i: $i * 2;
+  }
+  $t: $t + 1;
+}
