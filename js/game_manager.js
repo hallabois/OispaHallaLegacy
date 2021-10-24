@@ -226,8 +226,12 @@ GameManager.prototype.move = function (direction) {
     if (!this.movesAvailable()) {
       this.over = true; // Game over!
       
-	  let state = this.serialize_HAC(HAC_grid, "f", added);
-	  HallaAntiCheat.recordState(state);
+      let state = this.serialize_HAC(HAC_grid, "f", added);
+      HallaAntiCheat.recordState(state);
+
+      if(this.storageManager.getBestScore() < this.score){
+        HallaAntiCheat.recordBest();
+      }
 	  
       HallaAntiCheat.validate();
       HallaAntiCheat.clearHistory();

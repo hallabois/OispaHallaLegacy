@@ -25,14 +25,13 @@
   <meta name="twitter:card" content="Yhdistä opettajat ja saavuta Halla!"></meta>
 </head>
 <body>
-  <button class="pwa-add-button" style="display: none;">Install PWA</button>
   <div class="container">
     <div class="heading">
       <a href="https://discord.gg/7x25Jxrkvr" target="_blank">
         <h1 class="title">Oispa Halla</h1>
       </a>
       <div class="scores-container">
-      	<div class="HAC-container" title="HAC:n tila">
+      	<div class="HAC-container" title="HAC:n tila" style="display:none;">
           <div class="HAC-status">...</div>
         </div>
         <div class="score-container">0</div>
@@ -93,6 +92,9 @@
       <div class="kurin-palautus kurin-palautus-color">
         <a class="parin-kulautus" title="Vai parin kulautus? Lahjot opettajia pois ruudulta, mutta menetät tästä arvosanojasi! Voit lahjoa opettajia vain kolme kertaa ennen kun Halla saa kuulla tilanteesta.">KURINPALAUTUS</a>
       </div>
+    </div>
+    <div class="pwa-container" style="width: 100%;z-index: 500;display: flex;justify-content: center;margin-top: 30px;margin-bottom: -50px;">
+      <button class="pwa-add-button restart-button" style="border: none;margin: .5em;cursor: pointer;">Asenna sovelluksena</button>
     </div>
     <div class="disclaimer">
       <p>

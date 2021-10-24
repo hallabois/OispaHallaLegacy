@@ -2,10 +2,15 @@
 const HAC_status = document.querySelector(".HAC-status");
 const HAC_container = document.querySelector(".HAC-container");
 
+function showHAC(){
+    HAC_container.style["display"] = "";
+}
+
 let HAC_valid = '<img src="img/HAC_small.svg" style="width: 1em;margin: -.1em;">';
 
 class HAC {
     constructor() {
+        this.enabled = false;
     	this.debug = false;
         this.history = [];
         this.secure = false;
@@ -23,6 +28,9 @@ class HAC {
         console.log("HAC loaded!");
     }
     async chooseServer(){
+        if(!this.enabled){
+            return
+        }
         HAC_container.title = "Etsitään HAC-palvelimia...";
     	for(let i in this.urls){
     		let result = await this.connectivityCheck(this.urls[i]);
@@ -54,10 +62,18 @@ class HAC {
         }
         HAC_status.innerHTML = this.connected ? "✅📶" : "🚫📶";
     }
+    recordBest() {
+        if(localStorage){
+            localStorage["HAC_best_history"] = JSON.stringify(this.history);
+        }
+    }
     toggleDebug(){
     	this.debug = !this.debug;
     }
     async connectivityCheck(url){
+        if(!this.enabled){
+            return
+        }
     	try{
         	let response = await fetch(url + "/HAC/alive/");
 	        let data = await response.json();
@@ -74,6 +90,9 @@ class HAC {
         }
     }
     async validate(){
+        if(!this.enabled){
+            return
+        }
         try{
 	        HAC_status.innerHTML = "...";
         	let response = await fetch(this.url + "/HAC/validate/" + this.history.join(":"));
