@@ -24,6 +24,7 @@ function preloadImages(path){
     let img = document.createElement("img");
     img.src = path + imageList[i];
     img.style="height:0!important;";
+    img.alt = ""; // decorative, alt not needed
     document.getElementsByClassName("preload-container")[0].appendChild(img);
     //imageObject.src = imageList[i];
   }
