@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="author" content="Hallabois">
-  <meta name="description" content="Yhdistä opettajat ja saavuta Halla!">
+  <meta name="description" content="Oispa halla: Yhdistä opettajat ja saavuta Halla!">
   <meta name="keywords" content="Oispahalla, halla, ksyk, 2048, Lauri Halla, hallabois">
 
   <meta name="twitter:card" content="Yhdistä opettajat ja saavuta Halla!"></meta>
@@ -31,6 +31,9 @@
         <h1 class="title">Oispa Halla</h1>
       </a>
       <div class="scores-container">
+      	<div class="HAC-container" title="HAC:n tila" style="display:none;">
+          <div class="HAC-status">...</div>
+        </div>
         <div class="score-container">0</div>
         <div class="best-container">0</div>
       </div>
@@ -90,6 +93,9 @@
         <a class="parin-kulautus" title="Vai parin kulautus? Lahjot opettajia pois ruudulta, mutta menetät tästä arvosanojasi! Voit lahjoa opettajia vain kolme kertaa ennen kun Halla saa kuulla tilanteesta.">KURINPALAUTUS</a>
       </div>
     </div>
+    <div class="pwa-container" style="width: 100%;z-index: 500;display: flex;justify-content: center;margin-top: 30px;margin-bottom: -50px;">
+      <button class="pwa-add-button restart-button" style="display: none;border: none;margin: .5em;cursor: pointer;">Asenna sovelluksena</button>
+    </div>
     <div class="disclaimer">
       <p>
         <strong>HUOMIO:</strong> Pelin lista opettajista on tehty täysin sattumanvaraisesti, eikä opettajia ole laitettu minkäänlaiseen paremmuusjärjestykseen. Rakastamme kaikkia opettajia sekä arvostamme kaikkien heidän työtänsä yhtä paljon ❤️.
@@ -103,6 +109,7 @@
     </div>
   </div>
   <div class="preload-container"></div>
+  <script src="js/HAC.js"></script>
   <script src="js/bind_polyfill.js"></script>
   <script src="js/classlist_polyfill.js"></script>
   <script src="js/animframe_polyfill.js"></script>
@@ -113,6 +120,8 @@
   <script src="js/local_storage_manager.js"></script>
   <script src="js/game_manager.js"></script>
   <script src="js/application.js"></script>
+  <script src="pwa_promoter.js"></script>
+  <!-- <script src="/sw.js"></script> -->
   <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
   <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
   <script async defer src="https://api.oispahalla.com/latest.js"></script>

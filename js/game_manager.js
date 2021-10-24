@@ -15,6 +15,11 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 }
 
 
+// Export the current game for later analysis
+GameManager.prototype.serialize_HAC = function (gridState, direction, added) {
+  return gridState.join(".") + "+" + added + ";" + direction;
+}
+
 // Restart the game
 GameManager.prototype.restart = function () {
   this.storageManager.clearGameState();
@@ -85,6 +90,7 @@ GameManager.prototype.addStartTiles = function () {
   for (var i = 0; i < this.startTiles; i++) {
     this.addRandomTile();
   }
+  HallaAntiCheat.clearHistory();
 };
 
 // Adds a tile in a random position
@@ -94,6 +100,7 @@ GameManager.prototype.addRandomTile = function () {
     var tile = new Tile(this.grid.randomAvailableCell(), value);
 
     this.grid.insertTile(tile);
+    return "" + tile.x + "," + tile.y + "." + tile.value; // for HAC
   }
 };
 
@@ -154,6 +161,9 @@ GameManager.prototype.moveTile = function (tile, cell) {
 
 // Move tiles on the grid in the specified direction
 GameManager.prototype.move = function (direction) {
+
+  let HAC_grid = this.grid.serialize_HAC();
+
   // 0: up, 1: right, 2: down, 3: left
   var self = this;
 
@@ -206,15 +216,36 @@ GameManager.prototype.move = function (direction) {
       }
     });
   });
-
+  let ended = false;
+  
+  let added = "";
   if (moved) {
-    this.addRandomTile();
+	
+    added = this.addRandomTile();
 
     if (!this.movesAvailable()) {
       this.over = true; // Game over!
+      
+      let state = this.serialize_HAC(HAC_grid, "f", added);
+      HallaAntiCheat.recordState(state);
+
+      if(this.storageManager.getBestScore() < this.score){
+        HallaAntiCheat.recordBest();
+      }
+	  
+      HallaAntiCheat.validate();
+      HallaAntiCheat.clearHistory();
+      ended = true;
     }
 
     this.actuate();
+  }
+  if(!ended && moved){
+	  let HAC_direction = moved ? direction : "e";
+	  //HAC_grid = this.grid.serialize_HAC();
+	  let state = this.serialize_HAC(HAC_grid, HAC_direction, added);
+	  HallaAntiCheat.recordState(state);
+      HallaAntiCheat.validate();
   }
 };
 

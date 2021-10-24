@@ -3,35 +3,37 @@ window.requestAnimationFrame(function () {
   new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
 });
 
-// if('serviceWorker' in navigator) {
-//   console.log("service worker mode detected");
-//   navigator.serviceWorker.register('./service_worker.js');
-// } 
-// else {
-//   console.log("service worker not detected");
+function preloadImages(path){
   var imageList = [
-    "../img/2.png",
-    "../img/4.png",
-    "../img/8.png",
-    "../img/16.png",
-    "../img/32.png",
-    "../img/64.png",
-    "../img/128.png",
-    "../img/256.png",
-    "../img/512.png",
-    "../img/1024.png",
-    "../img/2048.png",
-    "../img/parinkulautus.png" ];
-            
+    "2.png",
+    "4.png",
+    "8.png",
+    "16.png",
+    "32.png",
+    "64.png",
+    "128.png",
+    "256.png",
+    "512.png",
+    "1024.png",
+    "2048.png",
+    "parinkulautus.png",
+  ];
+  
   for(var i = 0; i < imageList.length; i++ ) {
     //var imageObject = new Image();
     let img = document.createElement("img");
-    img.src = imageList[i];
+    img.src = path + imageList[i];
     img.style="height:0!important;";
     document.getElementsByClassName("preload-container")[0].appendChild(img);
     //imageObject.src = imageList[i];
   }
-//}
+}
+preloadImages("../img/");
+
+function setImageTheme(themeID){
+  document.querySelector("html").classList = ["theme-" + themeID];
+  preloadImages("../img/theme-" + themeID + "/");
+}
 
 const darkModeComponents = [
   document.querySelector("html"),
