@@ -32,6 +32,11 @@ if (pwa_enabled){
 	  addBtn.style.display = 'block';
 
 	  addBtn.addEventListener('click', (e) => {
+		// Analytics
+		try{
+			sa_event("pwa_clicked");
+		}
+		catch{} // We don't care
 	  	console.log("User clicked the install button.");
 	    // hide our user interface that shows our A2HS button
 	    addBtn.style.display = 'none';
@@ -41,8 +46,18 @@ if (pwa_enabled){
 	    deferredPrompt.userChoice.then((choiceResult) => {
 	        if (choiceResult.outcome === 'accepted') {
 	          console.log('User accepted the A2HS prompt');
+			  // Analytics
+			  try{
+				sa_event("pwa_installed");
+			  }
+			  catch{} // We don't care
 	        } else {
 	          console.log('User dismissed the A2HS prompt');
+			  // Analytics
+			  try{
+				sa_event("pwa_canceled");
+			  }
+			  catch{} // We don't care
 	        }
 	        deferredPrompt = null;
 	      });
