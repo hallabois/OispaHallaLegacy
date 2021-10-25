@@ -15,8 +15,7 @@ function preloadImages(path){
     "256.png",
     "512.png",
     "1024.png",
-    "2048.png",
-    "parinkulautus.png",
+    "2048.png"
   ];
   
   for(var i = 0; i < imageList.length; i++ ) {
@@ -28,12 +27,22 @@ function preloadImages(path){
     document.getElementsByClassName("preload-container")[0].appendChild(img);
     //imageObject.src = imageList[i];
   }
+
+  let img = document.createElement("img");
+    img.src = 'img/parinkulautus.png';
+    img.style="height:0!important;";
+    img.alt = ""; // decorative, alt not needed
+    document.getElementsByClassName("preload-container")[0].appendChild(img);
 }
 preloadImages("../img/");
 
 function setImageTheme(themeID){
   document.querySelector("html").classList = ["theme-" + themeID];
+  var hallaweenToggle = document.getElementById('hallaween-icon');
+  if(themeID == 1) hallaweenToggle.src = 'img/pumpkin.svg';
+  else hallaweenToggle.src = 'img/no_pumpkin.svg';
   preloadImages("../img/theme-" + themeID + "/");
+  localStorage.imageTheme = themeID;
 }
 
 const darkModeComponents = [
@@ -75,4 +84,10 @@ window.addEventListener("DOMContentLoaded", function() {
 			console.log("Error setting dark mode from memory: " + e);
 		}
 	}
+  if(localStorage.imageTheme){
+		setImageTheme(localStorage.imageTheme);
+	}
+  else{
+    setImageTheme( 2 );
+  }
 }, false);

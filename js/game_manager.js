@@ -10,6 +10,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
   this.inputManager.on("paritaKuli", this.paritaKuli.bind(this));
+  this.inputManager.on("toggleHallaween", this.toggleHallaween.bind(this));
 
   this.setup();
 }
@@ -49,6 +50,12 @@ GameManager.prototype.paritaKuli = function () {
     }
     else alert("Et ole tarpeeksi suosittu opettajien keskuudessa lahjomaan heitä!");
   }
+};
+
+GameManager.prototype.toggleHallaween = function () {
+  const currentTheme = document.querySelector('html').classList[0].split('-')[1];
+  if(currentTheme == 2) setImageTheme(1);
+  else setImageTheme(2);
 };
 
 // Return true if the game is lost, or has won and the user hasn't kept playing

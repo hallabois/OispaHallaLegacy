@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:math";
 
 @import "helpers";
 @import "fonts/clear-sans.css";
@@ -6,7 +7,7 @@
 $field-width: 500px;
 $grid-spacing: 15px;
 $grid-row-cells: 4;
-$tile-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells;
+$tile-size: math.div($field-width - $grid-spacing * ($grid-row-cells + 1), $grid-row-cells);
 $tile-border-radius: 3px;
 
 $mobile-threshold: $field-width + 20px;
@@ -32,7 +33,7 @@ $title-color-dark: #e6d2bf;
 $transition-speed: 100ms;
 
 html, body {
-  margin: 40px 0;
+  margin: 0;
   padding: 0;
 
   background: $game-background;
@@ -40,7 +41,6 @@ html, body {
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px;
 
-  background-image: url("../img/OispaHallaTausta2.webp");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: top center;
@@ -71,26 +71,47 @@ h1.title.dark{
   color: $title-color-dark;
 }
 
-.kurin-palautus-container {
-  margin-top: 15px;
-  justify-content: center;
+.underbar-container {
   display: flex;
-  text-align: center;
-}
+  width: 100%;
 
-.kurin-palautus {
-  padding-bottom: 5px;
-  background-color: #c00;
-  cursor: pointer;
-  width: 25%;
-  border: 1px $game-background solid;
-  border-radius: 3px;
-
-  &:hover {
-    border: 1px black solid;
+  > * {
+    margin-top: 15px;
   }
-  transition: 1s background;
+
+  .button-container {
+    > * {
+      width: 50%;
+      display: flex;
+    }
+  
+    .hallaween-button {
+      filter: invert(42%) sepia(6%) saturate(718%) hue-rotate(349deg) brightness(100%) contrast(84%);
+      
+      img {
+        width: 25px;
+      }
+    }
+  }
+  
+  .kurin-palautus-container {
+    justify-content: center;
+    flex: content;
+    display: flex;
+    text-align: center;
+    margin-left: 25px;
+  
+    .kurin-palautus {
+      padding: 0 5px 5px 5px;
+      background-color: #c00;
+      cursor: pointer;
+      width: 25%;
+      border-radius: 3px;
+      transition: 1s background;
+    }
+  }
 }
+
 
 .HAC-container {
   position: relative;
@@ -245,6 +266,7 @@ hr {
 .container {
   width: $field-width;
   margin: 0 auto;
+  padding: 40px 0;
 }
 
 @include keyframes(fade-in) {
@@ -280,7 +302,7 @@ hr {
   border-radius: 3px;
   padding: 0 20px;
   text-decoration: none;
-  color: $bright-text-color;
+  color: $bright-text-color !important;
   height: 40px;
   line-height: 42px;
 }
@@ -584,14 +606,14 @@ $i: 2;
   $field-width: 320px !global;
   $grid-spacing: 10px !global;
   $grid-row-cells: 4 !global;
-  $tile-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells !global;
+  $tile-size: math.div($field-width - $grid-spacing * ($grid-row-cells + 1), $grid-row-cells) !global;
   $tile-border-radius: 3px !global;
   $game-container-margin-top: 17px !global;
 
   html, body {
     font-size: 15px;
     padding: 0;
-    margin: 20px 0;
+    margin: 0;
     background-image: none !important; 
   }
 
@@ -605,6 +627,7 @@ $i: 2;
   .container {
     width: $field-width;
     margin: 0 auto;
+    padding: 20px 0;
   }
 
   .score-container, .best-container, .HAC-container {
@@ -659,7 +682,7 @@ $i: 2;
   }
 
   .kurin-palautus {
-    width: 40%;
+    width: 40% !important;
   }
   
   .game-container .kurin-palautus-viesti {
@@ -672,12 +695,58 @@ $i: 2;
   
 }
 
+$colors: (
+  '1-game-background': $game-background,
+  '1-game-background-inverted': #222, //käytetään kurinpalautusnapin hoverausefektille, tämä ja game-background ovat ainoita jotka pakolla tarvitaan defaultväreille tai muuten rikkoo hoverausefektin
+  '2-text-color': #eee,
+  '2-game-background': #161817,
+  '2-game-background-inverted': #E9E7E8, 
+  '2-game-container-background': #3e3933,
+  '2-title-color': #e6d2bf,
+  '2-restart-color': #974F23
+);
+
+@mixin setThemeColors($color-number) {
+  html.theme-#{$t} {
+    background: map-get($colors, '#{$color-number}-game-background');
+    & body {
+      background-image: url('../img/theme-#{$color-number}/OispaHallaTausta.webp');
+      color: map-get($colors, '#{$color-number}-text-color');
+      background-color: map-get($colors, '#{$color-number}-game-background');
+
+      h1.title {
+        color: map-get($colors, '#{$color-number}-title-color');
+      }
+
+      a {
+        color: map-get($colors, '#{$color-number}-title-color');
+      }
+
+      .kurin-palautus {
+        border: 1px map-get($colors, '#{$color-number}-game-background') solid;
+
+        &:hover {
+          border: 1px map-get($colors, '#{$color-number}-game-background-inverted') solid;
+        }
+      }
+
+      .game-container, .score-container, .best-container {
+        background: map-get($colors, '#{$color-number}-game-container-background');
+      }
+
+      .restart-button {
+        background: map-get($colors, '#{$color-number}-restart-color');
+      }
+    }
+  }
+}
+
 // Themes
 $t: 0;
 @while $t <= 20 {
   $i: 2;
   @while $i <= 32768 {
-    .theme-#{$t} .tile-#{$i} .tile-inner {
+    html.theme-#{$t} .tile-#{$i} .tile-inner {
       background-image: url('../img/theme-#{$t}/#{$i}.png');
       @if($i >= 128) {
         box-shadow: 0px 0px 15px nth(map.get($kiillot, $i), 1) nth(map.get($kiillot, $i), 2);
@@ -685,5 +754,6 @@ $t: 0;
     }
     $i: $i * 2;
   }
+  @include setThemeColors('#{$t}');
   $t: $t + 1;
 }

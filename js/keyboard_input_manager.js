@@ -73,7 +73,7 @@ KeyboardInputManager.prototype.listen = function () {
   this.bindButtonPress(".restart-button", this.restart);
   this.bindButtonPress(".keep-playing-button", this.keepPlaying);
   this.bindButtonPress(".parin-kulautus", this.paritaKuli);
-  this.bindButtonPress(".kurin-palautus", this.paritaKuli);
+  this.bindButtonPress(".hallaween-button", this.toggleHallaween);
 
   // Respond to swipe events
   var touchStartClientX, touchStartClientY;
@@ -150,3 +150,7 @@ KeyboardInputManager.prototype.paritaKuli = function (event) {
   this.emit("paritaKuli");
 };
 
+KeyboardInputManager.prototype.toggleHallaween = function (event) {
+  event.preventDefault();
+  this.emit("toggleHallaween");
+};
