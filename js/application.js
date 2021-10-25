@@ -34,7 +34,6 @@ function preloadImages(path){
     img.alt = ""; // decorative, alt not needed
     document.getElementsByClassName("preload-container")[0].appendChild(img);
 }
-preloadImages("../img/");
 
 function setImageTheme(themeID){
   document.querySelector("html").classList = ["theme-" + themeID];
@@ -43,6 +42,10 @@ function setImageTheme(themeID){
   else hallaweenToggle.src = 'img/no_pumpkin.svg';
   preloadImages("../img/theme-" + themeID + "/");
   localStorage.imageTheme = themeID;
+  try{
+			sa_event('theme_changed_to_' + themeID);
+		}
+	catch{}
 }
 
 const darkModeComponents = [
