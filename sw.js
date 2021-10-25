@@ -17,7 +17,10 @@ self.addEventListener('fetch', (event) => {
       const response = await fetch(event.request);
       const cache = await caches.open(cacheName);
       if( !(blacklist.includes(response.url)) ){
-	      cache.put(event.request, response.clone());
+        try{
+	        cache.put(event.request, response.clone());
+        }
+        catch{} // the response should still be returned, even if it didn't make it to the cache
       }
       return response;
     } catch (err) {
