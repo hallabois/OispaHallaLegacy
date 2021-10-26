@@ -146,11 +146,22 @@ KeyboardInputManager.prototype.bindButtonPress = function (selector, fn) {
 };
 
 KeyboardInputManager.prototype.paritaKuli = function (event) {
-  event.preventDefault();
-  this.emit("paritaKuli");
+  blocked = typeof(blocked) === 'undefined' ? false : blocked;
+  if(!blocked) {
+    event.preventDefault();
+    this.emit("paritaKuli");
+  }
+  //sets a timeout to block kurinpalautus for 100ms after clicking to prevent accidental uses
+  //yes this is a botch and it really should be a button and not an a but idc
+  setTimeout(() => {blocked = false;}, 100);
 };
 
 KeyboardInputManager.prototype.toggleHallaween = function (event) {
-  event.preventDefault();
-  this.emit("toggleHallaween");
+  blocked = typeof(blocked) === 'undefined' ? false : blocked;
+  if(!blocked) {
+    blocked = true;
+    event.preventDefault();
+    this.emit("toggleHallaween");
+  }
+  setTimeout(() => {blocked = false;}, 100);
 };

@@ -669,6 +669,10 @@ $i: 2;
   }
 
   .game-message {
+    a {
+      padding: 0 10px !important;
+    }
+
     .tilanne {
       font-size: 40px !important;
       height: 30px !important;
@@ -681,7 +685,11 @@ $i: 2;
     }
 
     .lower {
-      margin-top: 30px !important;
+      margin-top: 10px !important;
+
+      .keep-playing-button {
+        margin-bottom: 10px !important;
+      }
     }
   }
 
@@ -700,14 +708,12 @@ $i: 2;
 }
 
 $colors: (
-  '1-game-background': $game-background,
-  '1-game-background-inverted': #222, //käytetään kurinpalautusnapin hoverausefektille, tämä ja game-background ovat ainoita jotka pakolla tarvitaan defaultväreille tai muuten rikkoo hoverausefektin
   '2-text-color': #eee,
   '2-game-background': #161817,
-  '2-game-background-inverted': #E9E7E8, 
+  '2-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
   '2-game-container-background': #3e3933,
   '2-title-color': #e6d2bf,
-  '2-restart-color': #974F23
+  '2-button-color': #974F23
 );
 
 @mixin setThemeColors($color-number) {
@@ -715,31 +721,37 @@ $colors: (
     background: map-get($colors, '#{$color-number}-game-background');
     & body {
       background-image: url('../img/theme-#{$color-number}/OispaHallaTausta.webp');
-      color: map-get($colors, '#{$color-number}-text-color');
-      background-color: map-get($colors, '#{$color-number}-game-background');
-
-      h1.title {
-        color: map-get($colors, '#{$color-number}-title-color');
-      }
-
-      a {
+      @if map.has-key($colors, '#{$color-number}-game-background') { // skips the definitions if the game background exists
         color: map-get($colors, '#{$color-number}-text-color');
-      }
+        background-color: map-get($colors, '#{$color-number}-game-background');
 
-      .kurin-palautus {
-        border: 1px map-get($colors, '#{$color-number}-game-background') solid;
-
-        &:hover {
-          border: 1px map-get($colors, '#{$color-number}-game-background-inverted') solid;
+        h1.title {
+          color: map-get($colors, '#{$color-number}-title-color');
         }
-      }
 
-      .game-container, .score-container, .best-container, .game-message {
-        background: map-get($colors, '#{$color-number}-game-container-background');
-      }
+        a {
+          color: map-get($colors, '#{$color-number}-text-color');
+        }
 
-      .restart-button {
-        background: map-get($colors, '#{$color-number}-restart-color');
+        .kurin-palautus {
+          border: 1px map-get($colors, '#{$color-number}-game-background') solid;
+
+          &:hover {
+            border: 1px map-get($colors, '#{$color-number}-game-background-inverted') solid;
+          }
+        }
+
+        .game-container, .score-container, .best-container {
+          background: map-get($colors, '#{$color-number}-game-container-background');
+        }
+
+        .game-message.game-over {
+          background: rgba(map-get($colors, '#{$color-number}-game-background'), 0.8);
+        }
+
+        .restart-button, .lower > * {
+          background: map-get($colors, '#{$color-number}-button-color');
+        }
       }
     }
   }

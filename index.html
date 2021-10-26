@@ -6,7 +6,7 @@
 
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="style/main.css" type="text/css">
-  <link rel="shortcut icon" href="favicon.ico?v=2">
+  <link rel="shortcut icon" href="./favicon.ico?v=2">
   <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
   <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
   <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"  media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone, retina -->
@@ -130,10 +130,10 @@
   <script src="js/application.js"></script>
   <script src="pwa_promoter.js"></script>
   <!-- <script src="/sw.js"></script> -->
-  <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
-  <script async defer src="https://api.oispahalla.com/latest.js"></script>
-  <noscript><img src="https://api.oispahalla.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+  <script data-collect-dnt="true" async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" collect-dnt=true /></noscript>
+  <script data-collect-dnt="true" async defer src="https://api.oispahalla.com/latest.js"></script>
+  <noscript><img src="https://api.oispahalla.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" collect-dnt=true /></noscript>
 
 </body>
 </html>
