@@ -669,11 +669,15 @@ $i: 2;
   }
 
   .game-message {
-    p {
+    .tilanne {
       font-size: 40px !important;
       height: 30px !important;
       line-height: 30px !important;
       margin-top: 90px !important;
+    }
+
+    .kurinpalautukset {
+      font-size: 20px !important;
     }
 
     .lower {
@@ -719,7 +723,7 @@ $colors: (
       }
 
       a {
-        color: map-get($colors, '#{$color-number}-title-color');
+        color: map-get($colors, '#{$color-number}-text-color');
       }
 
       .kurin-palautus {
@@ -730,7 +734,7 @@ $colors: (
         }
       }
 
-      .game-container, .score-container, .best-container {
+      .game-container, .score-container, .best-container, .game-message {
         background: map-get($colors, '#{$color-number}-game-container-background');
       }
 

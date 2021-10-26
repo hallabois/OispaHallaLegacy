@@ -1048,11 +1048,14 @@ hr {
     font-size: 35px;
   }
 
-  .game-message p {
+  .game-message .tilanne {
     font-size: 40px !important;
     height: 30px !important;
     line-height: 30px !important;
     margin-top: 90px !important;
+  }
+  .game-message .kurinpalautukset {
+    font-size: 20px !important;
   }
   .game-message .lower {
     margin-top: 30px !important;
@@ -1310,7 +1313,7 @@ html.theme-2 body h1.title {
   color: #e6d2bf;
 }
 html.theme-2 body a {
-  color: #e6d2bf;
+  color: #eee;
 }
 html.theme-2 body .kurin-palautus {
   border: 1px #161817 solid;
@@ -1318,7 +1321,7 @@ html.theme-2 body .kurin-palautus {
 html.theme-2 body .kurin-palautus:hover {
   border: 1px #E9E7E8 solid;
 }
-html.theme-2 body .game-container, html.theme-2 body .score-container, html.theme-2 body .best-container {
+html.theme-2 body .game-container, html.theme-2 body .score-container, html.theme-2 body .best-container, html.theme-2 body .game-message {
   background: #3e3933;
 }
 html.theme-2 body .restart-button {
