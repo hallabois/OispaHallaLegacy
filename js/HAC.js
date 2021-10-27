@@ -6,6 +6,12 @@ function showHAC(){
     HAC_container.style["display"] = "";
 }
 
+function enableHAC(){
+    HallaAntiCheat.enabled = true;
+    HallaAntiCheat.chooseServer();
+    showHAC();
+}
+
 let HAC_valid = '<img src="img/HAC_small.svg" style="width: 1em;margin: -.1em;">';
 
 class HAC {

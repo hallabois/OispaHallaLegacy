@@ -741,7 +741,7 @@ $colors: (
           }
         }
 
-        .game-container, .score-container, .best-container {
+        .game-container, .score-container, .best-container, .HAC-container {
           background: map-get($colors, '#{$color-number}-game-container-background');
         }
 

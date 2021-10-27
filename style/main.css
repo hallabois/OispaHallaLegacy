@@ -1313,7 +1313,7 @@ html.theme-2 body .kurin-palautus {
 html.theme-2 body .kurin-palautus:hover {
   border: 1px #E9E7E8 solid;
 }
-html.theme-2 body .game-container, html.theme-2 body .score-container, html.theme-2 body .best-container {
+html.theme-2 body .game-container, html.theme-2 body .score-container, html.theme-2 body .best-container, html.theme-2 body .HAC-container {
   background: #3e3933;
 }
 html.theme-2 body .game-message.game-over {
