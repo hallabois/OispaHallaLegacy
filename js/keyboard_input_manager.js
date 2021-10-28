@@ -1,6 +1,7 @@
 class KeyboardInputManager {
   constructor() {
     this.events = {};
+    this.blocked = false;
 
     if (window.navigator.msPointerEnabled) {
       //Internet Explorer 10 style
@@ -140,23 +141,23 @@ class KeyboardInputManager {
     button.addEventListener(this.eventTouchend, fn.bind(this));
   }
   paritaKuli(event) {
-    blocked = typeof (blocked) === 'undefined' ? false : blocked;
-    if (!blocked) {
+    this.blocked = typeof (this.blocked) === 'undefined' ? false : this.blocked;
+    if (!this.blocked) {
       event.preventDefault();
       this.emit("paritaKuli");
     }
     //sets a timeout to block kurinpalautus for 100ms after clicking to prevent accidental uses
     //yes this is a botch and it really should be a button and not an a but idc
-    setTimeout(() => { blocked = false; }, 100);
+    setTimeout(() => { this.blocked = false; }, 100);
   }
   toggleHallaween(event) {
-    blocked = typeof (blocked) === 'undefined' ? false : blocked;
-    if (!blocked) {
-      blocked = true;
+    this.blocked = typeof (this.blocked) === 'undefined' ? false : this.blocked;
+    if (!this.blocked) {
+      this.blocked = true;
       event.preventDefault();
       this.emit("toggleHallaween");
     }
-    setTimeout(() => { blocked = false; }, 100);
+    setTimeout(() => { this.blocked = false; }, 100);
   }
 }
 
