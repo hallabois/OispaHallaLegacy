@@ -141,7 +141,7 @@ HTMLActuator.prototype.updateScore = function (score, palautukset, terminated) {
   }
   else {
     this.kurinPalautusColor.setAttribute('style', 'background-color: #c00!important;');
-    this.kurinPalautusNappi.setAttribute('style', '');
+    this.kurinPalautusNappi.setAttribute('style', 'color: #ddd!important');
   }
 };
 
