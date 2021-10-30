@@ -5,6 +5,7 @@ function HTMLActuator() {
   this.messageContainer = document.querySelector(".game-message");
 
   this.kurinPalautusViesti = document.querySelector(".kurin-palautus-viesti");
+  this.kurinPalautusNappi = document.querySelector(".parin-kulautus");
   this.kurinPalautusColor = document.querySelector(".kurin-palautus-color");
 
   this.score = 0;
@@ -135,10 +136,12 @@ HTMLActuator.prototype.updateScore = function (score, palautukset, terminated) {
   }
 
   if (this.score >= 1000 && palautukset < 3 && !terminated) {
-    this.kurinPalautusColor.setAttribute('style', 'background-color: #0c0!important');            
+    this.kurinPalautusColor.setAttribute('style', 'background-color: #0c0!important;');
+    this.kurinPalautusNappi.setAttribute('style', 'color: #222!important');
   }
   else {
-    this.kurinPalautusColor.setAttribute('style', 'background-color: #c00!important');
+    this.kurinPalautusColor.setAttribute('style', 'background-color: #c00!important;');
+    this.kurinPalautusNappi.setAttribute('style', 'color: #ddd!important');
   }
 };
 
