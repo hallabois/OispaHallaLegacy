@@ -28,10 +28,10 @@ class GameManager {
     this.setup();
   }
   // Restart the game
-  restartplus() {
+  restartplus(size=3) {
     this.storageManager.clearGameState();
     this.actuator.continueGame(); // Clear the game won/lost message
-    this.size = 3;
+    this.size = size;
     this.setup();
   }
   // Keep playing after winning (allows going over 2048)

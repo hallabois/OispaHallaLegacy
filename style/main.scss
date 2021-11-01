@@ -14,8 +14,7 @@
 
 $field-width: 500px;
 $grid-spacing: 15px;
-$grid-row-cells: 4;
-$tile-size: math.div($field-width - $grid-spacing * ($grid-row-cells + 1), $grid-row-cells);
+$grid-max-size: 10;
 $tile-border-radius: 3px;
 
 $mobile-threshold: $field-width + 20px;
@@ -460,15 +459,13 @@ hr {
     }
 
     // Build position classes
-    @for $x from 1 through $grid-row-cells {
-      @for $y from 1 through $grid-row-cells {
+    @for $x from 1 through $grid-max-size {
+      @for $y from 1 through $grid-max-size {
         &.tile-position-#{$x}-#{$y} {
           --x: #{$x};
           --y: #{$y};
           --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
           --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
-          $xPos: floor(($tile-size + $grid-spacing) * ($x - 1));
-          $yPos: floor(($tile-size + $grid-spacing) * ($y - 1));
           @include transform(translate(var(--xpos), var(--ypos)));
         }
       }
@@ -631,8 +628,6 @@ $i: 2;
   }
   $field-width: 320px !global;
   $grid-spacing: 10px !global;
-  $grid-row-cells: 4 !global;
-  $tile-size: math.div($field-width - $grid-spacing * ($grid-row-cells + 1), $grid-row-cells) !global;
   $tile-border-radius: 3px !global;
   $game-container-margin-top: 17px !global;
 
