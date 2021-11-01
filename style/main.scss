@@ -409,6 +409,7 @@ hr {
     overflow: clip;
     display: grid;
     grid-template-rows: repeat(var(--grid-size), var(--tile-size));
+    grid-template-columns: repeat(var(--grid-size), var(--tile-size));
     gap: var(--grid-gap);
     height: calc(100% - var(--grid-gap));
     width: calc(100% - var(--grid-gap));
@@ -435,7 +436,7 @@ hr {
     width: var(--tile-size);
     height: var(--tile-size);
     margin-right: var(--grid-gap);
-    float: left;
+    transition: all .25s;
 
     border-radius: var(--tile-border-radius);
 

@@ -1,6 +1,7 @@
 {
     "esnext": true,
-    "indent": 2,
+    "indent": 4,
+    "smarttabs": true,
     "maxlen": 80,
     "freeze": true,
     "camelcase": true,
@@ -14,6 +15,6 @@
     "boss": true,
     "expr": true,
     "loopfunc": true,
-    "white": true,
+    "white": true, //not a thing anymore
     "maxdepth": 4
 }
