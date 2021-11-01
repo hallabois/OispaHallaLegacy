@@ -134,6 +134,7 @@ class KeyboardInputManager {
   restartplus(event) {
     event.preventDefault();
     this.emit("restartplus");
+    event.stopPropagation();
   }
   keepPlaying(event) {
     event.preventDefault();
@@ -151,12 +152,12 @@ class KeyboardInputManager {
   paritaKuli(event) {
     event.preventDefault();
     this.emit("paritaKuli");
-    event.stopPropagation(); // this shoud prevent doublecklicks as better
+    event.stopPropagation();
   }
   toggleHallaween(event) {
     event.preventDefault();
     this.emit("toggleHallaween");
-    event.stopPropagation(); // this shoud prevent doublecklicks as better
+    event.stopPropagation();
   }
 }
 
