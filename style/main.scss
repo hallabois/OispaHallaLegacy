@@ -103,7 +103,7 @@ h1.title.dark{
   
   .kurin-palautus-container {
     justify-content: center;
-    flex: content;
+    flex: 1; // mf's browsers don't support flex: content???
     display: flex;
     text-align: center;
     margin-left: 25px;
