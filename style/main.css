@@ -72,12 +72,15 @@ h1.title.dark {
   margin-left: 25px;
 }
 .underbar-container .kurin-palautus-container .kurin-palautus {
-  padding: 0 5px 5px 5px;
+  padding: 0 5px;
   background-color: #c00;
   cursor: pointer;
   width: 25%;
   border-radius: 3px;
   transition: 1s background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .HAC-container {
