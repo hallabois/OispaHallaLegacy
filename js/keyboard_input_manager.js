@@ -70,6 +70,7 @@ class KeyboardInputManager {
     // Respond to button presses
     this.bindButtonPress(".retry-button", this.restart);
     this.bindButtonPress(".restart-button", this.restart);
+    this.bindContextPress(".restart-button", this.restartplus);
     this.bindButtonPress(".keep-playing-button", this.keepPlaying);
     this.bindButtonPress(".parin-kulautus", this.paritaKuli);
     this.bindButtonPress(".hallaween-button", this.toggleHallaween);
@@ -131,6 +132,10 @@ class KeyboardInputManager {
     event.preventDefault();
     this.emit("restart");
   }
+  restartplus(event) {
+    event.preventDefault();
+    this.emit("restartplus");
+  }
   keepPlaying(event) {
     event.preventDefault();
     this.emit("keepPlaying");
@@ -139,6 +144,10 @@ class KeyboardInputManager {
     var button = document.querySelector(selector);
     button.addEventListener("click", fn.bind(this));
     button.addEventListener(this.eventTouchend, fn.bind(this));
+  }
+  bindContextPress(selector, fn){
+    var button = document.querySelector(selector);
+    button.addEventListener("contextmenu", fn.bind(this));
   }
   paritaKuli(event) {
     this.blocked = typeof (this.blocked) === 'undefined' ? false : this.blocked;

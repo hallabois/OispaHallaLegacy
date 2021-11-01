@@ -9,6 +9,7 @@ class GameManager {
 
     this.inputManager.on("move", this.move.bind(this));
     this.inputManager.on("restart", this.restart.bind(this));
+    this.inputManager.on("restartplus", this.restartplus.bind(this))
     this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
     this.inputManager.on("paritaKuli", this.paritaKuli.bind(this));
     this.inputManager.on("toggleHallaween", this.toggleHallaween.bind(this));
@@ -23,6 +24,14 @@ class GameManager {
   restart() {
     this.storageManager.clearGameState();
     this.actuator.continueGame(); // Clear the game won/lost message
+    this.size = 4;
+    this.setup();
+  }
+  // Restart the game
+  restartplus() {
+    this.storageManager.clearGameState();
+    this.actuator.continueGame(); // Clear the game won/lost message
+    this.size = 3;
     this.setup();
   }
   // Keep playing after winning (allows going over 2048)
