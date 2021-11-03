@@ -236,9 +236,7 @@ class GameManager {
         let state = this.serialize_HAC(HAC_grid, "f", added);
         HallaAntiCheat.recordState(state);
 
-        if (this.storageManager.getBestScore() < this.score) {
-          HallaAntiCheat.recordBest();
-        }
+        HallaAntiCheat.recordBest(this.score);
 
         HallaAntiCheat.validate();
         HallaAntiCheat.clearHistory();
@@ -254,6 +252,7 @@ class GameManager {
       HallaAntiCheat.recordState(state);
       HallaAntiCheat.validate();
     }
+    HallaAntiCheat.recordBest(this.score);
   }
   // Get the vector representing the chosen direction
   getVector(direction) {
