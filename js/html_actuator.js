@@ -1,185 +1,190 @@
-function HTMLActuator() {
-  this.tileContainer    = document.querySelector(".tile-container");
-  this.scoreContainer   = document.querySelector(".score-container");
-  this.bestContainer    = document.querySelector(".best-container");
-  this.messageContainer = document.querySelector(".game-message");
+class HTMLActuator {
+  constructor() {
+    this.html_component = document.querySelector("html");
+    this.tileContainer = document.querySelector(".tile-container");
+    this.scoreContainer = document.querySelector(".score-container");
+    this.bestContainer = document.querySelector(".best-container");
+    this.messageContainer = document.querySelector(".game-message");
 
-  this.kurinPalautusViesti = document.querySelector(".kurin-palautus-viesti");
-  this.kurinPalautusNappi = document.querySelector(".parin-kulautus");
-  this.kurinPalautusColor = document.querySelector(".kurin-palautus-color");
+    this.kurinPalautusViesti = document.querySelector(".kurin-palautus-viesti");
+    this.kurinPalautusNappi = document.querySelector(".parin-kulautus");
+    this.kurinPalautusColor = document.querySelector(".kurin-palautus-color");
 
-  this.score = 0;
-}
+    this.score = 0;
+  }
+  actuate(grid, metadata) {
+    var self = this;
 
-HTMLActuator.prototype.actuate = function (grid, metadata) {
-  var self = this;
+    this.html_component.style = "--grid-size:" + grid.size + "!important;";
 
-  window.requestAnimationFrame(function () {
-    self.clearContainer(self.tileContainer);
+    window.requestAnimationFrame(function () {
+      self.clearContainer(self.tileContainer);
 
-    grid.cells.forEach(function (column) {
-      column.forEach(function (cell) {
-        if (cell) {
-          self.addTile(cell);
-        }
+      grid.cells.forEach(function (column) {
+        column.forEach(function (cell) {
+          if (cell) {
+            self.addTile(cell);
+          }
+        });
       });
-    });
 
-    self.updateScore(metadata.score, metadata.palautukset, metadata.terminated);
-    self.updateBestScore(metadata.bestScore);
+      self.updateScore(metadata.score, metadata.palautukset, metadata.terminated);
+      self.updateBestScore(metadata.bestScore);
 
-    if (metadata.terminated) {
-      if (metadata.over) {
-        self.message(false, metadata.palautukset); // You lose
-      } else if (metadata.won) {
-        self.message(true, metadata.palautukset); // You win!
+      if (metadata.terminated) {
+        if (metadata.over) {
+          self.message(false, metadata.palautukset); // You lose
+        } else if (metadata.won) {
+          self.message(true, metadata.palautukset); // You win!
+        }
       }
+
+    });
+  }
+  // Continues the game (both restart and keep playing)
+  continueGame() {
+    this.clearMessage();
+  }
+  clearContainer(container) {
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+  }
+  //Remove merged tiles (call after 100ms)
+  removeMergedTile(tile) {
+    if (tile.parentElement) {
+      tile.parentElement.removeChild(tile);
+    }
+  }
+  addTile(tile) {
+    var self = this;
+
+    var wrapper = document.createElement("div");
+    var inner = document.createElement("div");
+    var position = tile.previousPosition || { x: tile.x, y: tile.y };
+    var positionClass = this.positionClass(position);
+
+    // We can't use classlist because it somehow glitches when replacing classes
+    var classes = ["tile", "tile-" + tile.value, positionClass];
+
+    if (tile.value > 2048)
+      classes.push("tile-super");
+
+    this.applyClasses(wrapper, classes);
+
+    inner.classList.add("tile-inner");
+
+    if (tile.previousPosition) {
+      // Make sure that the tile gets rendered in the previous position first
+      window.requestAnimationFrame(function () {
+        classes[2] = self.positionClass({ x: tile.x, y: tile.y });
+        self.applyClasses(wrapper, classes); // Update the position
+      });
+    } else if (tile.mergedFrom) {
+      classes.push("tile-merged");
+      this.applyClasses(wrapper, classes);
+
+      // Render the tiles that merged
+      tile.mergedFrom.forEach(function (merged) {
+        self.addTile(merged);
+      });
+    } else {
+      classes.push("tile-new");
+      this.applyClasses(wrapper, classes);
     }
 
-  });
-};
+    if (tile.hasBeenMerged) {
+      // Remove this tile from the dom after it's animation has finished (animation lenght 100ms)
+      setTimeout(() => { self.removeMergedTile(wrapper); }, 100);
+    }
 
-// Continues the game (both restart and keep playing)
-HTMLActuator.prototype.continueGame = function () {
-  this.clearMessage();
-};
+    // Add the inner part of the tile to the wrapper
+    wrapper.appendChild(inner);
 
-HTMLActuator.prototype.clearContainer = function (container) {
-  while (container.firstChild) {
-    container.removeChild(container.firstChild);
+    // Put the tile on the board
+    this.tileContainer.appendChild(wrapper);
   }
-};
-
-
-//Remove merged tiles (call after 100ms)
-HTMLActuator.prototype.removeMergedTile = function (tile) {
-  if(tile.parentElement){
-    tile.parentElement.removeChild(tile);
+  applyClasses(element, classes) {
+    element.setAttribute("class", classes.join(" "));
   }
-}
-
-HTMLActuator.prototype.addTile = function (tile) {
-  var self = this;
-
-  var wrapper   = document.createElement("div");
-  var inner     = document.createElement("div");
-  var position  = tile.previousPosition || { x: tile.x, y: tile.y };
-  var positionClass = this.positionClass(position);
-
-  // We can't use classlist because it somehow glitches when replacing classes
-  var classes = ["tile", "tile-" + tile.value, positionClass];
-
-  if (tile.value > 2048) classes.push("tile-super");
-
-  this.applyClasses(wrapper, classes);
-
-  inner.classList.add("tile-inner");
-
-  if (tile.previousPosition) {
-    // Make sure that the tile gets rendered in the previous position first
-    window.requestAnimationFrame(function () {
-      classes[2] = self.positionClass({ x: tile.x, y: tile.y });
-      self.applyClasses(wrapper, classes); // Update the position
-    });
-  } else if (tile.mergedFrom) {
-    classes.push("tile-merged");
-    this.applyClasses(wrapper, classes);
-
-    // Render the tiles that merged
-    tile.mergedFrom.forEach(function (merged) {
-      self.addTile(merged);
-    });
-  } else {
-    classes.push("tile-new");
-    this.applyClasses(wrapper, classes);
+  normalizePosition(position) {
+    return { x: position.x + 1, y: position.y + 1 };
   }
-
-  if(tile.hasBeenMerged){
-    // Remove this tile from the dom after it's animation has finished (animation lenght 100ms)
-    setTimeout(()=>{self.removeMergedTile(wrapper)}, 100);
+  positionClass(position) {
+    position = this.normalizePosition(position);
+    return "tile-position-" + position.x + "-" + position.y;
   }
+  updateScore(score, palautukset, terminated) {
+    this.clearContainer(this.scoreContainer);
 
-  // Add the inner part of the tile to the wrapper
-  wrapper.appendChild(inner);
+    var difference = score - this.score;
+    this.score = score;
 
-  // Put the tile on the board
-  this.tileContainer.appendChild(wrapper);
-};
+    this.scoreContainer.textContent = this.score;
 
-HTMLActuator.prototype.applyClasses = function (element, classes) {
-  element.setAttribute("class", classes.join(" "));
-};
+    if (difference > 0) {
+      var addition = document.createElement("div");
+      addition.classList.add("score-addition");
+      addition.textContent = "+" + difference;
 
-HTMLActuator.prototype.normalizePosition = function (position) {
-  return { x: position.x + 1, y: position.y + 1 };
-};
+      this.scoreContainer.appendChild(addition);
+    }
 
-HTMLActuator.prototype.positionClass = function (position) {
-  position = this.normalizePosition(position);
-  return "tile-position-" + position.x + "-" + position.y;
-};
-
-HTMLActuator.prototype.updateScore = function (score, palautukset, terminated) {
-  this.clearContainer(this.scoreContainer);
-
-  var difference = score - this.score;
-  this.score = score;
-
-  this.scoreContainer.textContent = this.score;
-
-  if (difference > 0) {
-    var addition = document.createElement("div");
-    addition.classList.add("score-addition");
-    addition.textContent = "+" + difference;
-
-    this.scoreContainer.appendChild(addition);
+    if (this.score >= 1000 && palautukset < 3 && !terminated) {
+      this.kurinPalautusColor.setAttribute('style', 'background-color: #0c0!important;');
+      this.kurinPalautusNappi.setAttribute('style', 'color: #222!important');
+    }
+    else {
+      this.kurinPalautusColor.setAttribute('style', 'background-color: #c00!important;');
+      this.kurinPalautusNappi.setAttribute('style', 'color: #ddd!important');
+    }
   }
-
-  if (this.score >= 1000 && palautukset < 3 && !terminated) {
-    this.kurinPalautusColor.setAttribute('style', 'background-color: #0c0!important;');
-    this.kurinPalautusNappi.setAttribute('style', 'color: #222!important');
+  updateBestScore(bestScore) {
+    this.bestContainer.textContent = bestScore;
   }
-  else {
-    this.kurinPalautusColor.setAttribute('style', 'background-color: #c00!important;');
-    this.kurinPalautusNappi.setAttribute('style', 'color: #ddd!important');
+  message(won, kurinPalautukset) {
+    var type = won ? "game-won" : "game-over";
+    var message = won ? "HALLA!" : "Improbatur...";
+    //TODO: eri viestejä riippuen parhaimmasta ruudusta pelissä
+    this.messageContainer.classList.add(type);
+    this.messageContainer.getElementsByTagName("p")[0].textContent = message;
+
+    this.messageContainer.getElementsByTagName("p")[1].textContent = `Kurinpalautukset: ${kurinPalautukset}/3`;
   }
-};
-
-HTMLActuator.prototype.updateBestScore = function (bestScore) {
-  this.bestContainer.textContent = bestScore;
-};
-
-HTMLActuator.prototype.message = function (won, kurinPalautukset) {
-  var type    = won ? "game-won" : "game-over";
-  var message = won ? "HALLA!" : "Improbatur...";
-  //TODO: eri viestejä riippuen parhaimmasta ruudusta pelissä
-
-  this.messageContainer.classList.add(type);
-  this.messageContainer.getElementsByTagName("p")[0].textContent = message;
-
-  this.messageContainer.getElementsByTagName("p")[1].textContent = `Kurinpalautukset: ${kurinPalautukset}/3`;
-};
-
-HTMLActuator.prototype.clearMessage = function () {
-  // IE only takes one value to remove at a time.
-  this.messageContainer.classList.remove("game-won");
-  this.messageContainer.classList.remove("game-over");
-};
-
-HTMLActuator.prototype.paritaKuli = function () {
-    this.clearContainer(this.scoreContainer);    
+  clearMessage() {
+    // IE only takes one value to remove at a time.
+    this.messageContainer.classList.remove("game-won");
+    this.messageContainer.classList.remove("game-over");
+  }
+  paritaKuli() {
+    this.clearContainer(this.scoreContainer);
     this.clearContainer(this.kurinPalautusViesti);
-    this.scoreContainer.textContent = this.score-1000;
+    this.scoreContainer.textContent = this.score - 1000;
 
     var addition = document.createElement("div");
     addition.classList.add("score-addition");
     addition.textContent = "-1000";
     this.scoreContainer.appendChild(addition);
-    
+
     var messageElement = document.createElement("img");
-    messageElement.setAttribute('src',"./img/parinkulautus.png");
+    messageElement.setAttribute('src', "./img/parinkulautus.png");
 
     this.kurinPalautusViesti.appendChild(messageElement);
     return true;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

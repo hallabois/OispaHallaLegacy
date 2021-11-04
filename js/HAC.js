@@ -68,9 +68,26 @@ class HAC {
         }
         HAC_status.innerHTML = this.connected ? "✅📶" : "🚫📶";
     }
-    recordBest() {
+    recordBest(score) {
         if(localStorage){
-            localStorage["HAC_best_history"] = JSON.stringify(this.history);
+            let best = localStorage["HAC_best_score"];
+            let old_best = localStorage["bestScore"];
+            let best_history = localStorage["HAC_best_history"];
+            if(best == null){
+                if(best_history == null){
+                    best = 0;
+                }
+                else if((old_best != null && old_best < best) ){
+                    best = 0;
+                }
+                else{
+                    best = old_best;
+                }
+            }
+            if(score >= best){
+                localStorage["HAC_best_history"] = JSON.stringify(this.history);
+                localStorage["HAC_best_score"] = score;
+            }
         }
     }
     toggleDebug(){

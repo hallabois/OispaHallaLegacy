@@ -107,10 +107,15 @@ class Grid {
     var state = [];
     for (var y = 0; y < this.size; y++) {
       for (var x = 0; x < this.size; x++) {
-        if (this.cells[x][y]) {
-          state.push(this.cells[x][y].value);
+        try{
+          if (this.cells[x][y]) {
+            state.push(this.cells[x][y].value);
+          }
+          else {
+            state.push(0);
+          }
         }
-        else {
+        catch{
           state.push(0);
         }
       }

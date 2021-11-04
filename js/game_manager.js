@@ -9,6 +9,7 @@ class GameManager {
 
     this.inputManager.on("move", this.move.bind(this));
     this.inputManager.on("restart", this.restart.bind(this));
+    this.inputManager.on("restartplus", this.restartplus.bind(this))
     this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
     this.inputManager.on("paritaKuli", this.paritaKuli.bind(this));
     this.inputManager.on("toggleHallaween", this.toggleHallaween.bind(this));
@@ -23,6 +24,14 @@ class GameManager {
   restart() {
     this.storageManager.clearGameState();
     this.actuator.continueGame(); // Clear the game won/lost message
+    this.size = 4;
+    this.setup();
+  }
+  // Restart the game
+  restartplus(size=3) {
+    this.storageManager.clearGameState();
+    this.actuator.continueGame(); // Clear the game won/lost message
+    this.size = size;
     this.setup();
   }
   // Keep playing after winning (allows going over 2048)
@@ -227,9 +236,7 @@ class GameManager {
         let state = this.serialize_HAC(HAC_grid, "f", added);
         HallaAntiCheat.recordState(state);
 
-        if (this.storageManager.getBestScore() < this.score) {
-          HallaAntiCheat.recordBest();
-        }
+        HallaAntiCheat.recordBest(this.score);
 
         HallaAntiCheat.validate();
         HallaAntiCheat.clearHistory();
@@ -245,6 +252,7 @@ class GameManager {
       HallaAntiCheat.recordState(state);
       HallaAntiCheat.validate();
     }
+    HallaAntiCheat.recordBest(this.score);
   }
   // Get the vector representing the chosen direction
   getVector(direction) {

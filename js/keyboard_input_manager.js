@@ -1,7 +1,6 @@
 class KeyboardInputManager {
   constructor() {
     this.events = {};
-    this.blocked = false;
 
     if (window.navigator.msPointerEnabled) {
       //Internet Explorer 10 style
@@ -70,6 +69,7 @@ class KeyboardInputManager {
     // Respond to button presses
     this.bindButtonPress(".retry-button", this.restart);
     this.bindButtonPress(".restart-button", this.restart);
+    this.bindContextPress(".restart-button", this.restartplus);
     this.bindButtonPress(".keep-playing-button", this.keepPlaying);
     this.bindButtonPress(".parin-kulautus", this.paritaKuli);
     this.bindButtonPress(".hallaween-button", this.toggleHallaween);
@@ -131,6 +131,11 @@ class KeyboardInputManager {
     event.preventDefault();
     this.emit("restart");
   }
+  restartplus(event) {
+    event.preventDefault();
+    this.emit("restartplus");
+    event.stopPropagation();
+  }
   keepPlaying(event) {
     event.preventDefault();
     this.emit("keepPlaying");
@@ -140,24 +145,19 @@ class KeyboardInputManager {
     button.addEventListener("click", fn.bind(this));
     button.addEventListener(this.eventTouchend, fn.bind(this));
   }
+  bindContextPress(selector, fn){
+    var button = document.querySelector(selector);
+    button.addEventListener("contextmenu", fn.bind(this));
+  }
   paritaKuli(event) {
-    this.blocked = typeof (this.blocked) === 'undefined' ? false : this.blocked;
-    if (!this.blocked) {
-      event.preventDefault();
-      this.emit("paritaKuli");
-    }
-    //sets a timeout to block kurinpalautus for 100ms after clicking to prevent accidental uses
-    //yes this is a botch and it really should be a button and not an a but idc
-    setTimeout(() => { this.blocked = false; }, 100);
+    event.preventDefault();
+    this.emit("paritaKuli");
+    event.stopPropagation();
   }
   toggleHallaween(event) {
-    this.blocked = typeof (this.blocked) === 'undefined' ? false : this.blocked;
-    if (!this.blocked) {
-      this.blocked = true;
-      event.preventDefault();
-      this.emit("toggleHallaween");
-    }
-    setTimeout(() => { this.blocked = false; }, 100);
+    event.preventDefault();
+    this.emit("toggleHallaween");
+    event.stopPropagation();
   }
 }
 

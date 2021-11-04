@@ -4,10 +4,17 @@
 @import "helpers";
 @import "fonts/clear-sans.css";
 
+:root{
+  --field-width: 500px;
+  --grid-gap: 15px;
+  --grid-size: 4;
+  --tile-size: calc(calc(var(--field-width) - calc(var(--grid-gap) * calc(var(--grid-size) + 1))) / var(--grid-size));
+  --tile-border-radius: 3px;
+}
+
 $field-width: 500px;
 $grid-spacing: 15px;
-$grid-row-cells: 4;
-$tile-size: math.div($field-width - $grid-spacing * ($grid-row-cells + 1), $grid-row-cells);
+$grid-max-size: 10;
 $tile-border-radius: 3px;
 
 $mobile-threshold: $field-width + 20px;
@@ -96,18 +103,21 @@ h1.title.dark{
   
   .kurin-palautus-container {
     justify-content: center;
-    flex: content;
+    flex: 1; // mf's browsers don't support flex: content???
     display: flex;
     text-align: center;
     margin-left: 25px;
   
     .kurin-palautus {
-      padding: 0 5px 5px 5px;
+      padding: 0 5px;
       background-color: #c00;
       cursor: pointer;
       width: 25%;
       border-radius: 3px;
       transition: 1s background;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
@@ -312,7 +322,7 @@ hr {
   .game-container {
     margin-top: $game-container-margin-top;
     position: relative;
-    padding: $grid-spacing;
+    padding: var(--grid-gap);
 
     cursor: default;
     -webkit-touch-callout: none;
@@ -399,10 +409,20 @@ hr {
   .grid-container {
     position: absolute;
     z-index: 1;
+    overflow: clip;
+    display: grid;
+    grid-template-rows: repeat(var(--grid-size), var(--tile-size));
+    grid-template-columns: repeat(var(--grid-size), var(--tile-size));
+    gap: var(--grid-gap);
+    height: calc(100% - var(--grid-gap));
+    width: calc(100% - var(--grid-gap));
   }
 
   .grid-row {
-    margin-bottom: $grid-spacing;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-size), var(--tile-size));
+    gap: var(--grid-gap);
+    overflow: clip;
 
     &:last-child {
       margin-bottom: 0;
@@ -416,12 +436,12 @@ hr {
   }
 
   .grid-cell {
-    width: $tile-size;
-    height: $tile-size;
-    margin-right: $grid-spacing;
-    float: left;
+    width: var(--tile-size);
+    height: var(--tile-size);
+    margin-right: var(--grid-gap);
+    transition: all .25s;
 
-    border-radius: $tile-border-radius;
+    border-radius: var(--tile-border-radius);
 
     background: rgba($tile-color, .35);
 
@@ -437,18 +457,20 @@ hr {
 
   .tile {
     &, .tile-inner {
-      width: ceil($tile-size);
-      height: ceil($tile-size);
-      line-height: ceil($tile-size);
+      width: var(--tile-size);
+      height: var(--tile-size);
+      line-height: var(--tile-size);
     }
 
     // Build position classes
-    @for $x from 1 through $grid-row-cells {
-      @for $y from 1 through $grid-row-cells {
+    @for $x from 1 through $grid-max-size {
+      @for $y from 1 through $grid-max-size {
         &.tile-position-#{$x}-#{$y} {
-          $xPos: floor(($tile-size + $grid-spacing) * ($x - 1));
-          $yPos: floor(($tile-size + $grid-spacing) * ($y - 1));
-          @include transform(translate($xPos, $yPos));
+          --x: #{$x};
+          --y: #{$y};
+          --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+          --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+          @include transform(translate(var(--xpos), var(--ypos)));
         }
       }
     }
@@ -603,10 +625,13 @@ $i: 2;
 
 @include smaller($mobile-threshold) {
   // Redefine variables for smaller screens
+  :root{
+    --field-width: 320px;
+    --grid-gap: 10px;
+    --tile-border-radius: 3px;
+  }
   $field-width: 320px !global;
   $grid-spacing: 10px !global;
-  $grid-row-cells: 4 !global;
-  $tile-size: math.div($field-width - $grid-spacing * ($grid-row-cells + 1), $grid-row-cells) !global;
   $tile-border-radius: 3px !global;
   $game-container-margin-top: 17px !global;
 

@@ -1,4 +1,12 @@
 @import "fonts/clear-sans.css";
+:root {
+  --field-width: 500px;
+  --grid-gap: 15px;
+  --grid-size: 4;
+  --tile-size: calc(calc(var(--field-width) - calc(var(--grid-gap) * calc(var(--grid-size) + 1))) / var(--grid-size));
+  --tile-border-radius: 3px;
+}
+
 /* Dark theme: */
 html, body {
   margin: 0;
@@ -58,18 +66,21 @@ h1.title.dark {
 }
 .underbar-container .kurin-palautus-container {
   justify-content: center;
-  flex: content;
+  flex: 1;
   display: flex;
   text-align: center;
   margin-left: 25px;
 }
 .underbar-container .kurin-palautus-container .kurin-palautus {
-  padding: 0 5px 5px 5px;
+  padding: 0 5px;
   background-color: #c00;
   cursor: pointer;
   width: 25%;
   border-radius: 3px;
   transition: 1s background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .HAC-container {
@@ -394,7 +405,7 @@ hr {
 .game-container {
   margin-top: 40px;
   position: relative;
-  padding: 15px;
+  padding: var(--grid-gap);
   cursor: default;
   -webkit-touch-callout: none;
   -ms-touch-callout: none;
@@ -472,10 +483,20 @@ hr {
 .grid-container {
   position: absolute;
   z-index: 1;
+  overflow: clip;
+  display: grid;
+  grid-template-rows: repeat(var(--grid-size), var(--tile-size));
+  grid-template-columns: repeat(var(--grid-size), var(--tile-size));
+  gap: var(--grid-gap);
+  height: calc(100% - var(--grid-gap));
+  width: calc(100% - var(--grid-gap));
 }
 
 .grid-row {
-  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-size), var(--tile-size));
+  gap: var(--grid-gap);
+  overflow: clip;
 }
 .grid-row:last-child {
   margin-bottom: 0;
@@ -487,11 +508,11 @@ hr {
 }
 
 .grid-cell {
-  width: 106.25px;
-  height: 106.25px;
-  margin-right: 15px;
-  float: left;
-  border-radius: 3px;
+  width: var(--tile-size);
+  height: var(--tile-size);
+  margin-right: var(--grid-gap);
+  transition: all 0.25s;
+  border-radius: var(--tile-border-radius);
   background: rgba(238, 228, 218, 0.35);
 }
 .grid-cell:last-child {
@@ -504,105 +525,1009 @@ hr {
 }
 
 .tile, .tile .tile-inner {
-  width: 107px;
-  height: 107px;
-  line-height: 107px;
+  width: var(--tile-size);
+  height: var(--tile-size);
+  line-height: var(--tile-size);
 }
 .tile.tile-position-1-1 {
-  -webkit-transform: translate(0px, 0px);
-  -moz-transform: translate(0px, 0px);
-  -ms-transform: translate(0px, 0px);
-  transform: translate(0px, 0px);
+  --x: 1;
+  --y: 1;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-1-2 {
-  -webkit-transform: translate(0px, 121px);
-  -moz-transform: translate(0px, 121px);
-  -ms-transform: translate(0px, 121px);
-  transform: translate(0px, 121px);
+  --x: 1;
+  --y: 2;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-1-3 {
-  -webkit-transform: translate(0px, 242px);
-  -moz-transform: translate(0px, 242px);
-  -ms-transform: translate(0px, 242px);
-  transform: translate(0px, 242px);
+  --x: 1;
+  --y: 3;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-1-4 {
-  -webkit-transform: translate(0px, 363px);
-  -moz-transform: translate(0px, 363px);
-  -ms-transform: translate(0px, 363px);
-  transform: translate(0px, 363px);
+  --x: 1;
+  --y: 4;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-1-5 {
+  --x: 1;
+  --y: 5;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-1-6 {
+  --x: 1;
+  --y: 6;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-1-7 {
+  --x: 1;
+  --y: 7;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-1-8 {
+  --x: 1;
+  --y: 8;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-1-9 {
+  --x: 1;
+  --y: 9;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-1-10 {
+  --x: 1;
+  --y: 10;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-2-1 {
-  -webkit-transform: translate(121px, 0px);
-  -moz-transform: translate(121px, 0px);
-  -ms-transform: translate(121px, 0px);
-  transform: translate(121px, 0px);
+  --x: 2;
+  --y: 1;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-2-2 {
-  -webkit-transform: translate(121px, 121px);
-  -moz-transform: translate(121px, 121px);
-  -ms-transform: translate(121px, 121px);
-  transform: translate(121px, 121px);
+  --x: 2;
+  --y: 2;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-2-3 {
-  -webkit-transform: translate(121px, 242px);
-  -moz-transform: translate(121px, 242px);
-  -ms-transform: translate(121px, 242px);
-  transform: translate(121px, 242px);
+  --x: 2;
+  --y: 3;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-2-4 {
-  -webkit-transform: translate(121px, 363px);
-  -moz-transform: translate(121px, 363px);
-  -ms-transform: translate(121px, 363px);
-  transform: translate(121px, 363px);
+  --x: 2;
+  --y: 4;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-2-5 {
+  --x: 2;
+  --y: 5;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-2-6 {
+  --x: 2;
+  --y: 6;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-2-7 {
+  --x: 2;
+  --y: 7;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-2-8 {
+  --x: 2;
+  --y: 8;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-2-9 {
+  --x: 2;
+  --y: 9;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-2-10 {
+  --x: 2;
+  --y: 10;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-3-1 {
-  -webkit-transform: translate(242px, 0px);
-  -moz-transform: translate(242px, 0px);
-  -ms-transform: translate(242px, 0px);
-  transform: translate(242px, 0px);
+  --x: 3;
+  --y: 1;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-3-2 {
-  -webkit-transform: translate(242px, 121px);
-  -moz-transform: translate(242px, 121px);
-  -ms-transform: translate(242px, 121px);
-  transform: translate(242px, 121px);
+  --x: 3;
+  --y: 2;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-3-3 {
-  -webkit-transform: translate(242px, 242px);
-  -moz-transform: translate(242px, 242px);
-  -ms-transform: translate(242px, 242px);
-  transform: translate(242px, 242px);
+  --x: 3;
+  --y: 3;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-3-4 {
-  -webkit-transform: translate(242px, 363px);
-  -moz-transform: translate(242px, 363px);
-  -ms-transform: translate(242px, 363px);
-  transform: translate(242px, 363px);
+  --x: 3;
+  --y: 4;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-3-5 {
+  --x: 3;
+  --y: 5;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-3-6 {
+  --x: 3;
+  --y: 6;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-3-7 {
+  --x: 3;
+  --y: 7;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-3-8 {
+  --x: 3;
+  --y: 8;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-3-9 {
+  --x: 3;
+  --y: 9;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-3-10 {
+  --x: 3;
+  --y: 10;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-4-1 {
-  -webkit-transform: translate(363px, 0px);
-  -moz-transform: translate(363px, 0px);
-  -ms-transform: translate(363px, 0px);
-  transform: translate(363px, 0px);
+  --x: 4;
+  --y: 1;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-4-2 {
-  -webkit-transform: translate(363px, 121px);
-  -moz-transform: translate(363px, 121px);
-  -ms-transform: translate(363px, 121px);
-  transform: translate(363px, 121px);
+  --x: 4;
+  --y: 2;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-4-3 {
-  -webkit-transform: translate(363px, 242px);
-  -moz-transform: translate(363px, 242px);
-  -ms-transform: translate(363px, 242px);
-  transform: translate(363px, 242px);
+  --x: 4;
+  --y: 3;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 .tile.tile-position-4-4 {
-  -webkit-transform: translate(363px, 363px);
-  -moz-transform: translate(363px, 363px);
-  -ms-transform: translate(363px, 363px);
-  transform: translate(363px, 363px);
+  --x: 4;
+  --y: 4;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-4-5 {
+  --x: 4;
+  --y: 5;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-4-6 {
+  --x: 4;
+  --y: 6;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-4-7 {
+  --x: 4;
+  --y: 7;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-4-8 {
+  --x: 4;
+  --y: 8;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-4-9 {
+  --x: 4;
+  --y: 9;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-4-10 {
+  --x: 4;
+  --y: 10;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-5-1 {
+  --x: 5;
+  --y: 1;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-5-2 {
+  --x: 5;
+  --y: 2;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-5-3 {
+  --x: 5;
+  --y: 3;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-5-4 {
+  --x: 5;
+  --y: 4;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-5-5 {
+  --x: 5;
+  --y: 5;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-5-6 {
+  --x: 5;
+  --y: 6;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-5-7 {
+  --x: 5;
+  --y: 7;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-5-8 {
+  --x: 5;
+  --y: 8;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-5-9 {
+  --x: 5;
+  --y: 9;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-5-10 {
+  --x: 5;
+  --y: 10;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-6-1 {
+  --x: 6;
+  --y: 1;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-6-2 {
+  --x: 6;
+  --y: 2;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-6-3 {
+  --x: 6;
+  --y: 3;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-6-4 {
+  --x: 6;
+  --y: 4;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-6-5 {
+  --x: 6;
+  --y: 5;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-6-6 {
+  --x: 6;
+  --y: 6;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-6-7 {
+  --x: 6;
+  --y: 7;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-6-8 {
+  --x: 6;
+  --y: 8;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-6-9 {
+  --x: 6;
+  --y: 9;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-6-10 {
+  --x: 6;
+  --y: 10;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-7-1 {
+  --x: 7;
+  --y: 1;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-7-2 {
+  --x: 7;
+  --y: 2;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-7-3 {
+  --x: 7;
+  --y: 3;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-7-4 {
+  --x: 7;
+  --y: 4;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-7-5 {
+  --x: 7;
+  --y: 5;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-7-6 {
+  --x: 7;
+  --y: 6;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-7-7 {
+  --x: 7;
+  --y: 7;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-7-8 {
+  --x: 7;
+  --y: 8;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-7-9 {
+  --x: 7;
+  --y: 9;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-7-10 {
+  --x: 7;
+  --y: 10;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-8-1 {
+  --x: 8;
+  --y: 1;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-8-2 {
+  --x: 8;
+  --y: 2;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-8-3 {
+  --x: 8;
+  --y: 3;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-8-4 {
+  --x: 8;
+  --y: 4;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-8-5 {
+  --x: 8;
+  --y: 5;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-8-6 {
+  --x: 8;
+  --y: 6;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-8-7 {
+  --x: 8;
+  --y: 7;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-8-8 {
+  --x: 8;
+  --y: 8;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-8-9 {
+  --x: 8;
+  --y: 9;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-8-10 {
+  --x: 8;
+  --y: 10;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-9-1 {
+  --x: 9;
+  --y: 1;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-9-2 {
+  --x: 9;
+  --y: 2;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-9-3 {
+  --x: 9;
+  --y: 3;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-9-4 {
+  --x: 9;
+  --y: 4;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-9-5 {
+  --x: 9;
+  --y: 5;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-9-6 {
+  --x: 9;
+  --y: 6;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-9-7 {
+  --x: 9;
+  --y: 7;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-9-8 {
+  --x: 9;
+  --y: 8;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-9-9 {
+  --x: 9;
+  --y: 9;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-9-10 {
+  --x: 9;
+  --y: 10;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-10-1 {
+  --x: 10;
+  --y: 1;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-10-2 {
+  --x: 10;
+  --y: 2;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-10-3 {
+  --x: 10;
+  --y: 3;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-10-4 {
+  --x: 10;
+  --y: 4;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-10-5 {
+  --x: 10;
+  --y: 5;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-10-6 {
+  --x: 10;
+  --y: 6;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-10-7 {
+  --x: 10;
+  --y: 7;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-10-8 {
+  --x: 10;
+  --y: 8;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-10-9 {
+  --x: 10;
+  --y: 9;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
+}
+.tile.tile-position-10-10 {
+  --x: 10;
+  --y: 10;
+  --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+  --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+  -webkit-transform: translate(var(--xpos), var(--ypos));
+  -moz-transform: translate(var(--xpos), var(--ypos));
+  -ms-transform: translate(var(--xpos), var(--ypos));
+  transform: translate(var(--xpos), var(--ypos));
 }
 
 .tile {
@@ -781,6 +1706,12 @@ hr {
 }
 
 @media screen and (max-width: 520px) {
+  :root {
+    --field-width: 320px;
+    --grid-gap: 10px;
+    --tile-border-radius: 3px;
+  }
+
   html, body {
     font-size: 15px;
     padding: 0;
@@ -833,7 +1764,7 @@ hr {
   .game-container {
     margin-top: 17px;
     position: relative;
-    padding: 10px;
+    padding: var(--grid-gap);
     cursor: default;
     -webkit-touch-callout: none;
     -ms-touch-callout: none;
@@ -911,10 +1842,20 @@ hr {
   .grid-container {
     position: absolute;
     z-index: 1;
+    overflow: clip;
+    display: grid;
+    grid-template-rows: repeat(var(--grid-size), var(--tile-size));
+    grid-template-columns: repeat(var(--grid-size), var(--tile-size));
+    gap: var(--grid-gap);
+    height: calc(100% - var(--grid-gap));
+    width: calc(100% - var(--grid-gap));
   }
 
   .grid-row {
-    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-size), var(--tile-size));
+    gap: var(--grid-gap);
+    overflow: clip;
   }
   .grid-row:last-child {
     margin-bottom: 0;
@@ -926,11 +1867,11 @@ hr {
   }
 
   .grid-cell {
-    width: 67.5px;
-    height: 67.5px;
-    margin-right: 10px;
-    float: left;
-    border-radius: 3px;
+    width: var(--tile-size);
+    height: var(--tile-size);
+    margin-right: var(--grid-gap);
+    transition: all 0.25s;
+    border-radius: var(--tile-border-radius);
     background: rgba(238, 228, 218, 0.35);
   }
   .grid-cell:last-child {
@@ -943,105 +1884,1009 @@ hr {
   }
 
   .tile, .tile .tile-inner {
-    width: 68px;
-    height: 68px;
-    line-height: 68px;
+    width: var(--tile-size);
+    height: var(--tile-size);
+    line-height: var(--tile-size);
   }
   .tile.tile-position-1-1 {
-    -webkit-transform: translate(0px, 0px);
-    -moz-transform: translate(0px, 0px);
-    -ms-transform: translate(0px, 0px);
-    transform: translate(0px, 0px);
+    --x: 1;
+    --y: 1;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-1-2 {
-    -webkit-transform: translate(0px, 77px);
-    -moz-transform: translate(0px, 77px);
-    -ms-transform: translate(0px, 77px);
-    transform: translate(0px, 77px);
+    --x: 1;
+    --y: 2;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-1-3 {
-    -webkit-transform: translate(0px, 155px);
-    -moz-transform: translate(0px, 155px);
-    -ms-transform: translate(0px, 155px);
-    transform: translate(0px, 155px);
+    --x: 1;
+    --y: 3;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-1-4 {
-    -webkit-transform: translate(0px, 232px);
-    -moz-transform: translate(0px, 232px);
-    -ms-transform: translate(0px, 232px);
-    transform: translate(0px, 232px);
+    --x: 1;
+    --y: 4;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-1-5 {
+    --x: 1;
+    --y: 5;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-1-6 {
+    --x: 1;
+    --y: 6;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-1-7 {
+    --x: 1;
+    --y: 7;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-1-8 {
+    --x: 1;
+    --y: 8;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-1-9 {
+    --x: 1;
+    --y: 9;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-1-10 {
+    --x: 1;
+    --y: 10;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-2-1 {
-    -webkit-transform: translate(77px, 0px);
-    -moz-transform: translate(77px, 0px);
-    -ms-transform: translate(77px, 0px);
-    transform: translate(77px, 0px);
+    --x: 2;
+    --y: 1;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-2-2 {
-    -webkit-transform: translate(77px, 77px);
-    -moz-transform: translate(77px, 77px);
-    -ms-transform: translate(77px, 77px);
-    transform: translate(77px, 77px);
+    --x: 2;
+    --y: 2;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-2-3 {
-    -webkit-transform: translate(77px, 155px);
-    -moz-transform: translate(77px, 155px);
-    -ms-transform: translate(77px, 155px);
-    transform: translate(77px, 155px);
+    --x: 2;
+    --y: 3;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-2-4 {
-    -webkit-transform: translate(77px, 232px);
-    -moz-transform: translate(77px, 232px);
-    -ms-transform: translate(77px, 232px);
-    transform: translate(77px, 232px);
+    --x: 2;
+    --y: 4;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-2-5 {
+    --x: 2;
+    --y: 5;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-2-6 {
+    --x: 2;
+    --y: 6;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-2-7 {
+    --x: 2;
+    --y: 7;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-2-8 {
+    --x: 2;
+    --y: 8;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-2-9 {
+    --x: 2;
+    --y: 9;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-2-10 {
+    --x: 2;
+    --y: 10;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-3-1 {
-    -webkit-transform: translate(155px, 0px);
-    -moz-transform: translate(155px, 0px);
-    -ms-transform: translate(155px, 0px);
-    transform: translate(155px, 0px);
+    --x: 3;
+    --y: 1;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-3-2 {
-    -webkit-transform: translate(155px, 77px);
-    -moz-transform: translate(155px, 77px);
-    -ms-transform: translate(155px, 77px);
-    transform: translate(155px, 77px);
+    --x: 3;
+    --y: 2;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-3-3 {
-    -webkit-transform: translate(155px, 155px);
-    -moz-transform: translate(155px, 155px);
-    -ms-transform: translate(155px, 155px);
-    transform: translate(155px, 155px);
+    --x: 3;
+    --y: 3;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-3-4 {
-    -webkit-transform: translate(155px, 232px);
-    -moz-transform: translate(155px, 232px);
-    -ms-transform: translate(155px, 232px);
-    transform: translate(155px, 232px);
+    --x: 3;
+    --y: 4;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-3-5 {
+    --x: 3;
+    --y: 5;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-3-6 {
+    --x: 3;
+    --y: 6;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-3-7 {
+    --x: 3;
+    --y: 7;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-3-8 {
+    --x: 3;
+    --y: 8;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-3-9 {
+    --x: 3;
+    --y: 9;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-3-10 {
+    --x: 3;
+    --y: 10;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-4-1 {
-    -webkit-transform: translate(232px, 0px);
-    -moz-transform: translate(232px, 0px);
-    -ms-transform: translate(232px, 0px);
-    transform: translate(232px, 0px);
+    --x: 4;
+    --y: 1;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-4-2 {
-    -webkit-transform: translate(232px, 77px);
-    -moz-transform: translate(232px, 77px);
-    -ms-transform: translate(232px, 77px);
-    transform: translate(232px, 77px);
+    --x: 4;
+    --y: 2;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-4-3 {
-    -webkit-transform: translate(232px, 155px);
-    -moz-transform: translate(232px, 155px);
-    -ms-transform: translate(232px, 155px);
-    transform: translate(232px, 155px);
+    --x: 4;
+    --y: 3;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
   .tile.tile-position-4-4 {
-    -webkit-transform: translate(232px, 232px);
-    -moz-transform: translate(232px, 232px);
-    -ms-transform: translate(232px, 232px);
-    transform: translate(232px, 232px);
+    --x: 4;
+    --y: 4;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-4-5 {
+    --x: 4;
+    --y: 5;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-4-6 {
+    --x: 4;
+    --y: 6;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-4-7 {
+    --x: 4;
+    --y: 7;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-4-8 {
+    --x: 4;
+    --y: 8;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-4-9 {
+    --x: 4;
+    --y: 9;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-4-10 {
+    --x: 4;
+    --y: 10;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-5-1 {
+    --x: 5;
+    --y: 1;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-5-2 {
+    --x: 5;
+    --y: 2;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-5-3 {
+    --x: 5;
+    --y: 3;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-5-4 {
+    --x: 5;
+    --y: 4;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-5-5 {
+    --x: 5;
+    --y: 5;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-5-6 {
+    --x: 5;
+    --y: 6;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-5-7 {
+    --x: 5;
+    --y: 7;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-5-8 {
+    --x: 5;
+    --y: 8;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-5-9 {
+    --x: 5;
+    --y: 9;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-5-10 {
+    --x: 5;
+    --y: 10;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-6-1 {
+    --x: 6;
+    --y: 1;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-6-2 {
+    --x: 6;
+    --y: 2;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-6-3 {
+    --x: 6;
+    --y: 3;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-6-4 {
+    --x: 6;
+    --y: 4;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-6-5 {
+    --x: 6;
+    --y: 5;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-6-6 {
+    --x: 6;
+    --y: 6;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-6-7 {
+    --x: 6;
+    --y: 7;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-6-8 {
+    --x: 6;
+    --y: 8;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-6-9 {
+    --x: 6;
+    --y: 9;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-6-10 {
+    --x: 6;
+    --y: 10;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-7-1 {
+    --x: 7;
+    --y: 1;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-7-2 {
+    --x: 7;
+    --y: 2;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-7-3 {
+    --x: 7;
+    --y: 3;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-7-4 {
+    --x: 7;
+    --y: 4;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-7-5 {
+    --x: 7;
+    --y: 5;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-7-6 {
+    --x: 7;
+    --y: 6;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-7-7 {
+    --x: 7;
+    --y: 7;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-7-8 {
+    --x: 7;
+    --y: 8;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-7-9 {
+    --x: 7;
+    --y: 9;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-7-10 {
+    --x: 7;
+    --y: 10;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-8-1 {
+    --x: 8;
+    --y: 1;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-8-2 {
+    --x: 8;
+    --y: 2;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-8-3 {
+    --x: 8;
+    --y: 3;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-8-4 {
+    --x: 8;
+    --y: 4;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-8-5 {
+    --x: 8;
+    --y: 5;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-8-6 {
+    --x: 8;
+    --y: 6;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-8-7 {
+    --x: 8;
+    --y: 7;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-8-8 {
+    --x: 8;
+    --y: 8;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-8-9 {
+    --x: 8;
+    --y: 9;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-8-10 {
+    --x: 8;
+    --y: 10;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-9-1 {
+    --x: 9;
+    --y: 1;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-9-2 {
+    --x: 9;
+    --y: 2;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-9-3 {
+    --x: 9;
+    --y: 3;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-9-4 {
+    --x: 9;
+    --y: 4;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-9-5 {
+    --x: 9;
+    --y: 5;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-9-6 {
+    --x: 9;
+    --y: 6;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-9-7 {
+    --x: 9;
+    --y: 7;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-9-8 {
+    --x: 9;
+    --y: 8;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-9-9 {
+    --x: 9;
+    --y: 9;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-9-10 {
+    --x: 9;
+    --y: 10;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-10-1 {
+    --x: 10;
+    --y: 1;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-10-2 {
+    --x: 10;
+    --y: 2;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-10-3 {
+    --x: 10;
+    --y: 3;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-10-4 {
+    --x: 10;
+    --y: 4;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-10-5 {
+    --x: 10;
+    --y: 5;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-10-6 {
+    --x: 10;
+    --y: 6;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-10-7 {
+    --x: 10;
+    --y: 7;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-10-8 {
+    --x: 10;
+    --y: 8;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-10-9 {
+    --x: 10;
+    --y: 9;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
+  }
+  .tile.tile-position-10-10 {
+    --x: 10;
+    --y: 10;
+    --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+    --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+    -webkit-transform: translate(var(--xpos), var(--ypos));
+    -moz-transform: translate(var(--xpos), var(--ypos));
+    -ms-transform: translate(var(--xpos), var(--ypos));
+    transform: translate(var(--xpos), var(--ypos));
   }
 
   .tile .tile-inner {
