@@ -8,6 +8,7 @@
   --field-width: 500px;
   --grid-gap: 15px;
   --grid-size: 4;
+  --grid-size-max: 6;
   --tile-size: calc(calc(var(--field-width) - calc(var(--grid-gap) * calc(var(--grid-size) + 1))) / var(--grid-size));
   --tile-border-radius: 3px;
 }
@@ -114,7 +115,7 @@ h1.title.dark{
       cursor: pointer;
       width: 25%;
       border-radius: 3px;
-      transition: 1s background;
+      transition: 1s background, 1s color;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -411,11 +412,12 @@ hr {
     z-index: 1;
     overflow: clip;
     display: grid;
-    grid-template-rows: repeat(var(--grid-size), var(--tile-size));
-    grid-template-columns: repeat(var(--grid-size), var(--tile-size));
+    grid-template-rows: repeat(var(--grid-size-max), var(--tile-size));
+    grid-template-columns: repeat(var(--grid-size-max), var(--tile-size));
     gap: var(--grid-gap);
-    height: calc(100% - var(--grid-gap));
-    width: calc(100% - var(--grid-gap));
+    height: calc(100% - calc(var(--grid-gap) * 2));
+    width: calc(100% - calc(var(--grid-gap) * 2));
+    transition: all 0.25s;
   }
 
   .grid-row {
