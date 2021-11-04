@@ -1,7 +1,28 @@
 var GameManagerInstance;
 // Wait till the browser is ready to render the game (avoids glitches)
 window.requestAnimationFrame(function () {
-  GameManagerInstance = new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
+  // for debugging with plebs
+  if(window.location.href.includes("?debug")){
+    console.log("debug time!");
+    let out = "<div style='overflow-x:auto;height: 100%;background:#1e1e1e;color:#ddd!important;'>";
+    out += "<table><tr><th></th><th></th></tr>"; // Key, Value
+    for(let i in localStorage){
+      out += "<tr>";
+        out += "<td style='color: #94d0f1 !important;'>";
+        out += i;
+        out += "</td>";
+        out += "<td style='color: #ce9178 !important;'>";
+        out += localStorage[i];
+        out += "</td>";
+      out += "</tr>";
+    }
+    out += "</table></div>";
+    out += "<style>html, body{margin: 0; padding: 0;font-family: monospace;}</style>";
+    document.write(out);
+  }
+  else{
+    GameManagerInstance = new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
+  }
 });
 
 var themeCount = 2;
