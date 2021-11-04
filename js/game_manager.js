@@ -59,11 +59,13 @@ class GameManager {
     }
   }
   toggleHallaween() {
-    const currentTheme = document.querySelector('html').classList[0].split('-')[1];
-    if (currentTheme == 2)
-      setImageTheme(1);
-    else
-      setImageTheme(2);
+    let newIndex = parseInt(currentTheme) + 1;
+    console.log(newIndex);
+    if(newIndex > themeCount){
+      newIndex = 1;
+    }
+    console.log("actually: ", newIndex);
+    setImageTheme( newIndex );
   }
   // Return true if the game is lost, or has won and the user hasn't kept playing
   isGameTerminated() {
@@ -236,7 +238,9 @@ class GameManager {
         let state = this.serialize_HAC(HAC_grid, "f", added);
         HallaAntiCheat.recordState(state);
 
-        HallaAntiCheat.recordBest(this.score);
+        if(this.size == 4){
+          HallaAntiCheat.recordBest(this.score);
+        }
 
         HallaAntiCheat.validate();
         HallaAntiCheat.clearHistory();
@@ -252,7 +256,9 @@ class GameManager {
       HallaAntiCheat.recordState(state);
       HallaAntiCheat.validate();
     }
-    HallaAntiCheat.recordBest(this.score);
+    if(this.size == 4){
+      HallaAntiCheat.recordBest(this.score);
+    }
   }
   // Get the vector representing the chosen direction
   getVector(direction) {

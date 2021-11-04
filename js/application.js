@@ -4,6 +4,8 @@ window.requestAnimationFrame(function () {
   GameManagerInstance = new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
 });
 
+var themeCount = 2;
+
 function preloadImages(path){
   var imageList = [
     "2.png",
@@ -36,7 +38,9 @@ function preloadImages(path){
     document.getElementsByClassName("preload-container")[0].appendChild(img);
 }
 
+var currentTheme = 1;
 function setImageTheme(themeID){
+  currentTheme = themeID;
   document.querySelector("html").classList = ["theme-" + themeID];
   var hallaweenToggle = document.getElementById('hallaween-icon');
   if(themeID == 1) hallaweenToggle.src = 'img/pumpkin.svg';
