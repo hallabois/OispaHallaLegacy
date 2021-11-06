@@ -19,6 +19,7 @@ class HAC {
         this.enabled = false;
     	this.debug = false;
         this.history = [];
+        this.size = 4;
         this.secure = false;
         this.urls = ["https://localhost:8000", "http://localhost:8000", "https://hac.oispahalla.com:8000", "https://hac.hallacoin.ml:8000", "http://35.225.19.22:8000"];
         this.url = "";
@@ -26,6 +27,7 @@ class HAC {
         if(localStorage && localStorage["HAC_history"]){
             try {
                 this.history = JSON.parse(localStorage["HAC_history"]);
+                this.size = JSON.parse(localStorage["HAC_size"]);
             } catch (error) {
                 console.log("Failed to load HAC history from localstorage: ", error)
             }
@@ -59,6 +61,7 @@ class HAC {
         this.history.push(state);
         if(localStorage){
             localStorage["HAC_history"] = JSON.stringify(this.history);
+            localStorage["HAC_size"] = JSON.stringify(this.size);
         }
     }
     clearHistory(){
@@ -118,7 +121,7 @@ class HAC {
         }
         try{
 	        HAC_status.innerHTML = "...";
-        	let response = await fetch(this.url + "/HAC/validate/" + 4 + "x" + 4 + "S" + this.history.join(":"));
+        	let response = await fetch(this.url + "/HAC/validate/" + this.size + "x" + this.size + "S" + this.history.join(":"));
 	        let data = await response.json();
 	        if(this.debug){
 		        //console.log(response);

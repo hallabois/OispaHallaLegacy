@@ -96,6 +96,8 @@ class GameManager {
       this.addStartTiles();
     }
 
+    HallaAntiCheat.size = this.size;
+
     // Update the actuator
     this.actuate();
   }
