@@ -87,6 +87,9 @@ class HAC {
                     best = old_best;
                 }
             }
+            if(old_best == null){
+                best = 0;
+            }
             if(score >= best){
                 localStorage["HAC_best_history"] = JSON.stringify(this.history);
                 localStorage["HAC_best_score"] = score;
