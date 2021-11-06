@@ -60,11 +60,9 @@ class GameManager {
   }
   toggleHallaween() {
     let newIndex = parseInt(currentTheme) + 1;
-    console.log(newIndex);
     if(newIndex > themeCount){
       newIndex = 1;
     }
-    console.log("actually: ", newIndex);
     setImageTheme( newIndex );
   }
   // Return true if the game is lost, or has won and the user hasn't kept playing
