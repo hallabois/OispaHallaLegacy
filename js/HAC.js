@@ -118,7 +118,7 @@ class HAC {
         }
         try{
 	        HAC_status.innerHTML = "...";
-        	let response = await fetch(this.url + "/HAC/validate/" + this.history.join(":"));
+        	let response = await fetch(this.url + "/HAC/validate/" + 4 + "x" + 4 + "S" + this.history.join(":"));
 	        let data = await response.json();
 	        if(this.debug){
 		        //console.log(response);
