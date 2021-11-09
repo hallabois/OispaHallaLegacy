@@ -33,6 +33,8 @@ window.requestAnimationFrame(function () {
 });
 
 var themeCount = 2;
+var defautTheme = 1;
+var currentImageThemeVersion = 2;
 
 function preloadImages(path){
   var imageList = [
@@ -75,6 +77,7 @@ function setImageTheme(themeID){
   else hallaweenToggle.src = 'img/no_pumpkin.svg';
   preloadImages("../img/theme-" + themeID + "/");
   localStorage.imageTheme = themeID;
+  localStorage.imageThemeLastVersion = currentImageThemeVersion;
   try{
 			sa_event('theme_changed_to_' + themeID);
 		}
@@ -121,9 +124,14 @@ window.addEventListener("DOMContentLoaded", function() {
 		}
 	}
   if(localStorage.imageTheme){
-		setImageTheme(localStorage.imageTheme);
+    if(localStorage.imageThemeLastVersion && localStorage.imageThemeLastVersion == currentImageThemeVersion){
+      setImageTheme(localStorage.imageTheme);
+    }
+    else{
+      setImageTheme( defautTheme );
+    }
 	}
   else{
-    setImageTheme( 2 );
+    setImageTheme( defautTheme );
   }
 }, false);
