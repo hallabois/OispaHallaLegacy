@@ -21,7 +21,7 @@ class HAC {
         this.history = [];
         this.size = 4;
         this.secure = false;
-        this.urls = ["https://localhost:8000", "http://localhost:8000", "https://hac.oispahalla.com:8000", "https://hac.hallacoin.ml:8000", "http://35.225.19.22:8000"];
+        this.urls = ["https://localhost:8000", "http://localhost:8000", "https://hac.oispahalla.com:8000", "https://hac.hallacoin.ml:8000", "http://34.71.42.176:8000"];
         this.url = "";
         this.connected = false;
         if(localStorage && localStorage["HAC_history"]){
