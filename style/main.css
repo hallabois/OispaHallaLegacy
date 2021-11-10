@@ -56,8 +56,8 @@ h1.title.dark {
   margin-top: 15px;
 }
 .underbar-container .button-container > * {
-  width: 50%;
   display: flex;
+  width: 50%;
 }
 .underbar-container .button-container .hallaween-button {
   filter: invert(42%) sepia(6%) saturate(718%) hue-rotate(349deg) brightness(100%) contrast(84%);
@@ -71,6 +71,7 @@ h1.title.dark {
   display: flex;
   text-align: center;
   margin-left: 25px;
+  min-height: 30px;
 }
 .underbar-container .kurin-palautus-container .kurin-palautus {
   padding: 0 5px;
