@@ -12,7 +12,7 @@ class GameManager {
     this.inputManager.on("restartplus", this.restartplus.bind(this))
     this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
     this.inputManager.on("paritaKuli", this.paritaKuli.bind(this));
-    this.inputManager.on("toggleHallaween", this.toggleHallaween.bind(this));
+    // this.inputManager.on("toggleHallaween", this.toggleHallaween.bind(this));
 
     this.setup();
   }
