@@ -90,7 +90,7 @@ h1.title.dark{
   .button-container {
     > * {
       display: flex;
-      min-height: 30px;
+      width: 50%;
     }
   
     .hallaween-button {
@@ -108,6 +108,7 @@ h1.title.dark{
     display: flex;
     text-align: center;
     margin-left: 25px;
+    min-height: 30px;
   
     .kurin-palautus {
       padding: 0 5px;
