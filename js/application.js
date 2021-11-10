@@ -34,7 +34,7 @@ window.requestAnimationFrame(function () {
 
 var themeCount = 2;
 var defautTheme = 1;
-var currentImageThemeVersion = 2;
+var currentImageThemeVersion = 3;
 
 function preloadImages(path){
   var imageList = [
