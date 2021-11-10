@@ -72,9 +72,6 @@ var currentTheme = 1;
 function setImageTheme(themeID){
   currentTheme = themeID;
   document.querySelector("html").classList = ["theme-" + themeID];
-  var hallaweenToggle = document.getElementById('hallaween-icon');
-  if(themeID == 1) hallaweenToggle.src = 'img/pumpkin.svg';
-  else hallaweenToggle.src = 'img/no_pumpkin.svg';
   preloadImages("../img/theme-" + themeID + "/");
   localStorage.imageTheme = themeID;
   localStorage.imageThemeLastVersion = currentImageThemeVersion;
