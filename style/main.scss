@@ -89,8 +89,8 @@ h1.title.dark{
 
   .button-container {
     > * {
-      width: 50%;
       display: flex;
+      min-height: 30px;
     }
   
     .hallaween-button {
