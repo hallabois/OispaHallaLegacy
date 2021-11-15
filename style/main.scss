@@ -530,6 +530,7 @@ $i: 2;
   position: absolute; // Makes transforms relative to the top-left corner
 
   .tile-inner {
+    background-image: url('../img/tile_unknown.png');
     border-radius: $tile-border-radius;
 
     text-align: center;

@@ -1543,6 +1543,7 @@ hr {
   transition-property: transform;
 }
 .tile .tile-inner {
+  background-image: url("../img/tile_unknown.png");
   border-radius: 3px;
   text-align: center;
   font-weight: bold;
