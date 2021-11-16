@@ -77,6 +77,7 @@ class GameManager {
     if (previousState) {
       this.grid = new Grid(previousState.grid.size,
         previousState.grid.cells); // Reload grid
+      this.size = previousState.grid.size;
       this.score = previousState.score;
       this.palautukset = previousState.palautukset == undefined ? 0 : previousState.palautukset;
       this.over = previousState.over;
@@ -147,6 +148,7 @@ class GameManager {
       palautukset: this.palautukset,
       over: this.over,
       won: this.won,
+      size: this.size,
       keepPlaying: this.keepPlaying
     };
   }
