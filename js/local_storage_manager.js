@@ -43,7 +43,12 @@ class LocalStorageManager {
     return this.storage.getItem(this.bestScoreKey) || 0;
   }
   setBestScore(score) {
-    this.storage.setItem(this.bestScoreKey, score);
+    if(localStorage && localStorage.lastSession && localStorage.lastSession != tabID){
+      this.resolveConflict();
+    }
+    else{
+      this.storage.setItem(this.bestScoreKey, score);
+    }
   }
   // Game state getters/setters and clearing
   getGameState() {
@@ -51,10 +56,29 @@ class LocalStorageManager {
     return stateJSON ? JSON.parse(stateJSON) : null;
   }
   setGameState(gameState) {
-    this.storage.setItem(this.gameStateKey, JSON.stringify(gameState));
+    if(localStorage && localStorage.lastSession && localStorage.lastSession != tabID){
+      this.resolveConflict();
+    }
+    else{
+      this.storage.setItem("lastSession", tabID);
+      this.storage.setItem(this.gameStateKey, JSON.stringify(gameState));
+    }
   }
   clearGameState() {
-    this.storage.removeItem(this.gameStateKey);
+    if(localStorage && localStorage.lastSession && localStorage.lastSession != tabID){
+      this.resolveConflict();
+    }
+    else{
+      this.storage.removeItem(this.gameStateKey);
+    }
+  }
+  resolveConflict(){
+    let overwrite = confirm("Sinulla on useampi Oispa Halla™ välilehti auki!\nHaluatko lataa aiemman välilehden tilan tähän välilehteen?\n\n(Jos et paina OK, pelisi ei tallennu, kunnes suljet toiset välilehdet)");
+    if(overwrite){
+      this.storage.setItem("lastSession", tabID);
+      HallaAntiCheat = null; // Estää vahingolliset kirjoitukset historiaan. Aiheuttaa virheitä ennen reloadia, mutta ketä kiinnostaa ¯\_(ツ)_/¯
+      window.location.reload();
+    }
   }
 }
 

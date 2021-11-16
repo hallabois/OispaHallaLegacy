@@ -1,4 +1,23 @@
+// Stuff to make sure that only one tab can play the game at a time
+var tabID = sessionStorage.tabID ? 
+            sessionStorage.tabID : 
+            sessionStorage.tabID = Math.random();
+window.onunload = function() {
+  if(localStorage){
+    if(localStorage.lastSession){
+      if(localStorage.lastSession == tabID){
+        delete localStorage.lastSession;
+      }
+    }
+  }
+}
+
 var GameManagerInstance;
+
+function initGameManager(size = 4){
+  GameManagerInstance = new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
+}
+
 // Wait till the browser is ready to render the game (avoids glitches)
 window.requestAnimationFrame(function () {
   // for debugging with plebs
@@ -28,7 +47,7 @@ window.requestAnimationFrame(function () {
     document.write(out);
   }
   else{
-    GameManagerInstance = new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
+    initGameManager();
   }
 });
 

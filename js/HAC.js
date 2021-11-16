@@ -58,16 +58,26 @@ class HAC {
         HAC_container.title = "Yhteyttä yhteenkään HAC-palvelimeen ei saatu muodostettua.";
     }
     recordState(state) {
-        this.history.push(state);
-        if(localStorage){
-            localStorage["HAC_history"] = JSON.stringify(this.history);
-            localStorage["HAC_size"] = JSON.stringify(this.size);
+        if(localStorage && localStorage.lastSession && localStorage.lastSession != tabID){
+            console.log("MULTIPLE TABS OPEN, HAC HISTORY WILL NOT BE SAVED UNTIL THE CONFLICT IS RESOLVED");
+        }
+        else{
+            this.history.push(state);
+            if(localStorage){
+                localStorage["HAC_history"] = JSON.stringify(this.history);
+                localStorage["HAC_size"] = JSON.stringify(this.size);
+            }
         }
     }
     clearHistory(){
         this.history = [];
         if(localStorage){
-            localStorage["HAC_history"] = JSON.stringify(this.history);
+            if(localStorage && localStorage.lastSession && localStorage.lastSession != tabID){
+                console.log("MULTIPLE TABS OPEN, HAC HISTORY WILL NOT BE CLEARED UNTIL THE CONFLICT IS RESOLVED");
+            }
+            else{
+                localStorage["HAC_history"] = JSON.stringify(this.history);
+            }
         }
         HAC_status.innerHTML = this.connected ? "✅📶" : "🚫📶";
     }
