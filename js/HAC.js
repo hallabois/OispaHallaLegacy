@@ -103,7 +103,7 @@ class HAC {
                     best = old_best;
                 }
             }
-            if(best_history == null){
+            if(best_history == null || best_history == "[]"){
                 best = 0;
             }
             if(old_best == null){
