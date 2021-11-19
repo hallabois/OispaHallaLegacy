@@ -82,13 +82,16 @@ class HAC {
         HAC_status.innerHTML = this.connected ? "✅📶" : "🚫📶";
     }
     recordBest(score) {
-        if(score < 1){
-            return;
-        }
         if(localStorage){
             let best = localStorage["HAC_best_score"];
             let old_best = localStorage["bestScore"];
             let best_history = localStorage["HAC_best_history"];
+            if(score < 1){
+                return;
+            }
+            if(HallaAntiCheat.history.length == 0){
+                return;
+            }
             if(best == null){
                 if(best_history == null){
                     best = 0;
