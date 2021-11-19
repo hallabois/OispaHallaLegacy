@@ -97,6 +97,9 @@ class HAC {
                     best = old_best;
                 }
             }
+            if(best_history == null){
+                best = 0;
+            }
             if(old_best == null){
                 best = 0;
             }
