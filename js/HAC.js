@@ -82,6 +82,9 @@ class HAC {
         HAC_status.innerHTML = this.connected ? "✅📶" : "🚫📶";
     }
     recordBest(score) {
+        if(score < 1){
+            return;
+        }
         if(localStorage){
             let best = localStorage["HAC_best_score"];
             let old_best = localStorage["bestScore"];
