@@ -618,42 +618,9 @@ $i: 2;
 
 .restart-button {
   @include button;
-  display: flex;
+  display: block;
   text-align: center;
   float: right;
-  overflow: clip;
-  padding: 0;
-  .uusi-jakso{
-    transition: all 0.25s ease;
-    transform: translateX(0);
-    flex: 1;
-    overflow: hidden;
-  }
-  .size-selector {
-    transform: translateX(100%);
-    transition: all 0.25s ease;
-    flex: 0;
-    overflow: hidden;
-
-    display: flex;
-    button {
-      flex: 1;
-      font-size: 1em;
-      border: none;
-      border-radius: 3px;
-      margin: 3px;
-    }
-  }
-}
-.restart-button.open {
-  .uusi-jakso {
-    transform: translateX(-100%);
-    flex: 0;
-  }
-  .size-selector {
-    transform: translateX(0);
-    flex: 1;
-  }
 }
 
 .game-explanation {
