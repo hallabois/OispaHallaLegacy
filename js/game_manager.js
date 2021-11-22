@@ -7,12 +7,23 @@ class GameManager {
 
     this.startTiles = 2;
 
+    let restartbtn = document.querySelector(".restart-button");
+
     this.inputManager.on("move", this.move.bind(this));
-    this.inputManager.on("restart", this.restart.bind(this));
+    //this.inputManager.on("restart", this.restart.bind(this));
     this.inputManager.on("restartplus", this.restartplus.bind(this))
     this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
     this.inputManager.on("paritaKuli", this.paritaKuli.bind(this));
     // this.inputManager.on("toggleHallaween", this.toggleHallaween.bind(this));
+
+    restartbtn.onclick = () => {
+      if(!restartbtn.classList.contains("open")){
+        restartbtn.classList.add("open");
+      }
+      else{
+        restartbtn.classList.remove("open");
+      }
+    };
 
     this.setup();
   }
