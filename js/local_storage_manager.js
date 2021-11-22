@@ -77,6 +77,7 @@ class LocalStorageManager {
     if(overwrite){
       this.storage.setItem("lastSession", tabID);
       HallaAntiCheat = null; // Estää vahingolliset kirjoitukset historiaan. Aiheuttaa virheitä ennen reloadia, mutta ketä kiinnostaa ¯\_(ツ)_/¯
+      document.write("Ladataan uudelleen...");
       window.location.reload();
     }
   }
