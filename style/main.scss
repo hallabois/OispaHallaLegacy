@@ -618,7 +618,7 @@ $i: 2;
 
 .restart-button {
   @include button;
-  display: flex;
+  display: flex !important;
   text-align: center;
   float: right;
   overflow: clip;
@@ -637,11 +637,24 @@ $i: 2;
 
     display: flex;
     button {
-      flex: 1;
+      flex: content;
       font-size: 1em;
       border: none;
       border-radius: 3px;
       margin: 3px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    button.restart-4x4::after {
+      content: "oletus";
+      display: block;
+      line-height: 40%;
+      font-size: 75%;
+      margin-top: -1.5px;
+    }
+    button.restart-3x3 {
+      // background: #bbada0;
+      // color: #222;
     }
   }
 }
@@ -654,6 +667,9 @@ $i: 2;
     transform: translateX(0);
     flex: 1;
   }
+}
+.pwa-add-button {
+  @include button;
 }
 
 .game-explanation {

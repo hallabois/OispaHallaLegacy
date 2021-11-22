@@ -1700,7 +1700,7 @@ hr {
   color: #f9f6f2 !important;
   height: 40px;
   line-height: 42px;
-  display: flex;
+  display: flex !important;
   text-align: center;
   float: right;
   overflow: clip;
@@ -1720,13 +1720,21 @@ hr {
   display: flex;
 }
 .restart-button .size-selector button {
-  flex: 1;
+  flex: content;
   font-size: 1em;
   border: none;
   border-radius: 3px;
   margin: 3px;
+  cursor: pointer;
+  overflow: hidden;
 }
-
+.restart-button .size-selector button.restart-4x4::after {
+  content: "oletus";
+  display: block;
+  line-height: 40%;
+  font-size: 75%;
+  margin-top: -1.5px;
+}
 .restart-button.open .uusi-jakso {
   transform: translateX(-100%);
   flex: 0;
@@ -1734,6 +1742,17 @@ hr {
 .restart-button.open .size-selector {
   transform: translateX(0);
   flex: 1;
+}
+
+.pwa-add-button {
+  display: inline-block;
+  background: #8f7a66;
+  border-radius: 3px;
+  padding: 0 20px;
+  text-decoration: none;
+  color: #f9f6f2 !important;
+  height: 40px;
+  line-height: 42px;
 }
 
 .game-explanation {

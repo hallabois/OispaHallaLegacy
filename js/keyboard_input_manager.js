@@ -68,8 +68,8 @@ class KeyboardInputManager {
 
     // Respond to button presses
     this.bindButtonPress(".retry-button", this.restart);
-    this.bindButtonPress(".restart-button", this.restart);
-    this.bindContextPress(".restart-button", this.restartplus);
+    //this.bindButtonPress(".restart-button", this.restart);
+    //this.bindContextPress(".restart-button", this.restartplus);
     this.bindButtonPress(".keep-playing-button", this.keepPlaying);
     this.bindButtonPress(".parin-kulautus", this.paritaKuli);
 
