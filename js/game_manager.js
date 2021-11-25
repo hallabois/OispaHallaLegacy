@@ -111,6 +111,14 @@ class GameManager {
 
     HallaAntiCheat.size = this.size;
 
+    // Analytics
+    try{
+			sa_event('new_game');
+			sa_event('new_game_size_' + this.size);
+		}
+	  catch{}
+    //
+
     // Update the actuator
     this.actuate();
   }
