@@ -266,6 +266,13 @@ class GameManager {
           HallaAntiCheat.recordBest(this.score);
         }
 
+        // Analytics
+        try{
+          sa_event('game_failed');
+        }
+        catch{}
+        //
+
         HallaAntiCheat.validate();
         HallaAntiCheat.clearHistory();
         ended = true;
