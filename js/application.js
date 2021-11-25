@@ -2,7 +2,7 @@
 var tabID = sessionStorage.tabID ? 
             sessionStorage.tabID : 
             sessionStorage.tabID = Math.random();
-window.onunload = function() {
+window.onpagehide = function() {
   if(localStorage){
     if(localStorage.lastSession){
       if(localStorage.lastSession == tabID){
@@ -10,7 +10,7 @@ window.onunload = function() {
       }
     }
   }
-}
+};
 
 var GameManagerInstance;
 
