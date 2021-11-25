@@ -74,6 +74,12 @@ class LocalStorageManager {
   }
   resolveConflict(){
     let overwrite = confirm("Sinulla on useampi Oispa Halla™ välilehti auki!\nHaluatko lataa aiemman välilehden tilan tähän välilehteen?\n\n(Jos et paina OK, pelisi ei tallennu, kunnes suljet toiset välilehdet)");
+    // Analytics
+    try{
+			sa_event('conflict_resolved_to_' + overwrite);
+		}
+	  catch{}
+    //
     if(overwrite){
       this.storage.setItem("lastSession", tabID);
       HallaAntiCheat = null; // Estää vahingolliset kirjoitukset historiaan. Aiheuttaa virheitä ennen reloadia, mutta ketä kiinnostaa ¯\_(ツ)_/¯
