@@ -11,10 +11,6 @@ class GameManager {
     let restart3 = document.querySelector(".restart-3x3");
     let restart4 = document.querySelector(".restart-4x4");
 
-    this.inputManager.on("move", this.move.bind(this));
-    this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
-    this.inputManager.on("paritaKuli", this.paritaKuli.bind(this));
-
     restartbtn.onclick = () => {
       if(!restartbtn.classList.contains("open")){
         restartbtn.classList.add("open");
