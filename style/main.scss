@@ -11,6 +11,11 @@
   --grid-size-max: 6;
   --tile-size: calc(calc(var(--field-width) - calc(var(--grid-gap) * calc(var(--grid-size) + 1))) / var(--grid-size));
   --tile-border-radius: 3px;
+
+  --break-button-background-false: #c00;
+  --break-button-color-false: #222;
+  --break-button-background-true: #0c0;
+  --break-button-color-true: #ddd;
 }
 
 $field-width: 500px;
@@ -237,6 +242,7 @@ h1.title.dark{
   text-decoration: none;
   color: #eee;
   font-size: 11px;
+  transition: 1s background, 1s color;
 }
 
 .disclaimer {
@@ -416,6 +422,7 @@ hr {
     touch-action: none;
 
     background: $game-container-background;
+    transition: all 0.25s;
     border-radius: $tile-border-radius * 2;
     width: $field-width;
     height: $field-width;
@@ -876,12 +883,26 @@ $colors: (
   '3-game-background-inverted': #b9f7ee, //käytetään kurinpalautusnapin hoverausefektille
   '3-game-container-background': #8B0F17,
   '3-title-color': #F4AB1D,
-  '3-button-color': #146B3A
+  '3-button-color': #146B3A,
+  '3-break-button-background-false': #8B0F17, //kurinpalautus!
+  '3-break-button-color-false': #ddd,
+  '3-break-button-background-true': #146B3A,
+  '3-break-button-color-true': #dfdfdf,
 );
 
 @mixin setThemeColors($color-number) {
   html.theme-#{$t} {
     background: map-get($colors, '#{$color-number}-game-background');
+    @if map.has-key($colors, '#{$color-number}-break-button-background-false') { 
+      .parin-kulautus, .kurin-palautus {
+        background: map-get($colors, '#{$color-number}-break-button-background-false');
+        color: map-get($colors, '#{$color-number}-break-button-color-false');
+        &.allowed{
+          background: map-get($colors, '#{$color-number}-break-button-background-true');
+          color: map-get($colors, '#{$color-number}-break-button-color-true');
+        }
+      }
+    }
     & body {
       background-image: url('../img/theme-#{$color-number}/OispaHallaTausta.webp');
       @if map.has-key($colors, '#{$color-number}-game-background') { 

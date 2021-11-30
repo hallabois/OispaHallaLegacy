@@ -6,6 +6,10 @@
   --grid-size-max: 6;
   --tile-size: calc(calc(var(--field-width) - calc(var(--grid-gap) * calc(var(--grid-size) + 1))) / var(--grid-size));
   --tile-border-radius: 3px;
+  --break-button-background-false: #c00;
+  --break-button-color-false: #222;
+  --break-button-background-true: #0c0;
+  --break-button-color-true: #ddd;
 }
 
 /* Dark theme: */
@@ -203,6 +207,7 @@ h1.title.dark {
   text-decoration: none;
   color: #eee;
   font-size: 11px;
+  transition: 1s background, 1s color;
 }
 
 .disclaimer {
@@ -499,6 +504,7 @@ hr {
   -ms-touch-action: none;
   touch-action: none;
   background: #bbada0;
+  transition: all 0.25s;
   border-radius: 6px;
   width: 500px;
   height: 500px;
@@ -1910,6 +1916,7 @@ hr {
     -ms-touch-action: none;
     touch-action: none;
     background: #bbada0;
+    transition: all 0.25s;
     border-radius: 6px;
     width: 320px;
     height: 320px;
@@ -3372,6 +3379,14 @@ html.theme-3 .tile-32768 .tile-inner {
 
 html.theme-3 {
   background: #460811;
+}
+html.theme-3 .parin-kulautus, html.theme-3 .kurin-palautus {
+  background: #8B0F17;
+  color: #ddd;
+}
+html.theme-3 .parin-kulautus.allowed, html.theme-3 .kurin-palautus.allowed {
+  background: #146B3A;
+  color: #dfdfdf;
 }
 html.theme-3 body {
   background-image: url("../img/theme-3/OispaHallaTausta.webp");
