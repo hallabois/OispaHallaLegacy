@@ -21,6 +21,7 @@ class GameManager {
     };
     restart3.onclick = () => {this.restartplus(3)};
     restart4.onclick = () => {this.restartplus(4)};
+    this.inputManager.on("restart", this.restart.bind(this));
     this.inputManager.on("move", this.move.bind(this));
     this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
     this.inputManager.on("paritaKuli", this.paritaKuli.bind(this));

@@ -46,6 +46,7 @@ h1.title {
   margin: 0;
   display: block;
   float: left;
+  transition: 0.25s color;
 }
 
 h1.title.dark {
@@ -3135,8 +3136,31 @@ html.theme-0 .tile-32768 .tile-inner {
   box-shadow: 0px 0px 15px 2px #0B00FF;
 }
 
+html.theme-0 {
+  background: #161817;
+}
 html.theme-0 body {
   background-image: url("../img/theme-0/OispaHallaTausta.webp");
+  color: #eee;
+  background-color: #161817;
+}
+html.theme-0 body a {
+  color: #e6d2bf;
+}
+html.theme-0 body .kurin-palautus {
+  border: 1px #161817 solid;
+}
+html.theme-0 body .kurin-palautus:hover {
+  border: 1px #E9E7E8 solid;
+}
+html.theme-0 body .game-container, html.theme-0 body .score-container, html.theme-0 body .best-container, html.theme-0 body .HAC-container {
+  background: #3e3933;
+}
+html.theme-0 body .game-message.game-over {
+  background: rgba(22, 24, 23, 0.8);
+}
+html.theme-0 body .restart-button, html.theme-0 body .lower > * {
+  background: #8f7a66;
 }
 
 html.theme-1 .tile-2 .tile-inner {

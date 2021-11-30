@@ -79,6 +79,7 @@ h1.title {
   margin: 0;
   display: block;
   float: left;
+  transition: .25s color;
 }
 
 h1.title.dark{
@@ -870,6 +871,13 @@ $i: 2;
 }
 
 $colors: (
+  '0-text-color': #eee,
+  '0-game-background': #161817,
+  '0-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
+  '0-game-container-background': #3e3933,
+  '0-title-color': #e6d2bf,
+  '0-button-color': #8f7a66,
+
   '2-text-color': #eee,
   '2-game-background': #161817,
   '2-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
