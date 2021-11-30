@@ -708,6 +708,8 @@ $i: 2;
   float: right;
   overflow: clip;
   padding: 0;
+  height: 50px;
+  line-height: 52px;
   .uusi-jakso{
     transition: all 0.25s ease;
     transform: translateX(0);
@@ -719,6 +721,7 @@ $i: 2;
     transition: all 0.25s ease;
     flex: 0;
     overflow: hidden;
+    padding: 2px;
 
     display: flex;
     button {
@@ -737,9 +740,12 @@ $i: 2;
       font-size: 75%;
       margin-top: -1.5px;
     }
-    button.restart-3x3 {
-      // background: #bbada0;
-      // color: #222;
+    button.restart-3x3::after {
+      content: " ";
+      display: block;
+      line-height: 40%;
+      font-size: 75%;
+      margin-top: -1.5px;
     }
   }
 }

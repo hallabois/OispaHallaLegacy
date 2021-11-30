@@ -1793,6 +1793,8 @@ hr {
   float: right;
   overflow: clip;
   padding: 0;
+  height: 50px;
+  line-height: 52px;
 }
 .restart-button .uusi-jakso {
   transition: all 0.25s ease;
@@ -1805,6 +1807,7 @@ hr {
   transition: all 0.25s ease;
   flex: 0;
   overflow: hidden;
+  padding: 2px;
   display: flex;
 }
 .restart-button .size-selector button {
@@ -1823,6 +1826,14 @@ hr {
   font-size: 75%;
   margin-top: -1.5px;
 }
+.restart-button .size-selector button.restart-3x3::after {
+  content: " ";
+  display: block;
+  line-height: 40%;
+  font-size: 75%;
+  margin-top: -1.5px;
+}
+
 .restart-button.open .uusi-jakso {
   transform: translateX(-100%);
   flex: 0;
