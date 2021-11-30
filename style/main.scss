@@ -75,8 +75,83 @@ h1.title {
   display: block;
   float: left;
 }
+
 h1.title.dark{
   color: $title-color-dark;
+}
+
+@keyframes popdown {
+  from {margin-top: -250px; opacity: 0;}
+  to {margin-top: 250px; opacity: 1;}
+}
+
+@keyframes darken {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.lb-popup {
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  animation-name: darken;
+  animation-duration: 0.4s;
+}
+
+.lb-popup-container {
+  background-color: $game-background;
+  width: 450px;
+  margin: 250px auto;
+  animation-name: popdown;
+  animation-duration: 0.4s;
+}
+
+.lb-header {
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.lb-buttons {
+  display: flex;
+  justify-content: end;
+  width: 20%;
+  padding-top: 8px;
+
+  * {
+    text-decoration: none;
+    font-size: 35px;
+  }
+
+  img {
+    padding: 10px 10px 0 0;
+    width: 35px;
+    height: 35px;
+  }
+}
+
+.lb-stats {
+  margin: 0;
+  padding: 0 20px 20px;
+  counter-reset: leaderboard;
+}
+
+.lb-stat {
+  display: flex;
+  justify-content: space-between;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  & .lb-stat-label::before {
+    counter-increment: leaderboard; // scuffed but works
+    content: counter(leaderboard)". ";
+  }
 }
 
 .underbar-container {
@@ -91,10 +166,6 @@ h1.title.dark{
     > * {
       display: flex;
       width: 50%;
-    }
-  
-    .hallaween-button {
-      filter: invert(42%) sepia(6%) saturate(718%) hue-rotate(349deg) brightness(100%) contrast(84%);
       
       img {
         width: 25px;
@@ -102,25 +173,31 @@ h1.title.dark{
     }
   }
   
-  .kurin-palautus-container {
-    justify-content: center;
-    flex: 1; // mf's browsers don't support flex: content???
-    display: flex;
-    text-align: center;
-    margin-left: 25px;
-    min-height: 30px;
-  
-    .kurin-palautus {
-      padding: 0 5px;
-      background-color: #c00;
-      cursor: pointer;
-      width: 25%;
-      border-radius: 3px;
-      transition: 1s background, 1s color;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+}
+
+.kurin-palautus-container {
+  justify-content: center;
+  flex: 1; // mf's browsers don't support flex: content???
+  display: flex;
+  text-align: center;
+  margin-left: 25px;
+  min-height: 30px;
+}
+
+.kurin-palautus {
+  padding: 0 5px;
+  background-color: #c00;
+  cursor: pointer;
+  width: 25%;
+  border-radius: 3px;
+  transition: 1s background, 1s color;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  border: $game-background 1px solid;
+
+  &:hover {
+    border: $game-background-dark 1px solid;
   }
 }
 
@@ -742,7 +819,15 @@ $colors: (
   '2-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
   '2-game-container-background': #3e3933,
   '2-title-color': #e6d2bf,
-  '2-button-color': #974F23
+  '2-button-color': #974F23,
+
+  '3-text-color': #dfdfdf,
+  '3-cell-color': rgba(204, 63, 63, 0.35),
+  '3-game-background': #460811,
+  '3-game-background-inverted': #b9f7ee, //käytetään kurinpalautusnapin hoverausefektille
+  '3-game-container-background': #8B0F17,
+  '3-title-color': #F4AB1D,
+  '3-button-color': #146B3A
 );
 
 @mixin setThemeColors($color-number) {
@@ -750,16 +835,17 @@ $colors: (
     background: map-get($colors, '#{$color-number}-game-background');
     & body {
       background-image: url('../img/theme-#{$color-number}/OispaHallaTausta.webp');
-      @if map.has-key($colors, '#{$color-number}-game-background') { // skips the definitions if the game background exists
+      @if map.has-key($colors, '#{$color-number}-game-background') { 
+        // skips the definitions if the game background doesn't exist
         color: map-get($colors, '#{$color-number}-text-color');
         background-color: map-get($colors, '#{$color-number}-game-background');
 
-        h1.title {
+        a {
           color: map-get($colors, '#{$color-number}-title-color');
         }
 
-        a {
-          color: map-get($colors, '#{$color-number}-text-color');
+        .grid-cell {
+          background-color: map-get($colors, '#{$color-number}-cell-color');
         }
 
         .kurin-palautus {

@@ -72,6 +72,7 @@ class KeyboardInputManager {
     this.bindContextPress(".restart-button", this.restartplus);
     this.bindButtonPress(".keep-playing-button", this.keepPlaying);
     this.bindButtonPress(".parin-kulautus", this.paritaKuli);
+    this.bindButtonPress(".event-button", this.toggleEvent);
 
     // Respond to swipe events
     var touchStartClientX, touchStartClientY;
@@ -153,9 +154,9 @@ class KeyboardInputManager {
     this.emit("paritaKuli");
     event.stopPropagation();
   }
-  toggleHallaween(event) {
+  toggleEvent(event) {
     event.preventDefault();
-    this.emit("toggleHallaween");
+    this.emit("toggleEvent");
     event.stopPropagation();
   }
 }

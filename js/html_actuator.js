@@ -130,13 +130,20 @@ class HTMLActuator {
       this.scoreContainer.appendChild(addition);
     }
 
+    const currentTheme = document.querySelector("html").classList[0].split("theme-")[1];
+    const specialColors = { 3: [ '#146B3A', '#dfdfdf', '#8B0F17', '#ddd' ] }; 
+    // sisältää kurinpalautuksen värit eri teemoille jos tarpeen
+    // parempi ratkaisu olis css-variablet, mut ihsm
+ 
+    const kurinpalautusColors = specialColors[currentTheme] || ['#0c0', '#222', '#c00', '#ddd'];
+
     if (this.score >= 1000 && palautukset < 3 && !terminated) {
-      this.kurinPalautusColor.setAttribute('style', 'background-color: #0c0!important;');
-      this.kurinPalautusNappi.setAttribute('style', 'color: #222!important');
+      this.kurinPalautusColor.setAttribute('style', `background-color: ${kurinpalautusColors[0]}!important;`);
+      this.kurinPalautusNappi.setAttribute('style', `color: ${kurinpalautusColors[1]}!important`);
     }
     else {
-      this.kurinPalautusColor.setAttribute('style', 'background-color: #c00!important;');
-      this.kurinPalautusNappi.setAttribute('style', 'color: #ddd!important');
+      this.kurinPalautusColor.setAttribute('style', `background-color: ${kurinpalautusColors[2]}!important`);
+      this.kurinPalautusNappi.setAttribute('style', `color: ${kurinpalautusColors[3]}!important`);
     }
   }
   updateBestScore(bestScore) {

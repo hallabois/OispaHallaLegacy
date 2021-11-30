@@ -52,8 +52,8 @@ window.requestAnimationFrame(function () {
 });
 
 var themeCount = 2;
-var defautTheme = 1;
-var currentImageThemeVersion = 3;
+var defautTheme = 3;
+var currentImageThemeVersion = 4;
 
 function preloadImages(path){
   var imageList = [

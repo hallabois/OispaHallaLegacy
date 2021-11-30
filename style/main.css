@@ -48,6 +48,84 @@ h1.title.dark {
   color: #e6d2bf;
 }
 
+@keyframes popdown {
+  from {
+    margin-top: -250px;
+    opacity: 0;
+  }
+  to {
+    margin-top: 250px;
+    opacity: 1;
+  }
+}
+@keyframes darken {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.lb-popup {
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  animation-name: darken;
+  animation-duration: 0.4s;
+}
+
+.lb-popup-container {
+  background-color: #faf8ef;
+  width: 450px;
+  margin: 250px auto;
+  animation-name: popdown;
+  animation-duration: 0.4s;
+}
+
+.lb-header {
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.lb-buttons {
+  display: flex;
+  justify-content: end;
+  width: 20%;
+  padding-top: 8px;
+}
+.lb-buttons * {
+  text-decoration: none;
+  font-size: 35px;
+}
+.lb-buttons img {
+  padding: 10px 10px 0 0;
+  width: 35px;
+  height: 35px;
+}
+
+.lb-stats {
+  margin: 0;
+  padding: 0 20px 20px;
+  counter-reset: leaderboard;
+}
+
+.lb-stat {
+  display: flex;
+  justify-content: space-between;
+}
+.lb-stat:not(:last-child) {
+  margin-bottom: 10px;
+}
+.lb-stat .lb-stat-label::before {
+  counter-increment: leaderboard;
+  content: counter(leaderboard) ". ";
+}
+
 .underbar-container {
   display: flex;
   width: 100%;
@@ -59,13 +137,11 @@ h1.title.dark {
   display: flex;
   width: 50%;
 }
-.underbar-container .button-container .hallaween-button {
-  filter: invert(42%) sepia(6%) saturate(718%) hue-rotate(349deg) brightness(100%) contrast(84%);
-}
-.underbar-container .button-container .hallaween-button img {
+.underbar-container .button-container > * img {
   width: 25px;
 }
-.underbar-container .kurin-palautus-container {
+
+.kurin-palautus-container {
   justify-content: center;
   flex: 1;
   display: flex;
@@ -73,7 +149,8 @@ h1.title.dark {
   margin-left: 25px;
   min-height: 30px;
 }
-.underbar-container .kurin-palautus-container .kurin-palautus {
+
+.kurin-palautus {
   padding: 0 5px;
   background-color: #c00;
   cursor: pointer;
@@ -83,6 +160,10 @@ h1.title.dark {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: #faf8ef 1px solid;
+}
+.kurin-palautus:hover {
+  border: #131313 1px solid;
 }
 
 .HAC-container {
@@ -3151,11 +3232,8 @@ html.theme-2 body {
   color: #eee;
   background-color: #161817;
 }
-html.theme-2 body h1.title {
-  color: #e6d2bf;
-}
 html.theme-2 body a {
-  color: #eee;
+  color: #e6d2bf;
 }
 html.theme-2 body .kurin-palautus {
   border: 1px #161817 solid;
@@ -3242,8 +3320,34 @@ html.theme-3 .tile-32768 .tile-inner {
   box-shadow: 0px 0px 15px 2px #0B00FF;
 }
 
+html.theme-3 {
+  background: #460811;
+}
 html.theme-3 body {
   background-image: url("../img/theme-3/OispaHallaTausta.webp");
+  color: #dfdfdf;
+  background-color: #460811;
+}
+html.theme-3 body a {
+  color: #F4AB1D;
+}
+html.theme-3 body .grid-cell {
+  background-color: rgba(204, 63, 63, 0.35);
+}
+html.theme-3 body .kurin-palautus {
+  border: 1px #460811 solid;
+}
+html.theme-3 body .kurin-palautus:hover {
+  border: 1px #b9f7ee solid;
+}
+html.theme-3 body .game-container, html.theme-3 body .score-container, html.theme-3 body .best-container, html.theme-3 body .HAC-container {
+  background: #8B0F17;
+}
+html.theme-3 body .game-message.game-over {
+  background: rgba(70, 8, 17, 0.8);
+}
+html.theme-3 body .restart-button, html.theme-3 body .lower > * {
+  background: #146B3A;
 }
 
 html.theme-4 .tile-2 .tile-inner {

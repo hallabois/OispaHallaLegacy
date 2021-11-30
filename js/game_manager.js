@@ -12,7 +12,7 @@ class GameManager {
     this.inputManager.on("restartplus", this.restartplus.bind(this))
     this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
     this.inputManager.on("paritaKuli", this.paritaKuli.bind(this));
-    // this.inputManager.on("toggleHallaween", this.toggleHallaween.bind(this));
+    this.inputManager.on("toggleEvent", this.toggleEvent.bind(this));
 
     this.setup();
   }
@@ -58,11 +58,19 @@ class GameManager {
         alert("Et ole tarpeeksi suosittu opettajien keskuudessa lahjomaan heitä!");
     }
   }
-  toggleHallaween() {
-    let newIndex = parseInt(currentTheme) + 1;
-    if(newIndex > themeCount){
-      newIndex = 1;
+  toggleEvent() {
+    const themeID = document.querySelector("html").classList[0].split("-")[1];
+    var eventToggle = document.getElementById('event-icon');
+    var newIndex;
+    if(themeID == 1) {
+      newIndex = 3;
+      eventToggle.src = 'img/no_snow.svg';
     }
+    else {
+      newIndex = 1; 
+      eventToggle.src = 'img/snow.svg';
+    }
+    
     setImageTheme( newIndex );
   }
   // Return true if the game is lost, or has won and the user hasn't kept playing
