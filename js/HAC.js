@@ -27,9 +27,11 @@ class HAC {
         if(localStorage && localStorage["HAC_history"]){
             try {
                 this.history = JSON.parse(localStorage["HAC_history"]);
-                this.size = JSON.parse(localStorage["HAC_size"]);
+                if(localStorage["HAC_size"]){
+                    this.size = JSON.parse(localStorage["HAC_size"]);
+                }
             } catch (error) {
-                console.log("Failed to load HAC history from localstorage: ", error)
+                console.log("Failed to load HAC history from localstorage: ", error);
             }
         }
         this.chooseServer();

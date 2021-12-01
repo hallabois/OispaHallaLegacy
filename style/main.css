@@ -6,6 +6,10 @@
   --grid-size-max: 6;
   --tile-size: calc(calc(var(--field-width) - calc(var(--grid-gap) * calc(var(--grid-size) + 1))) / var(--grid-size));
   --tile-border-radius: 3px;
+  --break-button-background-false: #c00;
+  --break-button-color-false: #222;
+  --break-button-background-true: #0c0;
+  --break-button-color-true: #ddd;
 }
 
 /* Dark theme: */
@@ -42,6 +46,7 @@ h1.title {
   margin: 0;
   display: block;
   float: left;
+  transition: 0.25s color;
 }
 
 h1.title.dark {
@@ -203,6 +208,7 @@ h1.title.dark {
   text-decoration: none;
   color: #eee;
   font-size: 11px;
+  transition: 1s background, 1s color;
 }
 
 .disclaimer {
@@ -499,6 +505,7 @@ hr {
   -ms-touch-action: none;
   touch-action: none;
   background: #bbada0;
+  transition: all 0.25s;
   border-radius: 6px;
   width: 500px;
   height: 500px;
@@ -1781,9 +1788,70 @@ hr {
   color: #f9f6f2 !important;
   height: 40px;
   line-height: 42px;
-  display: block;
+  display: flex !important;
   text-align: center;
   float: right;
+  overflow: clip;
+  padding: 0;
+  height: 50px;
+  line-height: 52px;
+}
+.restart-button .uusi-jakso {
+  transition: all 0.25s ease;
+  transform: translateX(0);
+  flex: 1;
+  overflow: hidden;
+}
+.restart-button .size-selector {
+  transform: translateX(100%);
+  transition: all 0.25s ease;
+  flex: 0;
+  overflow: hidden;
+  padding: 2px;
+  display: flex;
+}
+.restart-button .size-selector button {
+  flex: content;
+  font-size: 1em;
+  border: none;
+  border-radius: 3px;
+  margin: 3px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.restart-button .size-selector button.restart-4x4::after {
+  content: "oletus";
+  display: block;
+  line-height: 40%;
+  font-size: 75%;
+  margin-top: -1.5px;
+}
+.restart-button .size-selector button.restart-3x3::after {
+  content: " ";
+  display: block;
+  line-height: 40%;
+  font-size: 75%;
+  margin-top: -1.5px;
+}
+
+.restart-button.open .uusi-jakso {
+  transform: translateX(-100%);
+  flex: 0;
+}
+.restart-button.open .size-selector {
+  transform: translateX(0);
+  flex: 1;
+}
+
+.pwa-add-button {
+  display: inline-block;
+  background: #8f7a66;
+  border-radius: 3px;
+  padding: 0 20px;
+  text-decoration: none;
+  color: #f9f6f2 !important;
+  height: 40px;
+  line-height: 42px;
 }
 
 .game-explanation {
@@ -1860,6 +1928,7 @@ hr {
     -ms-touch-action: none;
     touch-action: none;
     background: #bbada0;
+    transition: all 0.25s;
     border-radius: 6px;
     width: 320px;
     height: 320px;
@@ -3078,8 +3147,31 @@ html.theme-0 .tile-32768 .tile-inner {
   box-shadow: 0px 0px 15px 2px #0B00FF;
 }
 
+html.theme-0 {
+  background: #161817;
+}
 html.theme-0 body {
   background-image: url("../img/theme-0/OispaHallaTausta.webp");
+  color: #eee;
+  background-color: #161817;
+}
+html.theme-0 body a {
+  color: #e6d2bf;
+}
+html.theme-0 body .kurin-palautus {
+  border: 1px #161817 solid;
+}
+html.theme-0 body .kurin-palautus:hover {
+  border: 1px #E9E7E8 solid;
+}
+html.theme-0 body .game-container, html.theme-0 body .score-container, html.theme-0 body .best-container, html.theme-0 body .HAC-container {
+  background: #3e3933;
+}
+html.theme-0 body .game-message.game-over {
+  background: rgba(22, 24, 23, 0.8);
+}
+html.theme-0 body .restart-button, html.theme-0 body .lower > * {
+  background: #8f7a66;
 }
 
 html.theme-1 .tile-2 .tile-inner {
@@ -3322,6 +3414,14 @@ html.theme-3 .tile-32768 .tile-inner {
 
 html.theme-3 {
   background: #460811;
+}
+html.theme-3 .parin-kulautus, html.theme-3 .kurin-palautus {
+  background: #8B0F17;
+  color: #ddd;
+}
+html.theme-3 .parin-kulautus.allowed, html.theme-3 .kurin-palautus.allowed {
+  background: #146B3A;
+  color: #dfdfdf;
 }
 html.theme-3 body {
   background-image: url("../img/theme-3/OispaHallaTausta.webp");

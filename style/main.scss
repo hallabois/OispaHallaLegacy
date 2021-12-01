@@ -11,6 +11,11 @@
   --grid-size-max: 6;
   --tile-size: calc(calc(var(--field-width) - calc(var(--grid-gap) * calc(var(--grid-size) + 1))) / var(--grid-size));
   --tile-border-radius: 3px;
+
+  --break-button-background-false: #c00;
+  --break-button-color-false: #222;
+  --break-button-background-true: #0c0;
+  --break-button-color-true: #ddd;
 }
 
 $field-width: 500px;
@@ -74,6 +79,7 @@ h1.title {
   margin: 0;
   display: block;
   float: left;
+  transition: .25s color;
 }
 
 h1.title.dark{
@@ -237,6 +243,7 @@ h1.title.dark{
   text-decoration: none;
   color: #eee;
   font-size: 11px;
+  transition: 1s background, 1s color;
 }
 
 .disclaimer {
@@ -416,6 +423,7 @@ hr {
     touch-action: none;
 
     background: $game-container-background;
+    transition: all 0.25s;
     border-radius: $tile-border-radius * 2;
     width: $field-width;
     height: $field-width;
@@ -695,9 +703,64 @@ $i: 2;
 
 .restart-button {
   @include button;
-  display: block;
+  display: flex !important;
   text-align: center;
   float: right;
+  overflow: clip;
+  padding: 0;
+  height: 50px;
+  line-height: 52px;
+  .uusi-jakso{
+    transition: all 0.25s ease;
+    transform: translateX(0);
+    flex: 1;
+    overflow: hidden;
+  }
+  .size-selector {
+    transform: translateX(100%);
+    transition: all 0.25s ease;
+    flex: 0;
+    overflow: hidden;
+    padding: 2px;
+
+    display: flex;
+    button {
+      flex: content;
+      font-size: 1em;
+      border: none;
+      border-radius: 3px;
+      margin: 3px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    button.restart-4x4::after {
+      content: "oletus";
+      display: block;
+      line-height: 40%;
+      font-size: 75%;
+      margin-top: -1.5px;
+    }
+    button.restart-3x3::after {
+      content: " ";
+      display: block;
+      line-height: 40%;
+      font-size: 75%;
+      margin-top: -1.5px;
+    }
+  }
+}
+.restart-button.open {
+  .uusi-jakso {
+    transform: translateX(-100%);
+    flex: 0;
+  }
+  .size-selector {
+    transform: translateX(0);
+    flex: 1;
+  }
+}
+.pwa-add-button {
+  @include button;
 }
 
 .game-explanation {
@@ -814,6 +877,13 @@ $i: 2;
 }
 
 $colors: (
+  '0-text-color': #eee,
+  '0-game-background': #161817,
+  '0-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
+  '0-game-container-background': #3e3933,
+  '0-title-color': #e6d2bf,
+  '0-button-color': #8f7a66,
+
   '2-text-color': #eee,
   '2-game-background': #161817,
   '2-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
@@ -827,12 +897,26 @@ $colors: (
   '3-game-background-inverted': #b9f7ee, //käytetään kurinpalautusnapin hoverausefektille
   '3-game-container-background': #8B0F17,
   '3-title-color': #F4AB1D,
-  '3-button-color': #146B3A
+  '3-button-color': #146B3A,
+  '3-break-button-background-false': #8B0F17, //kurinpalautus!
+  '3-break-button-color-false': #ddd,
+  '3-break-button-background-true': #146B3A,
+  '3-break-button-color-true': #dfdfdf,
 );
 
 @mixin setThemeColors($color-number) {
   html.theme-#{$t} {
     background: map-get($colors, '#{$color-number}-game-background');
+    @if map.has-key($colors, '#{$color-number}-break-button-background-false') { 
+      .parin-kulautus, .kurin-palautus {
+        background: map-get($colors, '#{$color-number}-break-button-background-false');
+        color: map-get($colors, '#{$color-number}-break-button-color-false');
+        &.allowed{
+          background: map-get($colors, '#{$color-number}-break-button-background-true');
+          color: map-get($colors, '#{$color-number}-break-button-color-true');
+        }
+      }
+    }
     & body {
       background-image: url('../img/theme-#{$color-number}/OispaHallaTausta.webp');
       @if map.has-key($colors, '#{$color-number}-game-background') { 

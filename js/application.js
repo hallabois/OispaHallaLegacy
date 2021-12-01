@@ -2,7 +2,7 @@
 var tabID = sessionStorage.tabID ? 
             sessionStorage.tabID : 
             sessionStorage.tabID = Math.random();
-window.onunload = function() {
+window.onpagehide = function() {
   if(localStorage){
     if(localStorage.lastSession){
       if(localStorage.lastSession == tabID){
@@ -10,7 +10,7 @@ window.onunload = function() {
       }
     }
   }
-}
+};
 
 var GameManagerInstance;
 
@@ -100,45 +100,7 @@ function setImageTheme(themeID){
 	catch{}
 }
 
-const darkModeComponents = [
-  document.querySelector("html"),
-  document.querySelector("body"),
-  document.querySelector(".title")
-];
-const darkModeClassName = "dark";
-function toggleDarkMode(toggled, save=true){
-  if(toggled){
-  	console.log("Darkmode ON");
-    for(let i in darkModeComponents){
-      let component = darkModeComponents[i];
-      if( !(component.classList.contains(darkModeClassName)) ){
-        component.classList.add(darkModeClassName);
-      }
-    }
-  }
-  else{
-  	console.log("Darkmode OFF");
-    for(let i in darkModeComponents){
-      let component = darkModeComponents[i];
-      if( component.classList.contains(darkModeClassName) ){
-        component.classList.remove(darkModeClassName);
-      }
-    }
-  }
-  if(save){
-  	localStorage["darkThemeEnabled"] = toggled;
-  }
-}
-
 window.addEventListener("DOMContentLoaded", function() {
-	if(localStorage["darkThemeEnabled"]){
-		try{ //js did not want to convert a "true" into true without parsing it through JSON first, I hate this.
-			toggleDarkMode( JSON.parse(localStorage["darkThemeEnabled"]), false );
-		}
-		catch(e){
-			console.log("Error setting dark mode from memory: " + e);
-		}
-	}
   if(localStorage.imageTheme){
     if(localStorage.imageThemeLastVersion && localStorage.imageThemeLastVersion == currentImageThemeVersion){
       setImageTheme(localStorage.imageTheme);
