@@ -496,7 +496,7 @@ hr {
   .grid-container {
     position: absolute;
     z-index: 1;
-    overflow: clip;
+    overflow: hidden;
     display: grid;
     grid-template-rows: repeat(var(--grid-size-max), var(--tile-size));
     grid-template-columns: repeat(var(--grid-size-max), var(--tile-size));
@@ -510,7 +510,7 @@ hr {
     display: grid;
     grid-template-columns: repeat(var(--grid-size), var(--tile-size));
     gap: var(--grid-gap);
-    overflow: clip;
+    overflow: hidden;
 
     &:last-child {
       margin-bottom: 0;
@@ -706,7 +706,7 @@ $i: 2;
   display: flex !important;
   text-align: center;
   float: right;
-  overflow: clip;
+  overflow: hidden;
   padding: 0;
   height: 50px;
   line-height: 52px;
