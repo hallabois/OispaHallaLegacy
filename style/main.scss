@@ -118,11 +118,13 @@ h1.title.dark{
 
 .lb-header {
   padding: 0 20px;
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 }
 
 .lb-buttons {
+  display: -webkit-flex;
   display: flex;
   justify-content: end;
   width: 20%;
@@ -147,6 +149,7 @@ h1.title.dark{
 }
 
 .lb-stat {
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 
@@ -161,6 +164,7 @@ h1.title.dark{
 }
 
 .underbar-container {
+  display: -webkit-flex;
   display: flex;
   width: 100%;
 
@@ -170,6 +174,7 @@ h1.title.dark{
 
   .button-container {
     > * {
+      display: -webkit-flex;
       display: flex;
       width: 50%;
       
@@ -184,6 +189,7 @@ h1.title.dark{
 .kurin-palautus-container {
   justify-content: center;
   flex: 1; // mf's browsers don't support flex: content???
+  display: -webkit-flex;
   display: flex;
   text-align: center;
   margin-left: 25px;
@@ -197,6 +203,7 @@ h1.title.dark{
   width: 25%;
   border-radius: 3px;
   transition: 1s background, 1s color;
+  display: -webkit-flex;
   display: flex;
   align-items: center;
   justify-content: center; 
@@ -591,6 +598,7 @@ $i: 2;
   position: absolute;
   top: 25px;
 
+  display: -webkit-flex;
   display: flex;
   justify-content: center;
 
@@ -690,15 +698,18 @@ $i: 2;
 }
 
 .new-above-game{
+  display: -webkit-flex;
   display: flex;
   gap: 1em;
 }
 .above-game-left{
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 .above-game-right{
+  display: -webkit-flex;
   display: flex;
   flex-direction: row;
   gap: .5em;
@@ -738,6 +749,7 @@ $i: 2;
     overflow: hidden;
     padding: 2px;
 
+    display: -webkit-flex;
     display: flex;
     button {
       flex: content;
