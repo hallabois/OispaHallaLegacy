@@ -917,6 +917,16 @@ $colors: (
         }
       }
     }
+    @else {
+      .parin-kulautus, .kurin-palautus {
+        background: var(--break-button-background-false);
+        color: var(--break-button-color-false);
+        &.allowed{
+          background: var(--break-button-background-true);
+          color: var(--break-button-color-true);
+        }
+      }
+    }
     & body {
       background-image: url('../img/theme-#{$color-number}/OispaHallaTausta.webp');
       @if map.has-key($colors, '#{$color-number}-game-background') { 
