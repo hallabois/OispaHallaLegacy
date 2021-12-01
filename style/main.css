@@ -1792,6 +1792,7 @@ hr {
   gap: 0.5em;
   flex: 1;
   flex-wrap: wrap;
+  align-content: end;
 }
 
 .above-game:after {
