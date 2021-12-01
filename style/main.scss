@@ -300,6 +300,7 @@ h1.title.dark{
   color: white;
   text-align: center;
   flex: content;
+  min-width: 50px;
 
   &:after {
     position: absolute;

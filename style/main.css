@@ -281,6 +281,7 @@ h1.title.dark {
   color: white;
   text-align: center;
   flex: content;
+  min-width: 50px;
 }
 .score-container:after, .best-container:after {
   position: absolute;
