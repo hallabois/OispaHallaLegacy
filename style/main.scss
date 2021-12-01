@@ -732,6 +732,11 @@ $i: 2;
       margin: 3px;
       cursor: pointer;
       overflow: hidden;
+      background: #ddd;
+      color: black;
+    }
+    button:hover {
+      background: #ccc;
     }
     button.restart-4x4::after {
       content: "oletus";
