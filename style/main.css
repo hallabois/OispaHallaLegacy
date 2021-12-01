@@ -1926,21 +1926,6 @@ hr {
     margin-bottom: 10px;
   }
 
-  .game-intro {
-    width: 55%;
-    display: block;
-    box-sizing: border-box;
-    line-height: 1.65;
-  }
-
-  .restart-button {
-    width: 42%;
-    padding: 0;
-    display: block;
-    box-sizing: border-box;
-    margin-top: 2px;
-  }
-
   .game-container {
     margin-top: 17px;
     position: relative;

@@ -831,30 +831,9 @@ $i: 2;
     padding: 20px 0;
   }
 
-  .score-container, .best-container, .HAC-container {
-    // margin-top: 0;
-    // padding: 15px 10px;
-    // min-width: 70px;
-  }
 
   .heading {
     margin-bottom: 10px;
-  }
-
-  // Show intro and restart button side by side
-  .game-intro {
-    width: 55%;
-    display: block;
-    box-sizing: border-box;
-    line-height: 1.65;
-  }
-
-  .restart-button {
-    width: 42%;
-    padding: 0;
-    display: block;
-    box-sizing: border-box;
-    margin-top: 2px;
   }
 
   // Render the game field at the right width
