@@ -18,6 +18,18 @@ window.fakeStorage = {
   }
 };
 
+var localStorageWorks = false;
+try{
+  localStorage.test = "test";
+  let i = localStorage.test;
+  let t = i[0];
+  delete localStorage.test;
+  localStorageWorks = true;
+}
+catch(e){
+  console.log("Localstorage not working");
+}
+
 class LocalStorageManager {
   constructor() {
     this.bestScoreKey = "bestScore";
@@ -43,7 +55,7 @@ class LocalStorageManager {
     return this.storage.getItem(this.bestScoreKey) || 0;
   }
   setBestScore(score) {
-    if(localStorage && localStorage.lastSession && localStorage.lastSession != tabID){
+    if(localStorageWorks && localStorage.lastSession && localStorage.lastSession != tabID){
       this.resolveConflict();
     }
     else{
@@ -52,11 +64,17 @@ class LocalStorageManager {
   }
   // Game state getters/setters and clearing
   getGameState() {
+    if(!localStorageWorks){
+      return;
+    }
     var stateJSON = this.storage.getItem(this.gameStateKey);
     return stateJSON ? JSON.parse(stateJSON) : null;
   }
   setGameState(gameState) {
-    if(localStorage && localStorage.lastSession && localStorage.lastSession != tabID){
+    if(!localStorageWorks){
+      return;
+    }
+    if(localStorageWorks && localStorage.lastSession && localStorage.lastSession != tabID){
       this.resolveConflict();
     }
     else{
@@ -65,7 +83,10 @@ class LocalStorageManager {
     }
   }
   clearGameState() {
-    if(localStorage && localStorage.lastSession && localStorage.lastSession != tabID){
+    if(!localStorageWorks){
+      return;
+    }
+    if(localStorageWorks && localStorage.lastSession && localStorage.lastSession != tabID){
       this.resolveConflict();
     }
     else{

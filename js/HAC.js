@@ -24,10 +24,10 @@ class HAC {
         this.urls = ["https://localhost:8000", "http://localhost:8000", "https://hac.oispahalla.com:8000", "https://hac.hallacoin.ml:8000", "http://34.71.42.176:8000"];
         this.url = "";
         this.connected = false;
-        if(localStorage && localStorage["HAC_history"]){
+        if(localStorageWorks && localStorage["HAC_history"]){
             try {
                 this.history = JSON.parse(localStorage["HAC_history"]);
-                if(localStorage["HAC_size"]){
+                if(localStorageWorks["HAC_size"]){
                     this.size = JSON.parse(localStorage["HAC_size"]);
                 }
             } catch (error) {
@@ -60,12 +60,12 @@ class HAC {
         HAC_container.title = "Yhteyttä yhteenkään HAC-palvelimeen ei saatu muodostettua.";
     }
     recordState(state) {
-        if(localStorage && localStorage.lastSession && localStorage.lastSession != tabID){
+        if(localStorageWorks && localStorage.lastSession && localStorage.lastSession != tabID){
             console.log("MULTIPLE TABS OPEN, HAC HISTORY WILL NOT BE SAVED UNTIL THE CONFLICT IS RESOLVED");
         }
         else{
             this.history.push(state);
-            if(localStorage){
+            if(localStorageWorks){
                 localStorage["HAC_history"] = JSON.stringify(this.history);
                 localStorage["HAC_size"] = JSON.stringify(this.size);
             }
@@ -73,8 +73,8 @@ class HAC {
     }
     clearHistory(){
         this.history = [];
-        if(localStorage){
-            if(localStorage && localStorage.lastSession && localStorage.lastSession != tabID){
+        if(localStorageWorks){
+            if(localStorageWorks && localStorage.lastSession && localStorage.lastSession != tabID){
                 console.log("MULTIPLE TABS OPEN, HAC HISTORY WILL NOT BE CLEARED UNTIL THE CONFLICT IS RESOLVED");
             }
             else{
@@ -84,7 +84,7 @@ class HAC {
         HAC_status.innerHTML = this.connected ? "✅📶" : "🚫📶";
     }
     recordBest(score) {
-        if(localStorage){
+        if(localStorageWorks){
             let best = localStorage["HAC_best_score"];
             let old_best = localStorage["bestScore"];
             let best_history = localStorage["HAC_best_history"];
@@ -150,7 +150,7 @@ class HAC {
 	        if(this.debug){
 		        //console.log(response);
 		        console.log("Validation result: ", data);
-		        console.log("Score: ", data["score"])
+		        console.log("Score: ", data["score"]);
 	        }
 	        this.secure = data.valid;
 	        HAC_status.innerHTML = this.secure ? HAC_valid : "⚠️";
