@@ -93,11 +93,13 @@ h1.title.dark {
 
 .lb-header {
   padding: 0 20px;
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 }
 
 .lb-buttons {
+  display: -webkit-flex;
   display: flex;
   justify-content: end;
   width: 20%;
@@ -120,6 +122,7 @@ h1.title.dark {
 }
 
 .lb-stat {
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 }
@@ -132,6 +135,7 @@ h1.title.dark {
 }
 
 .underbar-container {
+  display: -webkit-flex;
   display: flex;
   width: 100%;
 }
@@ -139,6 +143,7 @@ h1.title.dark {
   margin-top: 15px;
 }
 .underbar-container .button-container > * {
+  display: -webkit-flex;
   display: flex;
   width: 50%;
 }
@@ -149,6 +154,7 @@ h1.title.dark {
 .kurin-palautus-container {
   justify-content: center;
   flex: 1;
+  display: -webkit-flex;
   display: flex;
   text-align: center;
   margin-left: 25px;
@@ -162,6 +168,7 @@ h1.title.dark {
   width: 25%;
   border-radius: 3px;
   transition: 1s background, 1s color;
+  display: -webkit-flex;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -173,18 +180,15 @@ h1.title.dark {
 
 .HAC-container {
   position: relative;
-  display: inline-block;
   background: #bbada0;
-  padding: 15px 25px;
+  padding: 15px 0px;
   font-size: 25px;
   height: 25px;
   line-height: 47px;
   font-weight: bold;
   border-radius: 3px;
   color: white;
-  margin-top: 8px;
   text-align: center;
-  min-width: 50px;
 }
 
 .HAC-container::after {
@@ -268,7 +272,7 @@ h1.title.dark {
 .score-container, .best-container {
   position: relative;
   background: #bbada0;
-  padding: 15px 25px;
+  padding: 15px 0;
   font-size: 25px;
   height: 25px;
   line-height: 47px;
@@ -474,6 +478,7 @@ hr {
   width: 94%;
   position: absolute;
   top: 25px;
+  display: -webkit-flex;
   display: flex;
   justify-content: center;
   z-index: 1000;
@@ -1767,17 +1772,20 @@ hr {
 }
 
 .new-above-game {
+  display: -webkit-flex;
   display: flex;
   gap: 1em;
 }
 
 .above-game-left {
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .above-game-right {
+  display: -webkit-flex;
   display: flex;
   flex-direction: row;
   gap: 0.5em;
@@ -1827,6 +1835,7 @@ hr {
   flex: 0;
   overflow: hidden;
   padding: 2px;
+  display: -webkit-flex;
   display: flex;
 }
 .restart-button .size-selector button {
