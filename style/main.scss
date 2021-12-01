@@ -218,7 +218,7 @@ h1.title.dark{
 .HAC-container {
   position: relative;
   background: #bbada0;
-  padding: 15px 0px;
+  padding: 15px 15px;
   font-size: 25px;
   height: 25px;
   line-height: 47px;
@@ -291,7 +291,7 @@ h1.title.dark{
 
   position: relative;
   background: $game-container-background;
-  padding: 15px 0;
+  padding: 15px 15px;
   font-size: $height;
   height: $height;
   line-height: $height + 22px;
@@ -299,7 +299,7 @@ h1.title.dark{
   border-radius: 3px;
   color: white;
   text-align: center;
-  flex: content !important;
+  flex: content;
 
   &:after {
     position: absolute;
@@ -727,7 +727,7 @@ $i: 2;
 
 .restart-button {
   @include button;
-  display: flex !important;
+  flex: content;
   text-align: center;
   overflow: hidden;
   padding: 0;

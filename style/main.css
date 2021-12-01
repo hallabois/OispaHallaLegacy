@@ -181,7 +181,7 @@ h1.title.dark {
 .HAC-container {
   position: relative;
   background: #bbada0;
-  padding: 15px 0px;
+  padding: 15px 15px;
   font-size: 25px;
   height: 25px;
   line-height: 47px;
@@ -272,7 +272,7 @@ h1.title.dark {
 .score-container, .best-container {
   position: relative;
   background: #bbada0;
-  padding: 15px 0;
+  padding: 15px 15px;
   font-size: 25px;
   height: 25px;
   line-height: 47px;
@@ -280,7 +280,7 @@ h1.title.dark {
   border-radius: 3px;
   color: white;
   text-align: center;
-  flex: content !important;
+  flex: content;
 }
 .score-container:after, .best-container:after {
   position: absolute;
@@ -1816,7 +1816,7 @@ hr {
   height: 40px;
   line-height: 42px;
   flex: content;
-  display: flex !important;
+  flex: content;
   text-align: center;
   overflow: hidden;
   padding: 0;
