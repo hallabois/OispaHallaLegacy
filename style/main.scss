@@ -292,7 +292,7 @@ h1.title.dark{
   position: relative;
   background: $game-container-background;
   padding: 15px 15px;
-  font-size: $height;
+  font-size: $height - 5px;
   height: $height;
   line-height: $height + 22px;
   font-weight: bold;
