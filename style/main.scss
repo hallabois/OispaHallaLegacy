@@ -889,7 +889,11 @@ $colors: (
   '0-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
   '0-game-container-background': #3e3933,
   '0-title-color': #e6d2bf,
-  '0-button-color': #8f7a66,
+  '0-button-color': #365ca6,
+  '0-break-button-background-false': #a63636, //kurinpalautus!
+  '0-break-button-color-false': #ddd,
+  '0-break-button-background-true': #49a636,
+  '0-break-button-color-true': #dfdfdf,
 
   '2-text-color': #eee,
   '2-game-background': #161817,

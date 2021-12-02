@@ -3164,12 +3164,12 @@ html.theme-0 {
   background: #161817;
 }
 html.theme-0 .parin-kulautus, html.theme-0 .kurin-palautus {
-  background: var(--break-button-background-false);
-  color: var(--break-button-color-false);
+  background: #8B0F17;
+  color: #ddd;
 }
 html.theme-0 .parin-kulautus.allowed, html.theme-0 .kurin-palautus.allowed {
-  background: var(--break-button-background-true);
-  color: var(--break-button-color-true);
+  background: #146B3A;
+  color: #dfdfdf;
 }
 html.theme-0 body {
   background-image: url("../img/theme-0/OispaHallaTausta.webp");
@@ -3192,7 +3192,7 @@ html.theme-0 body .game-message.game-over {
   background: rgba(22, 24, 23, 0.8);
 }
 html.theme-0 body .restart-button, html.theme-0 body .lower > * {
-  background: #8f7a66;
+  background: #365ca6;
 }
 
 html.theme-1 .tile-2 .tile-inner {
