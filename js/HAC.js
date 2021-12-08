@@ -88,7 +88,7 @@ class HAC {
         if(localStorageWorks){
             let best = localStorage["HAC_best_score" + this.size];
             if(best == null && this.size == 4){
-                best = localStorage["HAC_best_score"];
+                best = JSON.parse(localStorage["HAC_best_score"]);
                 localStorage["HAC_best_score" + this.size] = best;
             }
             if(best == null){
@@ -98,7 +98,7 @@ class HAC {
             let old_best = storagem.getBestScorePlus(this.size);
             let best_history = localStorage["HAC_best_history" + this.size];
             if(best_history == null && this.size == 4){
-                best_history = localStorage["HAC_best_history"];
+                best_history = JSON.parse(localStorage["HAC_best_history"]);
                 localStorage["HAC_best_history" + this.size] = JSON.stringify(best_history);
             }
             if(score < 1){
