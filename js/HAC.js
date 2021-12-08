@@ -84,10 +84,23 @@ class HAC {
         HAC_status.innerHTML = this.connected ? "✅📶" : "🚫📶";
     }
     recordBest(score) {
+        let storagem = GameManagerInstance.storageManager;
         if(localStorageWorks){
-            let best = localStorage["HAC_best_score"];
-            let old_best = localStorage["bestScore"];
-            let best_history = localStorage["HAC_best_history"];
+            let best = localStorage["HAC_best_score" + this.size];
+            if(best == null && this.size == 4){
+                best = localStorage["HAC_best_score"];
+                localStorage["HAC_best_score" + this.size] = best;
+            }
+            if(best == null){
+                best = 0;
+            }
+            console.log("Best score: ", best);
+            let old_best = storagem.getBestScorePlus(this.size);
+            let best_history = localStorage["HAC_best_history" + this.size];
+            if(best_history == null && this.size == 4){
+                best_history = localStorage["HAC_best_history"];
+                localStorage["HAC_best_history" + this.size] = JSON.stringify(best_history);
+            }
             if(score < 1){
                 return;
             }
@@ -112,8 +125,8 @@ class HAC {
                 best = 0;
             }
             if(score >= best){
-                localStorage["HAC_best_history"] = JSON.stringify(this.history);
-                localStorage["HAC_best_score"] = score;
+                localStorage["HAC_best_history" + this.size] = JSON.stringify(this.history);
+                localStorage["HAC_best_score" + this.size] = score;
             }
         }
     }

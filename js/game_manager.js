@@ -35,6 +35,7 @@ class GameManager {
   }
   // Restart the game
   restart() {
+    HallaAntiCheat.recordBest(this.score);
     this.storageManager.clearGameState();
     this.actuator.continueGame(); // Clear the game won/lost message
     //this.size = 4;
@@ -42,6 +43,7 @@ class GameManager {
   }
   // Restart the game
   restartplus(size=3) {
+    HallaAntiCheat.recordBest(this.score);
     this.storageManager.clearGameState();
     this.actuator.continueGame(); // Clear the game won/lost message
     this.size = size;
@@ -148,8 +150,8 @@ class GameManager {
   }
   // Sends the updated grid to the actuator
   actuate() {
-    if (this.storageManager.getBestScore() < this.score) {
-      this.storageManager.setBestScore(this.score);
+    if (this.storageManager.getBestScorePlus(this.size) < this.score) {
+      this.storageManager.setBestScorePlus(this.score, this.size);
     }
 
     // Clear the state when the game is over (game over only, not win)
@@ -164,7 +166,7 @@ class GameManager {
       palautukset: this.palautukset,
       over: this.over,
       won: this.won,
-      bestScore: this.storageManager.getBestScore(),
+      bestScore: this.storageManager.getBestScorePlus(this.size),
       terminated: this.isGameTerminated()
     });
 
@@ -269,7 +271,7 @@ class GameManager {
         let state = this.serialize_HAC(HAC_grid, "f", added);
         HallaAntiCheat.recordState(state);
 
-        if(this.size == 4){
+        if(this.size == 4 || this.size == 3){
           HallaAntiCheat.recordBest(this.score);
         }
 
