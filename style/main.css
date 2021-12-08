@@ -272,7 +272,7 @@ h1.title.dark {
 .score-container, .best-container {
   position: relative;
   background: #bbada0;
-  padding: 15px 15px;
+  padding: 15px 20px;
   font-size: 20px;
   height: 25px;
   line-height: 47px;
@@ -280,7 +280,7 @@ h1.title.dark {
   border-radius: 3px;
   color: white;
   text-align: center;
-  flex: content;
+  flex: 1;
   min-width: 50px;
 }
 .score-container:after, .best-container:after {
@@ -1842,7 +1842,7 @@ hr {
   display: flex;
 }
 .restart-button .size-selector button {
-  flex: content;
+  flex: 1;
   font-size: 1em;
   border: none;
   border-radius: 3px;
@@ -3164,11 +3164,11 @@ html.theme-0 {
   background: #161817;
 }
 html.theme-0 .parin-kulautus, html.theme-0 .kurin-palautus {
-  background: #8B0F17;
+  background: #a63636;
   color: #ddd;
 }
 html.theme-0 .parin-kulautus.allowed, html.theme-0 .kurin-palautus.allowed {
-  background: #146B3A;
+  background: #49a636;
   color: #dfdfdf;
 }
 html.theme-0 body {

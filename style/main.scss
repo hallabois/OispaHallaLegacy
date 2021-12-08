@@ -291,7 +291,7 @@ h1.title.dark{
 
   position: relative;
   background: $game-container-background;
-  padding: 15px 15px;
+  padding: 15px 20px;
   font-size: $height - 5px;
   height: $height;
   line-height: $height + 22px;
@@ -299,7 +299,7 @@ h1.title.dark{
   border-radius: 3px;
   color: white;
   text-align: center;
-  flex: content;
+  flex: 1; // mf's browsers don't support flex: content???
   min-width: 50px;
 
   &:after {
@@ -752,7 +752,7 @@ $i: 2;
     display: -webkit-flex;
     display: flex;
     button {
-      flex: content;
+      flex: 1; // mf's browsers don't support flex: content???
       font-size: 1em;
       border: none;
       border-radius: 3px;
