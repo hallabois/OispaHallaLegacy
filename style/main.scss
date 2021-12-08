@@ -69,6 +69,11 @@ html.dark, body.dark{
   background-position: top center;
 }
 
+.noscript{
+  background-color: #8f7a66;
+  color: #faf8ef;
+}
+
 .heading {
   @include clearfix;
 }
