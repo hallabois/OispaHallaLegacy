@@ -197,7 +197,7 @@ h1.title.dark {
 }
 
 .HAC-container::after {
-  content: "HAC:n tila";
+  content: "HAC";
   position: absolute;
   width: 100%;
   top: 10px;

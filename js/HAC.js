@@ -6,10 +6,25 @@ function showHAC(){
     HAC_container.style["display"] = "";
 }
 
+function hideHAC(){
+    HAC_container.style["display"] = "none";
+}
+
 function enableHAC(){
     HallaAntiCheat.enabled = true;
     HallaAntiCheat.chooseServer();
     showHAC();
+    if(localStorageWorks){
+        localStorage.HAC_dev_enabled = true;
+    }
+}
+
+function disableHAC(){
+    HallaAntiCheat.enabled = false;
+    hideHAC();
+    if(localStorageWorks){
+        localStorage.HAC_dev_enabled = false;
+    }
 }
 
 let HAC_valid = '<img src="img/HAC_small.svg" style="width: 1em;margin: -.1em;">';
@@ -24,17 +39,25 @@ class HAC {
         this.urls = ["https://localhost:8000", "http://localhost:8000", "https://hac.oispahalla.com:8000", "https://hac.hallacoin.ml:8000", "http://34.71.42.176:8000"];
         this.url = "";
         this.connected = false;
-        if(localStorageWorks && localStorage["HAC_history"]){
-            try {
-                this.history = JSON.parse(localStorage["HAC_history"]);
-                if(localStorageWorks["HAC_size"]){
-                    this.size = JSON.parse(localStorage["HAC_size"]);
+        if(localStorageWorks){
+            if(localStorage["HAC_history"]){
+                try {
+                    this.history = JSON.parse(localStorage["HAC_history"]);
+                    if(localStorageWorks["HAC_size"]){
+                        this.size = JSON.parse(localStorage["HAC_size"]);
+                    }
+                } catch (error) {
+                    console.log("Failed to load HAC history from localstorage: ", error);
                 }
-            } catch (error) {
-                console.log("Failed to load HAC history from localstorage: ", error);
+            }
+            if(localStorage.HAC_dev_enabled != null){
+                this.enabled = JSON.parse(localStorage.HAC_dev_enabled);
             }
         }
         this.chooseServer();
+        if(this.enabled){
+            showHAC();
+        }
         console.log("HAC loaded!");
     }
     async chooseServer(){
