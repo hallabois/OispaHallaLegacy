@@ -94,7 +94,6 @@ class HAC {
             if(best == null){
                 best = 0;
             }
-            console.log("Best score: ", best);
             let old_best = storagem.getBestScorePlus(this.size);
             let best_history = localStorage["HAC_best_history" + this.size];
             if(best_history == null && this.size == 4){
