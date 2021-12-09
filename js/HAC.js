@@ -110,7 +110,7 @@ class HAC {
         let storagem = GameManagerInstance.storageManager;
         if(localStorageWorks){
             let best = localStorage["HAC_best_score" + this.size];
-            if(best == null && this.size == 4){
+            if(best == null && localStorage["HAC_best_score"] != null && this.size == 4){
                 best = JSON.parse(localStorage["HAC_best_score"]);
                 localStorage["HAC_best_score" + this.size] = best;
             }
@@ -119,7 +119,7 @@ class HAC {
             }
             let old_best = storagem.getBestScorePlus(this.size);
             let best_history = localStorage["HAC_best_history" + this.size];
-            if(best_history == null && this.size == 4){
+            if(best_history == null && localStorage["HAC_best_history"] != null && this.size == 4){
                 best_history = JSON.parse(localStorage["HAC_best_history"]);
                 localStorage["HAC_best_history" + this.size] = JSON.stringify(best_history);
             }
