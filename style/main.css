@@ -34,6 +34,11 @@ html.dark, body.dark {
   background-position: top center;
 }
 
+.noscript {
+  background-color: #8f7a66;
+  color: #faf8ef;
+}
+
 .heading:after {
   content: "";
   display: block;
@@ -93,11 +98,13 @@ h1.title.dark {
 
 .lb-header {
   padding: 0 20px;
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 }
 
 .lb-buttons {
+  display: -webkit-flex;
   display: flex;
   justify-content: end;
   width: 20%;
@@ -120,6 +127,7 @@ h1.title.dark {
 }
 
 .lb-stat {
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 }
@@ -132,6 +140,7 @@ h1.title.dark {
 }
 
 .underbar-container {
+  display: -webkit-flex;
   display: flex;
   width: 100%;
 }
@@ -139,6 +148,7 @@ h1.title.dark {
   margin-top: 15px;
 }
 .underbar-container .button-container > * {
+  display: -webkit-flex;
   display: flex;
   width: 50%;
 }
@@ -149,6 +159,7 @@ h1.title.dark {
 .kurin-palautus-container {
   justify-content: center;
   flex: 1;
+  display: -webkit-flex;
   display: flex;
   text-align: center;
   margin-left: 25px;
@@ -162,6 +173,7 @@ h1.title.dark {
   width: 25%;
   border-radius: 3px;
   transition: 1s background, 1s color;
+  display: -webkit-flex;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -173,22 +185,19 @@ h1.title.dark {
 
 .HAC-container {
   position: relative;
-  display: inline-block;
   background: #bbada0;
-  padding: 15px 25px;
+  padding: 15px 15px;
   font-size: 25px;
   height: 25px;
   line-height: 47px;
   font-weight: bold;
   border-radius: 3px;
   color: white;
-  margin-top: 8px;
   text-align: center;
-  min-width: 50px;
 }
 
 .HAC-container::after {
-  content: "HAC:n tila";
+  content: "HAC";
   position: absolute;
   width: 100%;
   top: 10px;
@@ -267,17 +276,16 @@ h1.title.dark {
 
 .score-container, .best-container {
   position: relative;
-  display: inline-block;
   background: #bbada0;
-  padding: 15px 25px;
-  font-size: 25px;
+  padding: 15px 20px;
+  font-size: 20px;
   height: 25px;
   line-height: 47px;
   font-weight: bold;
   border-radius: 3px;
   color: white;
-  margin-top: 8px;
   text-align: center;
+  flex: 1;
   min-width: 50px;
 }
 .score-container:after, .best-container:after {
@@ -476,6 +484,7 @@ hr {
   width: 94%;
   position: absolute;
   top: 25px;
+  display: -webkit-flex;
   display: flex;
   justify-content: center;
   z-index: 1000;
@@ -554,6 +563,7 @@ hr {
   color: #f9f6f2 !important;
   height: 40px;
   line-height: 42px;
+  flex: content;
   margin-left: 9px;
 }
 .game-container .game-message a.keep-playing-button {
@@ -1767,6 +1777,29 @@ hr {
   animation-fill-mode: backwards;
 }
 
+.new-above-game {
+  display: -webkit-flex;
+  display: flex;
+  gap: 1em;
+}
+
+.above-game-left {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.above-game-right {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  flex: 1;
+  flex-wrap: wrap;
+  align-content: end;
+}
+
 .above-game:after {
   content: "";
   display: block;
@@ -1777,6 +1810,7 @@ hr {
   float: left;
   line-height: 42px;
   margin-bottom: 0;
+  font-size: smaller;
 }
 
 .restart-button {
@@ -1788,9 +1822,10 @@ hr {
   color: #f9f6f2 !important;
   height: 40px;
   line-height: 42px;
-  display: flex !important;
+  flex: content;
+  flex: content;
   text-align: center;
-  float: right;
+  display: flex;
   overflow: hidden;
   padding: 0;
   height: 50px;
@@ -1808,10 +1843,11 @@ hr {
   flex: 0;
   overflow: hidden;
   padding: 2px;
+  display: -webkit-flex;
   display: flex;
 }
 .restart-button .size-selector button {
-  flex: content;
+  flex: 1;
   font-size: 1em;
   border: none;
   border-radius: 3px;
@@ -1857,6 +1893,7 @@ hr {
   color: #f9f6f2 !important;
   height: 40px;
   line-height: 42px;
+  flex: content;
 }
 
 .game-explanation {
@@ -1890,33 +1927,8 @@ hr {
     padding: 20px 0;
   }
 
-  .score-container, .best-container, .HAC-container {
-    margin-top: 0;
-    padding: 15px 10px;
-    min-width: 70px;
-  }
-
-  .score-container, .HAC-container {
-    margin-bottom: 10px;
-  }
-
   .heading {
     margin-bottom: 10px;
-  }
-
-  .game-intro {
-    width: 55%;
-    display: block;
-    box-sizing: border-box;
-    line-height: 1.65;
-  }
-
-  .restart-button {
-    width: 42%;
-    padding: 0;
-    display: block;
-    box-sizing: border-box;
-    margin-top: 2px;
   }
 
   .game-container {
@@ -1982,6 +1994,7 @@ hr {
     color: #f9f6f2 !important;
     height: 40px;
     line-height: 42px;
+    flex: content;
     margin-left: 9px;
   }
   .game-container .game-message a.keep-playing-button {
@@ -3156,12 +3169,12 @@ html.theme-0 {
   background: #161817;
 }
 html.theme-0 .parin-kulautus, html.theme-0 .kurin-palautus {
-  background: var(--break-button-background-false);
-  color: var(--break-button-color-false);
+  background: #a63636;
+  color: #ddd;
 }
 html.theme-0 .parin-kulautus.allowed, html.theme-0 .kurin-palautus.allowed {
-  background: var(--break-button-background-true);
-  color: var(--break-button-color-true);
+  background: #49a636;
+  color: #dfdfdf;
 }
 html.theme-0 body {
   background-image: url("../img/theme-0/OispaHallaTausta.webp");
@@ -3184,7 +3197,7 @@ html.theme-0 body .game-message.game-over {
   background: rgba(22, 24, 23, 0.8);
 }
 html.theme-0 body .restart-button, html.theme-0 body .lower > * {
-  background: #8f7a66;
+  background: #365ca6;
 }
 
 html.theme-1 .tile-2 .tile-inner {

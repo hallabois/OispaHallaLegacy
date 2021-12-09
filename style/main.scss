@@ -69,6 +69,11 @@ html.dark, body.dark{
   background-position: top center;
 }
 
+.noscript{
+  background-color: #8f7a66;
+  color: #faf8ef;
+}
+
 .heading {
   @include clearfix;
 }
@@ -118,11 +123,13 @@ h1.title.dark{
 
 .lb-header {
   padding: 0 20px;
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 }
 
 .lb-buttons {
+  display: -webkit-flex;
   display: flex;
   justify-content: end;
   width: 20%;
@@ -147,6 +154,7 @@ h1.title.dark{
 }
 
 .lb-stat {
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 
@@ -161,6 +169,7 @@ h1.title.dark{
 }
 
 .underbar-container {
+  display: -webkit-flex;
   display: flex;
   width: 100%;
 
@@ -170,6 +179,7 @@ h1.title.dark{
 
   .button-container {
     > * {
+      display: -webkit-flex;
       display: flex;
       width: 50%;
       
@@ -184,6 +194,7 @@ h1.title.dark{
 .kurin-palautus-container {
   justify-content: center;
   flex: 1; // mf's browsers don't support flex: content???
+  display: -webkit-flex;
   display: flex;
   text-align: center;
   margin-left: 25px;
@@ -197,6 +208,7 @@ h1.title.dark{
   width: 25%;
   border-radius: 3px;
   transition: 1s background, 1s color;
+  display: -webkit-flex;
   display: flex;
   align-items: center;
   justify-content: center; 
@@ -210,21 +222,18 @@ h1.title.dark{
 
 .HAC-container {
   position: relative;
-  display: inline-block;
   background: #bbada0;
-  padding: 15px 25px;
+  padding: 15px 15px;
   font-size: 25px;
   height: 25px;
   line-height: 47px;
   font-weight: bold;
   border-radius: 3px;
   color: white;
-  margin-top: 8px;
   text-align: center;
-  min-width: 50px;
 }
 .HAC-container::after{
-  content: "HAC:n tila";
+  content: "HAC";
   position: absolute;
   width: 100%;
   top: 10px;
@@ -286,17 +295,16 @@ h1.title.dark{
   $height: 25px;
 
   position: relative;
-  display: inline-block;
   background: $game-container-background;
-  padding: 15px 25px;
-  font-size: $height;
+  padding: 15px 20px;
+  font-size: $height - 5px;
   height: $height;
   line-height: $height + 22px;
   font-weight: bold;
   border-radius: 3px;
   color: white;
-  margin-top: 8px;
   text-align: center;
+  flex: 1; // mf's browsers don't support flex: content???
   min-width: 50px;
 
   &:after {
@@ -401,6 +409,7 @@ hr {
   color: $bright-text-color !important;
   height: 40px;
   line-height: 42px;
+  flex: content;
 }
 
 // Game field mixin used to render CSS at different width
@@ -592,6 +601,7 @@ $i: 2;
   position: absolute;
   top: 25px;
 
+  display: -webkit-flex;
   display: flex;
   justify-content: center;
 
@@ -690,6 +700,26 @@ $i: 2;
   @include animation-fill-mode(backwards);
 }
 
+.new-above-game{
+  display: -webkit-flex;
+  display: flex;
+  gap: 1em;
+}
+.above-game-left{
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.above-game-right{
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  gap: .5em;
+  flex: 1;
+  flex-wrap: wrap;
+  align-content: end;
+}
 
 .above-game {
   @include clearfix;
@@ -699,13 +729,14 @@ $i: 2;
   float: left;
   line-height: 42px;
   margin-bottom: 0;
+  font-size: smaller;
 }
 
 .restart-button {
   @include button;
-  display: flex !important;
+  flex: content;
   text-align: center;
-  float: right;
+  display: flex;
   overflow: hidden;
   padding: 0;
   height: 50px;
@@ -723,9 +754,10 @@ $i: 2;
     overflow: hidden;
     padding: 2px;
 
+    display: -webkit-flex;
     display: flex;
     button {
-      flex: content;
+      flex: 1; // mf's browsers don't support flex: content???
       font-size: 1em;
       border: none;
       border-radius: 3px;
@@ -804,34 +836,9 @@ $i: 2;
     padding: 20px 0;
   }
 
-  .score-container, .best-container, .HAC-container {
-    margin-top: 0;
-    padding: 15px 10px;
-    min-width: 70px;
-  }
-
-  .score-container, .HAC-container {
-    margin-bottom: 10px;
-  }
 
   .heading {
     margin-bottom: 10px;
-  }
-
-  // Show intro and restart button side by side
-  .game-intro {
-    width: 55%;
-    display: block;
-    box-sizing: border-box;
-    line-height: 1.65;
-  }
-
-  .restart-button {
-    width: 42%;
-    padding: 0;
-    display: block;
-    box-sizing: border-box;
-    margin-top: 2px;
   }
 
   // Render the game field at the right width
@@ -887,7 +894,11 @@ $colors: (
   '0-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
   '0-game-container-background': #3e3933,
   '0-title-color': #e6d2bf,
-  '0-button-color': #8f7a66,
+  '0-button-color': #365ca6,
+  '0-break-button-background-false': #a63636, //kurinpalautus!
+  '0-break-button-color-false': #ddd,
+  '0-break-button-background-true': #49a636,
+  '0-break-button-color-true': #dfdfdf,
 
   '2-text-color': #eee,
   '2-game-background': #161817,

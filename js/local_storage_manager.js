@@ -37,6 +37,19 @@ class LocalStorageManager {
 
     var supported = this.localStorageSupported();
     this.storage = supported ? window.localStorage : window.fakeStorage;
+    if(localStorageWorks){
+        if(localStorage.bestScore && localStorage.bestScores == null){
+          localStorage.bestScores = JSON.stringify({
+            "4": localStorage.bestScore,
+          });
+        }
+        if(localStorage.bestScores == null){
+          localStorage.bestScores = JSON.stringify({
+            "3": 0,
+            "4": 0,
+          });
+        }
+    }
   }
   localStorageSupported() {
     var testKey = "test";
@@ -54,12 +67,45 @@ class LocalStorageManager {
   getBestScore() {
     return this.storage.getItem(this.bestScoreKey) || 0;
   }
+  getBestScorePlus(size) {
+    try{
+      if(localStorageWorks){
+        if(localStorage.bestScores != null){
+          if( Object.keys(JSON.parse(localStorage.bestScores)).includes(size.toString()) ){
+            let val = JSON.parse(localStorage.bestScores)[size];
+            return val;
+          }
+        }
+      }
+    }
+    catch(e){
+      console.log("Best scores not working!", e);
+      return 0;
+    }
+    if(size == 4){
+      return this.getBestScore();
+    }
+    return 0;
+  }
   setBestScore(score) {
     if(localStorageWorks && localStorage.lastSession && localStorage.lastSession != tabID){
       this.resolveConflict();
     }
     else{
       this.storage.setItem(this.bestScoreKey, score);
+    }
+  }
+  setBestScorePlus(score, size) {
+    if(localStorageWorks && localStorage.lastSession && localStorage.lastSession != tabID){
+      this.resolveConflict();
+    }
+    else{
+      this.storage.setItem(this.bestScoreKey, score);
+      if(localStorageWorks){
+        let current = JSON.parse(localStorage.bestScores);
+        current[size] = score;
+        localStorage.bestScores = JSON.stringify(current);
+      }
     }
   }
   // Game state getters/setters and clearing

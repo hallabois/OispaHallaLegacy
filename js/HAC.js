@@ -6,10 +6,25 @@ function showHAC(){
     HAC_container.style["display"] = "";
 }
 
+function hideHAC(){
+    HAC_container.style["display"] = "none";
+}
+
 function enableHAC(){
     HallaAntiCheat.enabled = true;
     HallaAntiCheat.chooseServer();
     showHAC();
+    if(localStorageWorks){
+        localStorage.HAC_dev_enabled = true;
+    }
+}
+
+function disableHAC(){
+    HallaAntiCheat.enabled = false;
+    hideHAC();
+    if(localStorageWorks){
+        localStorage.HAC_dev_enabled = false;
+    }
 }
 
 let HAC_valid = '<img src="img/HAC_small.svg" style="width: 1em;margin: -.1em;">';
@@ -24,17 +39,25 @@ class HAC {
         this.urls = ["https://localhost:8000", "http://localhost:8000", "https://hac.oispahalla.com:8000", "https://hac.hallacoin.ml:8000", "http://34.71.42.176:8000"];
         this.url = "";
         this.connected = false;
-        if(localStorageWorks && localStorage["HAC_history"]){
-            try {
-                this.history = JSON.parse(localStorage["HAC_history"]);
-                if(localStorageWorks["HAC_size"]){
-                    this.size = JSON.parse(localStorage["HAC_size"]);
+        if(localStorageWorks){
+            if(localStorage["HAC_history"]){
+                try {
+                    this.history = JSON.parse(localStorage["HAC_history"]);
+                    if(localStorageWorks["HAC_size"]){
+                        this.size = JSON.parse(localStorage["HAC_size"]);
+                    }
+                } catch (error) {
+                    console.log("Failed to load HAC history from localstorage: ", error);
                 }
-            } catch (error) {
-                console.log("Failed to load HAC history from localstorage: ", error);
+            }
+            if(localStorage.HAC_dev_enabled != null){
+                this.enabled = JSON.parse(localStorage.HAC_dev_enabled);
             }
         }
         this.chooseServer();
+        if(this.enabled){
+            showHAC();
+        }
         console.log("HAC loaded!");
     }
     async chooseServer(){
@@ -84,10 +107,22 @@ class HAC {
         HAC_status.innerHTML = this.connected ? "✅📶" : "🚫📶";
     }
     recordBest(score) {
+        let storagem = GameManagerInstance.storageManager;
         if(localStorageWorks){
-            let best = localStorage["HAC_best_score"];
-            let old_best = localStorage["bestScore"];
-            let best_history = localStorage["HAC_best_history"];
+            let best = localStorage["HAC_best_score" + this.size];
+            if(best == null && localStorage["HAC_best_score"] != null && this.size == 4){
+                best = JSON.parse(localStorage["HAC_best_score"]);
+                localStorage["HAC_best_score" + this.size] = best;
+            }
+            if(best == null){
+                best = 0;
+            }
+            let old_best = storagem.getBestScorePlus(this.size);
+            let best_history = localStorage["HAC_best_history" + this.size];
+            if(best_history == null && localStorage["HAC_best_history"] != null && this.size == 4){
+                best_history = JSON.parse(localStorage["HAC_best_history"]);
+                localStorage["HAC_best_history" + this.size] = JSON.stringify(best_history);
+            }
             if(score < 1){
                 return;
             }
@@ -112,8 +147,8 @@ class HAC {
                 best = 0;
             }
             if(score >= best){
-                localStorage["HAC_best_history"] = JSON.stringify(this.history);
-                localStorage["HAC_best_score"] = score;
+                localStorage["HAC_best_history" + this.size] = JSON.stringify(this.history);
+                localStorage["HAC_best_score" + this.size] = score;
             }
         }
     }

@@ -27,9 +27,41 @@
   <script>window.sa_event=window.sa_event||function(){var a=[].slice.call(arguments);window.sa_event.q?window.sa_event.q.push(a):window.sa_event.q=[a]};</script>
 </head>
 <body>
+  <noscript>
+    <div class="noscript">
+      <p>
+        <strong>JavaScript ei ole päällä tai selaimesi ei tue sitä.</strong>
+        <br>
+        Sivuston toiminta edellyttää JavaScriptin toimintaa.
+      </p>
+    </div>
+  </noscript>
   <div class="container">
-    <div class="heading">
-      <a href="https://hallabois.github.io/invite/" target="_blank">
+    <div class="new-above-game">
+      <div class="above-game-left">
+        <a href="https://hallabois.github.io/invite/" target="_blank">
+          <h1 class="title">Oispa Halla</h1>
+        </a>
+        <p class="game-intro">Yhdistä opettajat ja saavuta <strong>Halla!</strong></p>
+      </div>
+      <div class="above-game-right">
+        <div class="HAC-container" title="HAC:n tila" style="display:none;">
+          <div class="HAC-status">...</div>
+        </div>
+        <div class="score-container">0</div>
+        <div class="best-container">0</div>
+        <a class="restart-button">
+          <div class="uusi-jakso">Uusi Jakso</div>
+          <div class="size-selector">
+            <button>&lt;</button>
+            <button class="restart-3x3">3x3</button>
+            <button class="restart-4x4">4x4</button>
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- <div class="heading">
+      <a href="https://discord.gg/7x25Jxrkvr" target="_blank">
         <h1 class="title">Oispa Halla</h1>
       </a>
       <div class="scores-container">
@@ -51,7 +83,7 @@
           <button class="restart-4x4">4x4</button>
         </div>
       </a>
-    </div>
+    </div> -->
 
     <div class="game-container">
       <div class="kurin-palautus-viesti"></div>
@@ -113,9 +145,9 @@
     </div>
     <div class="underbar-container">
       <div class="kurin-palautus-container">
-        <div class="kurin-palautus kurin-palautus-color">
+        <button class="kurin-palautus kurin-palautus-color">
           <a class="parin-kulautus" title="Vai parin kulautus? Lahjot opettajia pois ruudulta, mutta menetät arvosanojasi! Voit lahjoa opettajia vain kolme kertaa ennen kun Halla saa kuulla tilanteesta.">KURINPALAUTUS</a>
-        </div>
+        </button>
       </div>
       <div class="button-container">
         <div class="event-container">
