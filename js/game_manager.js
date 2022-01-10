@@ -26,6 +26,7 @@ class GameManager {
     this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
     this.inputManager.on("paritaKuli", this.paritaKuli.bind(this));
     this.inputManager.on("toggleEvent", this.toggleEvent.bind(this));
+    this.inputManager.on("toggleDarkMode", this.toggleDarkMode.bind(this));
 
     this.setup();
   }
@@ -74,7 +75,7 @@ class GameManager {
     }
   }
   toggleEvent() {
-    const themeID = document.querySelector("html").classList[0].split("-")[1];
+    let themeID = currentTheme;
     var eventToggle = document.getElementById('event-icon');
     var newIndex;
     if(themeID == 1) {
@@ -87,6 +88,9 @@ class GameManager {
     }
     
     setImageTheme( newIndex );
+  }
+  toggleDarkMode(){
+    setImageTheme( currentTheme == 1 ? 0 : 1 );
   }
   // Return true if the game is lost, or has won and the user hasn't kept playing
   isGameTerminated() {

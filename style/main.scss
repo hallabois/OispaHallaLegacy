@@ -49,7 +49,7 @@ html, body {
   margin: 0;
   padding: 0;
 
-  background: $game-background;
+  background: $game-background-dark;
   color: $text-color;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px;
@@ -900,6 +900,8 @@ $colors: (
   '0-break-button-background-true': #49a636,
   '0-break-button-color-true': #dfdfdf,
 
+  '1-game-background': $game-background,
+
   '2-text-color': #eee,
   '2-game-background': #161817,
   '2-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
@@ -997,4 +999,16 @@ $t: 0;
   }
   @include setThemeColors('#{$t}');
   $t: $t + 1;
+}
+
+.event-button{
+  text-decoration: none !important;
+}
+
+#darkmode-icon {
+  filter: saturate(0) invert(1);
+}
+
+#darkmode-icon.dark {
+  filter: saturate(0);
 }

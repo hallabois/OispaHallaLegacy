@@ -52,8 +52,8 @@ window.requestAnimationFrame(function () {
 });
 
 var themeCount = 2;
-var defautTheme = 3;
-var currentImageThemeVersion = 4;
+var defautTheme = 1;
+var currentImageThemeVersion = 5;
 
 function preloadImages(path){
   var imageList = [
@@ -98,6 +98,18 @@ function setImageTheme(themeID){
 			sa_event('theme_changed_to_' + themeID);
 		}
 	catch{}
+  applyThemeUIElements();
+}
+function applyThemeUIElements(){
+  var toggle = document.getElementById('darkmode-icon');
+  if(currentTheme == 1) {
+    toggle.classList.remove("dark");
+    toggle.innerHTML = "🔆";
+  }
+  else{
+    toggle.classList.add("dark");
+    toggle.innerHTML = "🔅";
+  }
 }
 
 window.addEventListener("DOMContentLoaded", function() {

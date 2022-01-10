@@ -72,7 +72,7 @@ class KeyboardInputManager {
     //this.bindContextPress(".restart-button", this.restartplus);
     this.bindButtonPress(".keep-playing-button", this.keepPlaying);
     this.bindButtonPress(".kurin-palautus", this.paritaKuli);
-    this.bindButtonPress(".event-button", this.toggleEvent);
+    this.bindButtonPress(".event-button", this.toggleDarkMode);
 
     // Respond to swipe events
     var touchStartClientX, touchStartClientY;
@@ -157,6 +157,11 @@ class KeyboardInputManager {
   toggleEvent(event) {
     event.preventDefault();
     this.emit("toggleEvent");
+    event.stopPropagation();
+  }
+  toggleDarkMode(event) {
+    event.preventDefault();
+    this.emit("toggleDarkMode");
     event.stopPropagation();
   }
 }
