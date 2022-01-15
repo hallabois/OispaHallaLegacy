@@ -2,7 +2,7 @@
 var tabID = sessionStorage.tabID ? 
             sessionStorage.tabID : 
             sessionStorage.tabID = Math.random();
-window.onpagehide = function() {
+function unregisterTabID() {
   if(localStorage){
     if(localStorage.lastSession){
       if(localStorage.lastSession == tabID){
@@ -10,7 +10,9 @@ window.onpagehide = function() {
       }
     }
   }
-};
+}
+window.onpagehide = unregisterTabID;
+window.onbeforeunload = unregisterTabID;
 
 var GameManagerInstance;
 
@@ -24,7 +26,7 @@ window.requestAnimationFrame(function () {
   if(window.location.href.includes("?debug")){
     console.log("debug time!");
     let out = "<div style='overflow-x:auto;height: 100%;background:#1e1e1e;color:#ddd!important;'>";
-    let toshare = JSON.stringify(localStorage);
+    let toshare = JSON.stringify({title: "debug information", text: localStorage});
     out += "<table><tr><th></th><th></th></tr>"; // Key, Value
     for(let i in localStorage){
       if(typeof(localStorage[i]) !== "function"){
@@ -40,7 +42,7 @@ window.requestAnimationFrame(function () {
     }
     out += "</table>";
     if(navigator.share){
-      out += "<button onclick='navigator.share(" + toshare + ")'> Share </button>";
+      out += "<button style='font-size:2em;' onclick='navigator.share(" + toshare + ")'> Share </button>";
     }
     out += "</div>";
     out += "<style>html, body{margin: 0; padding: 0;font-family: monospace;}div{display:flex;flex-direction: column;}table{flex: 1;}</style>";
