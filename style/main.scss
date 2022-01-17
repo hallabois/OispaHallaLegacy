@@ -967,6 +967,10 @@ $i: 2;
   
 }
 
+html.theme-0 .color-button img {
+  filter: invert(86%) sepia(34%) saturate(170%) hue-rotate(341deg) brightness(97%) contrast(86%);
+}
+
 html.theme-1 .color-button img { //very fucking scufferoni but i couldn't find a better way to do this in sass
   filter: invert(43%) sepia(4%) saturate(922%) hue-rotate(349deg) brightness(99%) contrast(93%);
 }
