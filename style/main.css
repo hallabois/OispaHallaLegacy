@@ -297,6 +297,7 @@ h1.title.dark {
 }
 
 .parin-kulautus {
+  padding: 0 1em;
   text-decoration: none;
   color: #eee;
   font-size: 11px;
@@ -3367,12 +3368,12 @@ html.theme-1 {
   background: #faf8ef;
 }
 html.theme-1 .parin-kulautus, html.theme-1 .kurin-palautus {
-  background: var(--break-button-background-false);
-  color: var(--break-button-color-false);
+  background: #cc0000;
+  color: #ddd;
 }
 html.theme-1 .parin-kulautus.allowed, html.theme-1 .kurin-palautus.allowed {
-  background: var(--break-button-background-true);
-  color: var(--break-button-color-true);
+  background: #00cc00;
+  color: #dfdfdf;
 }
 html.theme-1 body {
   background-image: url("../img/theme-1/OispaHallaTausta.webp");

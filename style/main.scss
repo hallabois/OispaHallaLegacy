@@ -332,6 +332,7 @@ h1.title.dark{
 }
 
 .parin-kulautus {
+  padding: 0 1em;
   text-decoration: none;
   color: #eee;
   font-size: 11px;
@@ -992,6 +993,10 @@ $colors: (
   '0-break-button-color-true': #dfdfdf,
 
   '1-game-background': $game-background,
+  '1-break-button-background-false': #cc0000, //kurinpalautus!
+  '1-break-button-color-false': #ddd,
+  '1-break-button-background-true': #00cc00,
+  '1-break-button-color-true': #dfdfdf,
 
   '2-text-color': #eee,
   '2-game-background': #161817,
