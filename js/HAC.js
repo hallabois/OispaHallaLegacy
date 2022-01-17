@@ -27,7 +27,7 @@ function disableHAC(){
     }
 }
 
-let HAC_valid = '<img src="img/HAC_small.svg" style="width: 1em;margin: -.1em;">';
+let HAC_valid = '<img src="img/svg/HAC_small.svg" style="width: 1em;margin: -.1em;">';
 
 class HAC {
     constructor() {
@@ -139,7 +139,7 @@ class HAC {
                 else{
                     best = old_best;
                 }
-            }
+            }//LMAO XD LOL t.antti 9v
             if(best_history == null || best_history == "[]"){
                 best = 0;
             }

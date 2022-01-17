@@ -6,6 +6,7 @@ class GameManager {
     this.actuator = new Actuator;
 
     this.startTiles = 2;
+    this.numOfScores = 10;
 
     let restartbtn = document.querySelector(".restart-button");
     let restart3 = document.querySelector(".restart-3x3");
@@ -28,6 +29,8 @@ class GameManager {
     this.inputManager.on("toggleEvent", this.toggleEvent.bind(this));
     this.inputManager.on("toggleDarkMode", this.toggleDarkMode.bind(this));
 
+    this.popup = document.getElementsByClassName("lb-popup")[0];
+    
     this.setup();
   }
   // Export the current game for later analysis
@@ -55,8 +58,7 @@ class GameManager {
     this.keepPlaying = true;
     this.actuator.continueGame(); // Clear the game won/lost message
   }
-  //kiitoksia Antti R:lle, eli alkuperäiselle oispakaljaa.com-deville tästä pätkästä :D
-  //oon pahoillani näist nimistä
+
   paritaKuli() {
     if (!this.isGameTerminated()) {
       if (this.score >= 1000) {
@@ -80,11 +82,11 @@ class GameManager {
     var newIndex;
     if(themeID == 1) {
       newIndex = 3;
-      eventToggle.src = 'img/no_snow.svg';
+      eventToggle.src = 'img/svg/no_snow.svg';
     }
     else {
       newIndex = 1; 
-      eventToggle.src = 'img/snow.svg';
+      eventToggle.src = 'img/svg/snow.svg';
     }
     
     setImageTheme( newIndex );
@@ -96,6 +98,11 @@ class GameManager {
   isGameTerminated() {
     return this.over || (this.won && !this.keepPlaying);
   }
+
+  isLeaderboardOpen() {
+    return this.popup.style.display == "block";
+  }
+
   // Set up the game
   setup() {
     var previousState = this.storageManager.getGameState();
@@ -211,7 +218,7 @@ class GameManager {
     // 0: up, 1: right, 2: down, 3: left
     var self = this;
 
-    if (this.isGameTerminated())
+    if (this.isGameTerminated() || this.isLeaderboardOpen())
       return; // Don't do anything if the game's over
 
     var cell, tile;

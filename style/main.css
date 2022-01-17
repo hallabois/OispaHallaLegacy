@@ -94,6 +94,7 @@ h1.title.dark {
   margin: 250px auto;
   animation-name: popdown;
   animation-duration: 0.4s;
+  border-radius: 6px;
 }
 
 .lb-header {
@@ -106,23 +107,25 @@ h1.title.dark {
 .lb-buttons {
   display: -webkit-flex;
   display: flex;
-  justify-content: end;
-  width: 20%;
-  padding-top: 8px;
+  padding-top: 17px;
 }
 .lb-buttons * {
   text-decoration: none;
-  font-size: 35px;
+  font-size: 30px;
 }
 .lb-buttons img {
   padding: 10px 10px 0 0;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
+}
+
+.lb-content {
+  margin: 0;
+  padding: 0 20px 20px;
 }
 
 .lb-stats {
-  margin: 0;
-  padding: 0 20px 20px;
+  padding-left: 0px;
   counter-reset: leaderboard;
 }
 
@@ -139,6 +142,80 @@ h1.title.dark {
   content: counter(leaderboard) ". ";
 }
 
+.form-title-container {
+  display: flex;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  padding-left: 5px;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555353;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  font-size: small;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext, .tooltip:active .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext {
+  width: 120px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.form-container hr {
+  padding: 0;
+  margin: 0px 0 20px 0;
+}
+
+.closerhr {
+  padding: 15px 0 15px 0;
+}
+
+.name-form-title {
+  margin: 0 0 10px;
+  margin-bottom: 10px;
+}
+
+.name-form {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-container {
+  margin-bottom: 20px;
+}
+
+.name-form-container {
+  padding-bottom: 20px;
+}
+
+.lb-error {
+  color: red;
+  font-size: small;
+}
+
+.lb-disclaimer {
+  padding-top: 25px;
+  font-size: small;
+  text-align: center;
+}
+
 .underbar-container {
   display: -webkit-flex;
   display: flex;
@@ -147,13 +224,17 @@ h1.title.dark {
 .underbar-container > * {
   margin-top: 15px;
 }
-.underbar-container .button-container > * {
-  display: -webkit-flex;
+.underbar-container .button-container {
   display: flex;
+}
+.underbar-container .button-container > * {
   width: 50%;
 }
 .underbar-container .button-container > * img {
   width: 25px;
+}
+.underbar-container .button-container :not(:first-child) {
+  margin-left: 10px;
 }
 
 .kurin-palautus-container {
@@ -164,13 +245,15 @@ h1.title.dark {
   text-align: center;
   margin-left: 25px;
   min-height: 30px;
+  position: relative;
+  left: 15px;
 }
 
 .kurin-palautus {
   padding: 0 5px;
   background-color: #c00;
   cursor: pointer;
-  width: 25%;
+  width: fit-content;
   border-radius: 3px;
   transition: 1s background, 1s color;
   display: -webkit-flex;
@@ -3085,10 +3168,6 @@ hr {
     margin-bottom: 10px !important;
   }
 
-  .kurin-palautus {
-    width: 40% !important;
-  }
-
   .game-container .kurin-palautus-viesti {
     top: 20px;
   }
@@ -3096,6 +3175,14 @@ hr {
     width: 170px;
   }
 }
+html.theme-1 .color-button img {
+  filter: invert(43%) sepia(4%) saturate(922%) hue-rotate(349deg) brightness(99%) contrast(93%);
+}
+
+html.theme-3 .color-button img {
+  filter: invert(79%) sepia(81%) saturate(3152%) hue-rotate(347deg) brightness(101%) contrast(91%);
+}
+
 html.theme-0 .tile-2 .tile-inner {
   background-image: url("../img/theme-0/2.png");
 }
@@ -3183,6 +3270,9 @@ html.theme-0 body {
 }
 html.theme-0 body a {
   color: #e6d2bf;
+}
+html.theme-0 body .lb-popup-container {
+  background-color: #3e3933;
 }
 html.theme-0 body .kurin-palautus {
   border: 1px #161817 solid;
@@ -3381,6 +3471,9 @@ html.theme-2 body {
 html.theme-2 body a {
   color: #e6d2bf;
 }
+html.theme-2 body .lb-popup-container {
+  background-color: #3e3933;
+}
 html.theme-2 body .kurin-palautus {
   border: 1px #161817 solid;
 }
@@ -3484,6 +3577,9 @@ html.theme-3 body {
 }
 html.theme-3 body a {
   color: #F4AB1D;
+}
+html.theme-3 body .lb-popup-container {
+  background-color: #8B0F17;
 }
 html.theme-3 body .grid-cell {
   background-color: rgba(204, 63, 63, 0.35);

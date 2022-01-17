@@ -119,6 +119,7 @@ h1.title.dark{
   margin: 250px auto;
   animation-name: popdown;
   animation-duration: 0.4s;
+  border-radius: 6px;
 }
 
 .lb-header {
@@ -131,25 +132,27 @@ h1.title.dark{
 .lb-buttons {
   display: -webkit-flex;
   display: flex;
-  justify-content: end;
-  width: 20%;
-  padding-top: 8px;
+  padding-top: 17px;
 
   * {
     text-decoration: none;
-    font-size: 35px;
+    font-size: 30px;
   }
 
   img {
     padding: 10px 10px 0 0;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
   }
 }
 
-.lb-stats {
+.lb-content {
   margin: 0;
   padding: 0 20px 20px;
+}
+
+.lb-stats {
+  padding-left: 0px;
   counter-reset: leaderboard;
 }
 
@@ -168,6 +171,81 @@ h1.title.dark{
   }
 }
 
+.form-title-container {
+  display: flex;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  padding-left: 5px;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555353;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  font-size: small;
+ 
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext, .tooltip:active .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext {
+  width: 120px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.form-container hr {
+  padding: 0;
+  margin: 0px 0 20px 0;
+}
+
+.closerhr {
+  padding: 15px 0 15px 0;
+}
+
+.name-form-title {
+  margin: 0 0 10px;
+  margin-bottom: 10px;
+}
+
+.name-form {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-container {
+  margin-bottom: 20px;
+}
+
+.name-form-container {
+  padding-bottom: 20px;
+}
+
+.lb-error {
+  color: red;
+  font-size: small;
+}
+
+.lb-disclaimer {
+  padding-top: 25px;
+  font-size: small;
+  text-align: center;
+}
+
 .underbar-container {
   display: -webkit-flex;
   display: flex;
@@ -178,15 +256,18 @@ h1.title.dark{
   }
 
   .button-container {
+    display: flex;
     > * {
-      display: -webkit-flex;
-      display: flex;
       width: 50%;
       
       img {
         width: 25px;
       }
     }
+    :not(:first-child) {
+      margin-left: 10px;
+    }
+
   }
   
 }
@@ -199,13 +280,15 @@ h1.title.dark{
   text-align: center;
   margin-left: 25px;
   min-height: 30px;
+  position: relative;
+  left: 15px;
 }
 
 .kurin-palautus {
   padding: 0 5px;
   background-color: #c00;
   cursor: pointer;
-  width: 25%;
+  width: fit-content;
   border-radius: 3px;
   transition: 1s background, 1s color;
   display: -webkit-flex;
@@ -874,10 +957,6 @@ $i: 2;
     }
   }
 
-  .kurin-palautus {
-    width: 40% !important;
-  }
-  
   .game-container .kurin-palautus-viesti {
     top: 20px;
   
@@ -886,6 +965,14 @@ $i: 2;
     }
   }
   
+}
+
+html.theme-1 .color-button img { //very fucking scufferoni but i couldn't find a better way to do this in sass
+  filter: invert(43%) sepia(4%) saturate(922%) hue-rotate(349deg) brightness(99%) contrast(93%);
+}
+
+html.theme-3 .color-button img {
+  filter: invert(79%) sepia(81%) saturate(3152%) hue-rotate(347deg) brightness(101%) contrast(91%);
 }
 
 $colors: (
@@ -954,6 +1041,10 @@ $colors: (
 
         a {
           color: map-get($colors, '#{$color-number}-title-color');
+        }
+
+        .lb-popup-container {
+          background-color: map-get($colors, '#{$color-number}-game-container-background');
         }
 
         .grid-cell {

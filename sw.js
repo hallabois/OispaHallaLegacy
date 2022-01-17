@@ -1,7 +1,7 @@
 console.log("Service worker registered.");
 
 var cacheName = "oispahalla-offline";
-var HAC_urls = ["https://localhost:8000", "http://localhost:8000", "https://hac.oispahalla.com:8000", "https://hac.hallacoin.ml:8000", "http://35.225.19.22:8000"];
+var HAC_urls = ["https://localhost:8000", "http://localhost:8000", "https://hac.oispahalla.com:8000", "https://hac.hallacoin.ml:8000", "http://35.225.19.22:8000", "http://localhost:5000", "https://localhost:5000"];
 var HAC_alive = "/HAC/alive/";
 var blacklist = [
 	"manifest.json",
