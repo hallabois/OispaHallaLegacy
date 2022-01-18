@@ -49,20 +49,22 @@ class KeyboardInputManager {
 
     // Respond to direction keys
     document.addEventListener("keydown", function (event) {
-      var modifiers = event.altKey || event.ctrlKey || event.metaKey ||
-        event.shiftKey;
-      var mapped = map[event.which];
+      if(document.querySelector(".lb-popup").style.display === "none") {
+        var modifiers = event.altKey || event.ctrlKey || event.metaKey ||
+          event.shiftKey;
+        var mapped = map[event.which];
 
-      if (!modifiers) {
-        if (mapped !== undefined) {
-          event.preventDefault();
-          self.emit("move", mapped);
+        if (!modifiers) {
+          if (mapped !== undefined) {
+            event.preventDefault();
+            self.emit("move", mapped);
+          }
         }
-      }
 
-      // R key restarts the game
-      if (!modifiers && event.which === 82) {
-        self.restart.call(self, event);
+        // R key restarts the game
+        if (!modifiers && event.which === 82) {
+          self.restart.call(self, event);
+        }
       }
     });
 
@@ -79,20 +81,22 @@ class KeyboardInputManager {
     var gameContainer = document.getElementsByClassName("game-container")[0];
 
     gameContainer.addEventListener(this.eventTouchstart, function (event) {
-      if ((!window.navigator.msPointerEnabled && event.touches.length > 1) ||
-        event.targetTouches.length > 1) {
-        return; // Ignore if touching with more than 1 finger
-      }
+      if(document.querySelector(".lb-popup").style.display === "none") {
+        if ((!window.navigator.msPointerEnabled && event.touches.length > 1) ||
+          event.targetTouches.length > 1) {
+          return; // Ignore if touching with more than 1 finger
+        }
 
-      if (window.navigator.msPointerEnabled) {
-        touchStartClientX = event.pageX;
-        touchStartClientY = event.pageY;
-      } else {
-        touchStartClientX = event.touches[0].clientX;
-        touchStartClientY = event.touches[0].clientY;
-      }
+        if (window.navigator.msPointerEnabled) {
+          touchStartClientX = event.pageX;
+          touchStartClientY = event.pageY;
+        } else {
+          touchStartClientX = event.touches[0].clientX;
+          touchStartClientY = event.touches[0].clientY;
+        }
 
-      event.preventDefault();
+        event.preventDefault();
+      }
     });
 
     gameContainer.addEventListener(this.eventTouchmove, function (event) {
