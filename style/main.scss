@@ -900,6 +900,17 @@ $colors: (
   '0-break-button-background-true': #49a636,
   '0-break-button-color-true': #dfdfdf,
 
+  '14-text-color': #eee,
+  '14-game-background': #161817,
+  '14-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
+  '14-game-container-background': #3e3933,
+  '14-title-color': #e6d2bf,
+  '14-button-color': #365ca6,
+  '14-break-button-background-false': #a63636, //kurinpalautus!
+  '14-break-button-color-false': #ddd,
+  '14-break-button-background-true': #49a636,
+  '14-break-button-color-true': #dfdfdf,
+
   '1-game-background': $game-background,
 
   '2-text-color': #eee,

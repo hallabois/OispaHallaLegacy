@@ -4383,16 +4383,39 @@ html.theme-14 .tile-32768 .tile-inner {
   box-shadow: 0px 0px 15px 2px #0B00FF;
 }
 
+html.theme-14 {
+  background: #161817;
+}
 html.theme-14 .parin-kulautus, html.theme-14 .kurin-palautus {
-  background: var(--break-button-background-false);
-  color: var(--break-button-color-false);
+  background: #a63636;
+  color: #ddd;
 }
 html.theme-14 .parin-kulautus.allowed, html.theme-14 .kurin-palautus.allowed {
-  background: var(--break-button-background-true);
-  color: var(--break-button-color-true);
+  background: #49a636;
+  color: #dfdfdf;
 }
 html.theme-14 body {
   background-image: url("../img/theme-14/OispaHallaTausta.webp");
+  color: #eee;
+  background-color: #161817;
+}
+html.theme-14 body a {
+  color: #e6d2bf;
+}
+html.theme-14 body .kurin-palautus {
+  border: 1px #161817 solid;
+}
+html.theme-14 body .kurin-palautus:hover {
+  border: 1px #E9E7E8 solid;
+}
+html.theme-14 body .game-container, html.theme-14 body .score-container, html.theme-14 body .best-container, html.theme-14 body .HAC-container {
+  background: #3e3933;
+}
+html.theme-14 body .game-message.game-over {
+  background: rgba(22, 24, 23, 0.8);
+}
+html.theme-14 body .restart-button, html.theme-14 body .lower > * {
+  background: #365ca6;
 }
 
 html.theme-15 .tile-2 .tile-inner {
