@@ -177,14 +177,12 @@ class HAC {
             return
         }
     	try{
-        	let response = await fetch(url + "/HAC/alive/");
-	        let data = await response.json();
-	        if(this.debug){
-		        //console.log(response);
-		        console.log("Connectivity check result: ", data);
-	        }
-	        if(data){
+        	let response = await fetch(url + "/HAC/alive");
+	        if(response.ok) {
 	        	return true;
+            }
+            else {
+		        console.log("Connectivity check result: ", response);
 	        }
         }
         catch(e){
