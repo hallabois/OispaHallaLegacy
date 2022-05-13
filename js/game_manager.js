@@ -252,6 +252,12 @@ class GameManager {
             // The mighty 2048 tile
             if (merged.value === 2048)
               self.won = true;
+              // Analytics
+              try{
+                HallaAntiCheat.recordAnalytics(true, this.score);
+              }
+              catch{}
+              //
           } else {
             self.moveTile(tile, positions.farthest);
           }
@@ -282,6 +288,10 @@ class GameManager {
         // Analytics
         try{
           sa_event('game_failed');
+        }
+        catch{}
+        try{
+          HallaAntiCheat.recordAnalytics(false, this.score);
         }
         catch{}
         //

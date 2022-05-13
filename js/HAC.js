@@ -47,7 +47,7 @@ class HAC {
                         this.size = JSON.parse(localStorage["HAC_size"]);
                     }
                 } catch (error) {
-                    console.log("Failed to load HAC history from localstorage: ", error);
+                    console.warn("Failed to load HAC history from localstorage: ", error);
                 }
             }
             if(localStorage.HAC_dev_enabled != null){
@@ -151,6 +151,23 @@ class HAC {
                 localStorage["HAC_best_score" + this.size] = score;
             }
         }
+    }
+    recordAnalytics(won, score) {
+        let resp = fetch("https://hac.oispahalla.com:8002/overwatch/api/record",
+            {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "r": this.size + "x" + this.size + "S" + this.history.join(":"),
+                    "won": won,
+                    "score": score    
+                })
+            }
+        )
     }
     toggleDebug(){
     	this.debug = !this.debug;
