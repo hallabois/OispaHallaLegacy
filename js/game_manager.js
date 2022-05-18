@@ -36,6 +36,10 @@ class GameManager {
   }
   // Restart the game
   restart() {
+    try{
+      HallaAntiCheat.recordAnalytics(this.won, true, this.score);
+    }
+    catch{}
     HallaAntiCheat.recordBest(this.score);
     this.storageManager.clearGameState();
     this.actuator.continueGame(); // Clear the game won/lost message
@@ -44,6 +48,10 @@ class GameManager {
   }
   // Restart the game
   restartplus(size=3) {
+    try{
+      HallaAntiCheat.recordAnalytics(this.won, true, this.score);
+    }
+    catch{}
     HallaAntiCheat.recordBest(this.score);
     this.storageManager.clearGameState();
     this.actuator.continueGame(); // Clear the game won/lost message
@@ -254,7 +262,7 @@ class GameManager {
               self.won = true;
               // Analytics
               try{
-                HallaAntiCheat.recordAnalytics(true, this.score);
+                HallaAntiCheat.recordAnalytics(self.won, false, this.score);
               }
               catch{}
               //
@@ -291,7 +299,7 @@ class GameManager {
         }
         catch{}
         try{
-          HallaAntiCheat.recordAnalytics(false, this.score);
+          HallaAntiCheat.recordAnalytics(self.won, false, this.score);
         }
         catch{}
         //

@@ -152,7 +152,7 @@ class HAC {
             }
         }
     }
-    recordAnalytics(won, score) {
+    recordAnalytics(won, abandoned, score) {
         let resp = fetch("https://hac.oispahalla.com:8002/overwatch/api/record",
             {
                 method: 'POST',
@@ -164,6 +164,7 @@ class HAC {
                 body: JSON.stringify({
                     "r": this.size + "x" + this.size + "S" + this.history.join(":"),
                     "won": won,
+                    "abandoned": abandoned,
                     "score": score    
                 })
             }
