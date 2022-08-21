@@ -1,0 +1,1211 @@
+@use "sass:map";
+@use "sass:math";
+
+@import "./style/helpers";
+@import "./style/fonts/clear-sans.css";
+
+:root{
+  --field-width: 500px;
+  --grid-gap: 15px;
+  --grid-size: 4;
+  --grid-size-max: 6;
+  --tile-size: calc(calc(var(--field-width) - calc(var(--grid-gap) * calc(var(--grid-size) + 1))) / var(--grid-size));
+  --tile-border-radius: 3px;
+
+  --break-button-background-false: #c00;
+  --break-button-color-false: #222;
+  --break-button-background-true: #0c0;
+  --break-button-color-true: #ddd;
+}
+
+$field-width: 500px;
+$grid-spacing: 15px;
+$grid-max-size: 10;
+$tile-border-radius: 3px;
+
+$mobile-threshold: $field-width + 20px;
+
+$text-color: #776E65;
+$bright-text-color: #f9f6f2;
+
+$tile-color: #eee4da;
+$tile-gold-color: #edc22e;
+$tile-gold-glow-color: lighten($tile-gold-color, 15%);
+
+$game-container-margin-top: 40px;
+$game-container-background: #bbada0;
+
+$game-background: #faf8ef;
+
+/* Dark theme: */
+$text-color-dark: #ccbbab;
+$game-background-dark: #131313;
+$title-color-dark: #e6d2bf;
+
+
+$transition-speed: 100ms;
+
+html, body {
+  margin: 0;
+  padding: 0;
+
+  min-height: 100vh;
+
+  background: $game-background-dark;
+  color: $text-color;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  font-display: swap; // Ensure that text stays visible during font load
+
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: top center;
+  
+  accent-color: var(--button-background);
+}
+
+.noscript{
+  background-color: #8f7a66;
+  color: #faf8ef;
+}
+
+.heading {
+  @include clearfix;
+}
+
+h1.title {
+  font-size: 45px;
+  font-weight: bold;
+  margin: 0;
+  display: block;
+  float: left;
+  transition: .25s color;
+}
+
+h1.title.dark{
+  color: $title-color-dark;
+}
+
+@keyframes popdown {
+  from {margin-top: -50vh; opacity: 0;}
+  to {margin-top: 0; opacity: 1;}
+}
+
+@keyframes darken {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.lb-popup {
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 200;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  animation-name: darken;
+  animation-duration: 0.4s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lb-popup-container {
+  background-color: $game-background;
+  min-width: min(450px, 100vw);
+  margin: 0;
+  animation-name: popdown;
+  animation-duration: 0.4s;
+  border-radius: 6px;
+}
+
+.lb-header {
+  padding: 0 20px;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+.lb-buttons {
+  display: -webkit-flex;
+  display: flex;
+  padding-top: 17px;
+
+  * {
+    text-decoration: none;
+    font-size: 30px;
+  }
+
+  img {
+    padding: 10px 10px 0 0;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.lb-content {
+  margin: 0;
+  padding: 0 20px 20px;
+}
+
+.lb-stats {
+  padding-left: 0px;
+  counter-reset: leaderboard;
+}
+
+.lb-stat {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  & .lb-stat-label::before {
+    counter-increment: leaderboard; // scuffed but works
+    content: counter(leaderboard)". ";
+  }
+}
+
+.form-title-container {
+  display: flex;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  padding-left: 5px;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555353;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  font-size: small;
+ 
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext, .tooltip:active .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext {
+  width: 120px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.form-container hr {
+  padding: 0;
+  margin: 0px 0 20px 0;
+}
+
+.closerhr {
+  padding: 15px 0 15px 0;
+}
+
+.name-form-title {
+  margin: 0 0 10px;
+  margin-bottom: 10px;
+}
+
+.name-form {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-container {
+  margin-bottom: 20px;
+}
+
+.name-form-container {
+  padding-bottom: 10px;
+}
+
+.lb-error {
+  color: red;
+  font-size: small;
+}
+
+.lb-disclaimer {
+  padding-top: 25px;
+  font-size: small;
+  text-align: center;
+}
+
+.underbar-container {
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+
+  > * {
+    margin-top: 15px;
+  }
+
+  .button-container {
+    display: flex;
+    > * {
+      width: 50%;
+      
+      img {
+        width: 25px;
+      }
+    }
+    :not(:first-child) {
+      margin-left: 10px;
+    }
+
+  }
+  
+}
+
+.kurin-palautus-container {
+  justify-content: center;
+  flex: 1; // mf's browsers don't support flex: content???
+  display: -webkit-flex;
+  display: flex;
+  text-align: center;
+  min-height: 30px;
+  position: relative;
+}
+
+.kurin-palautus {
+  padding: 0 5px;
+  background-color: #c00;
+  cursor: pointer;
+  width: fit-content;
+  transition: 1s background, 1s color;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   
+  padding: .5em .3em;
+
+  // border: $game-background 1px solid;
+
+  // &:hover {
+  //   border: $game-background-dark 1px solid;
+  // }
+}
+
+
+.HAC-container {
+  position: relative;
+  background: #bbada0;
+  padding: 15px 15px;
+  font-size: 25px;
+  height: 25px;
+  line-height: 47px;
+  font-weight: bold;
+  border-radius: 3px;
+  color: white;
+  text-align: center;
+}
+.HAC-container::after{
+  content: "HAC";
+  position: absolute;
+  width: 100%;
+  top: 10px;
+  left: 0;
+  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 13px;
+  text-align: center;
+  color: #eee4da;
+}
+.HAC-status{
+  cursor: default;
+}
+
+.parin-kulautus {
+  padding: 0 1em;
+  margin-bottom: 0;
+  text-decoration: none;
+  color: #eee;
+  font-size: 11px;
+  letter-spacing: 0.055em;
+  transition: 1s background, 1s color;
+}
+
+.disclaimer {
+  margin-top: 60px;
+  font-size: small;
+  text-align: center;
+}
+
+.disclaimer p {
+  margin-bottom: 20px;
+}
+
+.discord {
+  margin-top: 40px;
+  font-size: small;
+  text-align: center;
+}
+
+@include keyframes(move-up) {
+  0% {
+    top: 25px;
+    opacity: 1;
+  }
+
+  100% {
+    top: -50px;
+    opacity: 0;
+  }
+}
+
+.scores-container {
+  float: right;
+  text-align: right;
+  margin-bottom: 20px;
+  min-width: 20px;
+  max-width: 50%;
+}
+
+.score-container, .best-container {
+  $height: 25px;
+
+  position: relative;
+  background: $game-container-background;
+  padding: 15px 20px;
+  font-size: $height - 5px;
+  height: $height;
+  line-height: $height + 22px;
+  font-weight: bold;
+  border-radius: 3px;
+  color: white;
+  text-align: center;
+  flex: 1; // mf's browsers don't support flex: content???
+  min-width: 50px;
+
+  &:after {
+    position: absolute;
+    width: 100%;
+    top: 10px;
+    left: 0;
+    text-transform: uppercase;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: center;
+    color: $tile-color;
+  }
+
+  .score-addition {
+    position: absolute;
+    right: 30px;
+    color: red;
+    font-size: $height;
+    line-height: $height;
+    font-weight: bold;
+    color: rgba($text-color, .9);
+    z-index: 100;
+    @include animation(move-up 600ms ease-in);
+    @include animation-fill-mode(both);
+  }
+}
+
+.score-container:after {
+  content: var(--c, "Arvosana");
+}
+
+.best-container:after {
+  content: var(--c, "Paras Halla");
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 10px;
+  line-height: 1.65;
+}
+
+a {
+  color: $text-color;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+strong {
+  &.important {
+    text-transform: uppercase;
+  }
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid lighten($text-color, 40%);
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.container {
+  width: $field-width;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+@include keyframes(fade-in) {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+//kurinpalautus
+@include keyframes(fade-in-out) {
+  0% {
+    opacity: 0; 
+  }
+      
+  50% {
+    opacity: 1; 
+  }
+
+  100% {
+    opacity: 0; 
+  } 
+}
+
+
+// Styles for buttons
+@mixin button {
+  display: inline-block;
+  background: darken($game-container-background, 20%);
+  border-radius: 3px;
+  padding: 0 20px;
+  text-decoration: none;
+  color: $bright-text-color !important;
+  height: 40px;
+  line-height: 42px;
+  flex: content;
+}
+
+// Game field mixin used to render CSS at different width
+@mixin game-field {
+  .game-container {
+    margin-top: $game-container-margin-top;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    padding: var(--grid-gap);
+
+    cursor: default;
+    -webkit-touch-callout: none;
+    -ms-touch-callout: none;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    -ms-touch-action: none;
+    touch-action: none;
+
+    background: $game-container-background;
+    transition: all 0.25s;
+    border-radius: $tile-border-radius * 2;
+    width: $field-width;
+    height: $field-width;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    .game-message {
+      display: none;
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba($tile-color, .8);
+      z-index: 100;
+
+      text-align: center;
+
+      p {
+        line-height: 60px;
+        font-weight: bold;
+        text-shadow: 0 0 1em var(--background);
+      }
+
+      .tilanne {
+        font-size: 60px;
+        margin-top: 180px;
+        // height: $field-width;
+        // line-height: $field-width;
+      }
+
+      .kurinpalautukset {
+        font-size: 20px;
+      }
+
+      .lower {
+        display: block;
+        margin-top: 59px;
+      }
+
+      a {
+        @include button;
+        margin-left: 9px;
+        // margin-top: 59px;
+
+        &.keep-playing-button {
+          display: none;
+        }
+      }
+      .button {
+        @include button;
+        margin-left: 9px;
+        // margin-top: 59px;
+
+        &.keep-playing-button {
+          display: none;
+        }
+      }
+
+      @include animation(fade-in 800ms ease $transition-speed * 12);
+      @include animation-fill-mode(both);
+
+      &.game-won {
+        background: rgba($tile-gold-color, .5);
+        color: $bright-text-color;
+
+        .keep-playing-button {
+          display: inline-block;
+        }
+      }
+
+      &.game-won, &.game-over {
+        display: block;
+      }
+    }
+  }
+
+  .grid-container {
+    position: absolute;
+    z-index: 1;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: repeat(var(--grid-size-max), var(--tile-size));
+    grid-template-columns: repeat(var(--grid-size-max), var(--tile-size));
+    gap: var(--grid-gap);
+    height: calc(100% - calc(var(--grid-gap) * 2));
+    width: calc(100% - calc(var(--grid-gap) * 2));
+    transition: all 0.25s;
+  }
+
+  .grid-row {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-size), var(--tile-size));
+    gap: var(--grid-gap);
+    overflow: hidden;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+
+  .grid-cell {
+    width: var(--tile-size);
+    height: var(--tile-size);
+    margin-right: var(--grid-gap);
+    transition: all .25s;
+
+    border-radius: var(--tile-border-radius);
+
+    background: rgba($tile-color, .35);
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .tile-container {
+    position: absolute;
+    z-index: 2;
+  }
+
+  .tile {
+    &, .tile-inner {
+      width: var(--tile-size);
+      height: var(--tile-size);
+      line-height: var(--tile-size);
+    }
+
+    // Build position classes
+    @for $x from 1 through $grid-max-size {
+      @for $y from 1 through $grid-max-size {
+        &.tile-position-#{$x}-#{$y} {
+          --x: #{$x};
+          --y: #{$y};
+          --xpos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--x) - 1) );
+          --ypos: calc( calc(var(--tile-size) + var(--grid-gap)) * calc(var(--y) - 1) );
+          @include transform(translate(var(--xpos), var(--ypos)));
+        }
+      }
+    }
+  }
+}
+
+$kiillot: (128: (-4px, #a8fa8a), 
+          256: (-4px, #FFFB62), 
+          512: (-3px, #ffa600), 
+          1024: (-1px, #5000ff), 
+          2048: (0px, #FF4646), 
+          4096: (0px, #FF9B00), 
+          8192: (0px, #00FF13), 
+          16384: (1px, #FFC600), 
+          32768: (2px, #0B00FF));
+
+$i: 2;
+
+@while $i <= 32768 {
+  .tile-#{$i} .tile-inner {
+    background-image: url('/img/#{$i}.webp');
+    @if($i >= 128) {
+      box-shadow: 0px 0px 15px nth(map.get($kiillot, $i), 1) nth(map.get($kiillot, $i), 2);
+    }
+  }
+  $i: $i * 2;
+}
+
+.game-container .kurin-palautus-viesti {
+  width: 94%;
+  position: absolute;
+  top: 25px;
+
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+
+  z-index: 1000;
+  pointer-events: none;
+
+  & img {
+    width: 300px;
+
+    @include animation(fade-in-out 4000ms ease-out);
+    @include animation-fill-mode(both);
+  }
+}
+
+
+// End of game-field mixin
+@include game-field;
+
+
+.tile {
+  position: absolute; // Makes transforms relative to the top-left corner
+
+  .tile-inner {
+    background-image: url('/img/tile_unknown.png');
+    border-radius: $tile-border-radius;
+
+    text-align: center;
+    font-weight: bold;
+    z-index: 10;
+
+    font-size: 55px;
+
+    background-size: cover;
+  }
+
+  // Movement transition
+  @include transition($transition-speed ease-in-out);
+  -webkit-transition-property: -webkit-transform;
+  -moz-transition-property: -moz-transform;
+  transition-property: transform;
+
+  $base: 2;
+  $exponent: 1;
+  $limit: 11;
+
+  // Colors for all 11 states, false = no special color
+  $special-colors: false false, // 2
+                   false false, // 4
+                   #f78e48 true, // 8
+                   #fc5e2e true, // 16
+                   #ff3333 true, // 32
+                   #ff0000 true, // 64
+                   false true, // 128
+                   false true, // 256
+                   false true, // 512
+                   false true, // 1024
+                   false true; // 2048
+
+}
+
+@include keyframes(appear) {
+  0% {
+    opacity: 0;
+    @include transform(scale(0));
+  }
+
+  100% {
+    opacity: 1;
+    @include transform(scale(1));
+  }
+}
+
+
+.tile-new .tile-inner {
+  @include animation(appear 200ms ease $transition-speed);
+  @include animation-fill-mode(backwards);
+}
+
+@include keyframes(pop) {
+  0% {
+    @include transform(scale(0));
+  }
+
+  50% {
+    @include transform(scale(1.2));
+  }
+
+  100% {
+    @include transform(scale(1));
+  }
+}
+
+.tile-merged .tile-inner {
+  z-index: 20;
+  @include animation(pop 200ms ease $transition-speed);
+  @include animation-fill-mode(backwards);
+}
+
+.new-above-game{
+  display: -webkit-flex;
+  display: flex;
+  gap: 1em;
+}
+.above-game-left{
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.above-game-right{
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  gap: .5em;
+  flex: 1;
+  flex-wrap: wrap;
+  align-content: end;
+}
+
+.above-game {
+  @include clearfix;
+}
+
+.game-intro {
+  float: left;
+  line-height: 42px;
+  margin-bottom: 0;
+  font-size: smaller;
+}
+
+.restart-button {
+  @include button;
+  flex: content;
+  text-align: center;
+  display: flex;
+  overflow: hidden;
+  padding: 0;
+  height: 50px;
+  line-height: 52px;
+  .uusi-jakso{
+    transition: all 0.25s ease;
+    transform: translateX(0);
+    flex: 1;
+    overflow: hidden;
+  }
+  .size-selector {
+    transform: translateX(100%);
+    transition: all 0.25s ease;
+    flex: 0;
+    overflow: hidden;
+    padding: 2px;
+
+    display: -webkit-flex;
+    display: flex;
+    button {
+      flex: 1; // mf's browsers don't support flex: content???
+      font-size: 1em;
+      border: none;
+      border-radius: 3px;
+      margin: 3px;
+      cursor: pointer;
+      overflow: hidden;
+      background: #ddd;
+      color: black;
+    }
+    button:hover {
+      background: #ccc;
+    }
+    button.restart-4x4::after {
+      content: "oletus";
+      display: block;
+      line-height: 40%;
+      font-size: 75%;
+      margin-top: -1.5px;
+    }
+    button.restart-3x3::after {
+      content: " ";
+      display: block;
+      line-height: 40%;
+      font-size: 75%;
+      margin-top: -1.5px;
+    }
+  }
+}
+.restart-button.open {
+  .uusi-jakso {
+    transform: translateX(-100%);
+    flex: 0;
+  }
+  .size-selector {
+    transform: translateX(0);
+    flex: 1;
+  }
+}
+.pwa-add-button {
+  @include button;
+}
+
+.game-explanation {
+  margin-top: 50px;
+}
+
+@include smaller($mobile-threshold) {
+  // Redefine variables for smaller screens
+  :root{
+    --field-width: 320px;
+    --grid-gap: 10px;
+    --tile-border-radius: 3px;
+  }
+  $field-width: 320px !global;
+  $grid-spacing: 10px !global;
+  $tile-border-radius: 3px !global;
+  $game-container-margin-top: 17px !global;
+
+  html, body {
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+    background-image: none !important; 
+  }
+
+  h1.title {
+    font-size: 38px;
+    margin-top: 15px;
+    max-width: 50%;
+    word-wrap: normal;
+  }
+
+  .container {
+    width: $field-width;
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+
+
+  .heading {
+    margin-bottom: 10px;
+  }
+
+  // Render the game field at the right width
+  @include game-field;
+
+  // Rest of the font-size adjustments in the tile class
+  .tile .tile-inner {
+    font-size: 35px;
+  }
+
+  .game-message {
+    a {
+      padding: 0 10px !important;
+    }
+
+    .tilanne {
+      font-size: 40px !important;
+      height: 30px !important;
+      line-height: 30px !important;
+      margin-top: 90px !important;
+    }
+
+    .kurinpalautukset {
+      font-size: 20px !important;
+    }
+
+    .lower {
+      margin-top: 10px !important;
+
+      .keep-playing-button {
+        margin-bottom: 10px !important;
+      }
+    }
+  }
+
+  .game-container .kurin-palautus-viesti {
+    top: 20px;
+  
+    & img {
+      width: 170px;
+    }
+  }
+  
+}
+
+.theme-0 .color-button img {
+  filter: invert(86%) sepia(34%) saturate(170%) hue-rotate(341deg) brightness(97%) contrast(86%);
+}
+
+.theme-1 .color-button img { //very fucking scufferoni but i couldn't find a better way to do this in sass
+  filter: invert(43%) sepia(4%) saturate(922%) hue-rotate(349deg) brightness(99%) contrast(93%);
+}
+
+.theme-3 .color-button img {
+  filter: invert(79%) sepia(81%) saturate(3152%) hue-rotate(347deg) brightness(101%) contrast(91%);
+}
+
+.theme-14 .color-button img {
+  filter: invert(86%) sepia(34%) saturate(170%) hue-rotate(341deg) brightness(97%) contrast(86%);
+}
+
+$colors: (
+  '0-color-scheme': 'dark', 
+  '0-text-color': #eee,
+  '0-game-background': #161817,
+  '0-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
+  '0-game-container-background': #3e3933,
+  '0-title-color': #e6d2bf,
+  '0-button-color': #365ca6,
+  '0-break-button-background-false': #a63636, //kurinpalautus!
+  '0-break-button-color-false': #ddd,
+  '0-break-button-background-true': #49a636,
+  '0-break-button-color-true': #dfdfdf,
+
+  '14-color-scheme': 'dark', 
+  '14-text-color': #eee,
+  '14-game-background': #161817,
+  '14-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
+  '14-game-container-background': #3e3933,
+  '14-title-color': #e6d2bf,
+  '14-button-color': #365ca6,
+  '14-break-button-background-false': #a63636, //kurinpalautus!
+  '14-break-button-color-false': #ddd,
+  '14-break-button-background-true': #49a636,
+  '14-break-button-color-true': #dfdfdf,
+
+  '16-color-scheme': 'light', 
+  '16-game-background': $game-background,
+  '16-break-button-background-false': #a63636, //kurinpalautus!
+  '16-break-button-color-false': #ddd,
+  '16-break-button-background-true': #49a636,
+  '16-break-button-color-true': #dfdfdf,
+
+  '1-color-scheme': 'light', 
+  '1-game-background': $game-background,
+  '1-break-button-background-false': #cc0000, //kurinpalautus!
+  '1-break-button-color-false': #ddd,
+  '1-break-button-background-true': #00cc00,
+  '1-break-button-color-true': #dfdfdf,
+
+  '2-color-scheme': 'dark', 
+  '2-text-color': #eee,
+  '2-game-background': #161817,
+  '2-game-background-inverted': #E9E7E8, //käytetään kurinpalautusnapin hoverausefektille
+  '2-game-container-background': #3e3933,
+  '2-title-color': #e6d2bf,
+  '2-button-color': #974F23,
+
+  '3-color-scheme': 'dark', 
+  '3-text-color': #dfdfdf,
+  '3-cell-color': rgba(204, 63, 63, 0.35),
+  '3-game-background': #460811,
+  '3-game-background-inverted': #b9f7ee, //käytetään kurinpalautusnapin hoverausefektille
+  '3-game-container-background': #8B0F17,
+  '3-title-color': #F4AB1D,
+  '3-button-color': #146B3A,
+  '3-break-button-background-false': #8B0F17, //kurinpalautus!
+  '3-break-button-color-false': #ddd,
+  '3-break-button-background-true': #146B3A,
+  '3-break-button-color-true': #dfdfdf,
+);
+
+@mixin setThemeColors($color-number) {
+  .theme-#{$t} {
+    // Formejen jne väritystä varten
+    @if map.has-key($colors, '#{$color-number}-color-scheme') {
+      --color-scheme: #{map-get($colors, '#{$color-number}-color-scheme')};
+      color-scheme: var(--color-scheme, "light");
+    }
+    --background: #{map-get($colors, '#{$color-number}-game-background')};
+    --background-inverted: #{map-get($colors, '#{$color-number}-game-background-inverted')};
+    --color: #{$text-color};
+    @if map.has-key($colors, '#{$color-number}-text-color') { 
+      --color: #{map-get($colors, '#{$color-number}-text-color')};
+    }
+    --container-background: #{$game-background};
+    @if map.has-key($colors, '#{$color-number}-game-container-background') {
+      --container-background: #{map-get($colors, '#{$color-number}-game-container-background')};
+    }
+    --button-background: #8f7a66;
+    @if map.has-key($colors, '#{$color-number}-button-color') {
+      --button-background: #{map-get($colors, '#{$color-number}-button-color')};
+    }
+
+    background: map-get($colors, '#{$color-number}-game-background');
+    @if map.has-key($colors, '#{$color-number}-break-button-background-false') { 
+      .parin-kulautus, .kurin-palautus {
+        background: map-get($colors, '#{$color-number}-break-button-background-false');
+        color: map-get($colors, '#{$color-number}-break-button-color-false');
+        &.allowed{
+          background: map-get($colors, '#{$color-number}-break-button-background-true');
+          color: map-get($colors, '#{$color-number}-break-button-color-true');
+        }
+      }
+    }
+    @else {
+      .parin-kulautus, .kurin-palautus {
+        background: var(--break-button-background-false);
+        color: var(--break-button-color-false);
+        &.allowed{
+          background: var(--break-button-background-true);
+          color: var(--break-button-color-true);
+        }
+      }
+    }
+    & body {
+      background-image: url('/img/theme-#{$color-number}/OispaHallaTausta.webp');
+      @if map.has-key($colors, '#{$color-number}-game-background') { 
+        // skips the definitions if the game background doesn't exist
+        color: map-get($colors, '#{$color-number}-text-color');
+        background-color: map-get($colors, '#{$color-number}-game-background');
+
+        a {
+          color: map-get($colors, '#{$color-number}-title-color');
+        }
+
+        .lb-popup-container {
+          background-color: map-get($colors, '#{$color-number}-game-container-background');
+        }
+
+        .grid-cell {
+          background-color: map-get($colors, '#{$color-number}-cell-color');
+        }
+
+        // .kurin-palautus {
+        //   border: 1px map-get($colors, '#{$color-number}-game-background') solid;
+
+        //   &:hover {
+        //     border: 1px map-get($colors, '#{$color-number}-game-background-inverted') solid;
+        //   }
+        // }
+
+        .game-container, .score-container, .best-container, .HAC-container {
+          background: map-get($colors, '#{$color-number}-game-container-background');
+        }
+
+        .game-message.game-over {
+          background: rgba(map-get($colors, '#{$color-number}-game-background'), 0.8);
+        }
+
+        .restart-button, .lower > * {
+          background: map-get($colors, '#{$color-number}-button-color') !important;
+        }
+      }
+    }
+  }
+}
+
+// Themes
+$t: 0;
+@while $t <= 20 {
+  $i: 2;
+  @while $i <= 32768 {
+    .theme-#{$t} .tile-#{$i} .tile-inner {
+      background-image: url('/img/theme-#{$t}/#{$i}.webp');
+      @if($i >= 128) {
+        box-shadow: 0px 0px 15px nth(map.get($kiillot, $i), 1) nth(map.get($kiillot, $i), 2);
+      }
+    }
+    $i: $i * 2;
+  }
+  @include setThemeColors('#{$t}');
+  $t: $t + 1;
+}
+
+.event-button{
+  text-decoration: none !important;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+}
+
+#darkmode-icon {
+  filter: saturate(0) invert(1);
+}
+
+#darkmode-icon.dark {
+  filter: saturate(0);
+}
+
+// Default component styles
+.button {
+  border: none;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 1em;
+  font-family: "Clear Sans";
+  cursor: pointer;
+}
+.icon-button {
+  font-size: 1.25em;
+  height: 100%;
+}
+.background-none {
+  background: none;
+}
+.action-btn {
+  padding: .75em;
+  color: #f9f6f2;
+  background: var(--button-background);
+  transition: transform 200ms;
+}
+.action-btn:hover {
+  transform: scale(1.03);
+}
+.action-btn:active {
+  transform: scale(0.97);
+}
+.action-btn:disabled {
+  filter: saturate(0);
+}
+//

@@ -1,0 +1,49 @@
+yarn run v1.22.19
+$ svelte-kit build
+vite v2.9.9 building for production...
+transforming...
+✓ 61 modules transformed.
+rendering chunks...
+.svelte-kit/output/client/_app/assets/ClearSans-Light-webfont-77ef51b0.eot      24.97 KiB
+.svelte-kit/output/client/_app/assets/ClearSans-Regular-webfont-4d1fe136.eot    22.94 KiB
+.svelte-kit/output/client/_app/assets/ClearSans-Bold-webfont-820a4c29.eot       23.26 KiB
+.svelte-kit/output/client/_app/assets/ClearSans-Regular-webfont-5d7fbc7a.svg    80.74 KiB
+.svelte-kit/output/client/_app/assets/ClearSans-Light-webfont-5080487c.svg      94.01 KiB
+.svelte-kit/output/client/_app/assets/ClearSans-Bold-webfont-a669c919.svg       77.35 KiB
+.svelte-kit/output/client/_app/assets/ClearSans-Regular-webfont-8c94cd2f.woff   26.14 KiB
+.svelte-kit/output/client/_app/assets/ClearSans-Light-webfont-465697ff.woff     28.03 KiB
+.svelte-kit/output/client/_app/assets/ClearSans-Bold-webfont-b16e36cc.woff      26.48 KiB
+.svelte-kit/output/client/_app/manifest.json                                    3.39 KiB
+.svelte-kit/output/client/_app/pages/__layout.svelte-1e9dec60.js                0.53 KiB / gzip: 0.35 KiB
+.svelte-kit/output/client/_app/error.svelte-b41787bb.js                         1.56 KiB / gzip: 0.75 KiB
+.svelte-kit/output/client/_app/pages/debug.svelte-deb00761.js                   4.68 KiB / gzip: 1.89 KiB
+.svelte-kit/output/client/_app/pages/nuboard.svelte-2593ae0c.js                 0.61 KiB / gzip: 0.40 KiB
+.svelte-kit/output/client/_app/chunks/index-8e7ff2fe.js                         0.43 KiB / gzip: 0.31 KiB
+.svelte-kit/output/client/_app/start-8fc561a6.js                                23.95 KiB / gzip: 8.86 KiB
+.svelte-kit/output/client/_app/pages/moninpeli.svelte-a8beae58.js               6.66 KiB / gzip: 2.61 KiB
+.svelte-kit/output/client/_app/assets/board-7a877ae2.css                        0.04 KiB / gzip: 0.06 KiB
+.svelte-kit/output/client/_app/assets/pages/index.svelte-327efac7.css           2.46 KiB / gzip: 0.77 KiB
+.svelte-kit/output/client/_app/chunks/index-593d27cc.js                         12.79 KiB / gzip: 5.37 KiB
+.svelte-kit/output/client/_app/assets/pages/debug.svelte-a8ef7351.css           0.34 KiB / gzip: 0.22 KiB
+.svelte-kit/output/client/_app/assets/tournaments-18681e5e.css                  2.18 KiB / gzip: 0.71 KiB
+.svelte-kit/output/client/_app/assets/pages/moninpeli.svelte-336a42ec.css       0.92 KiB / gzip: 0.38 KiB
+.svelte-kit/output/client/_app/chunks/board-033f279c.js                         23.10 KiB / gzip: 6.96 KiB
+.svelte-kit/output/client/_app/pages/index.svelte-be91454e.js                   42.42 KiB / gzip: 14.60 KiB
+.svelte-kit/output/client/_app/assets/pages/__layout.svelte-bcaab7d3.css        138.04 KiB / gzip: 10.02 KiB
+.svelte-kit/output/client/_app/chunks/tournaments-350fa379.js                   70.49 KiB / gzip: 22.30 KiB
+vite v2.9.9 building SSR bundle for production...
+transforming...
+✓ 57 modules transformed.
+rendering chunks...
+.svelte-kit/output/server/manifest.json                       2.96 KiB
+.svelte-kit/output/server/index.js                            76.40 KiB
+.svelte-kit/output/server/entries/pages/__layout.svelte.js    0.25 KiB
+.svelte-kit/output/server/entries/fallbacks/error.svelte.js   0.72 KiB
+.svelte-kit/output/server/entries/pages/debug.svelte.js       1.03 KiB
+.svelte-kit/output/server/entries/pages/index.svelte.js       24.12 KiB
+.svelte-kit/output/server/entries/pages/moninpeli.svelte.js   10.45 KiB
+.svelte-kit/output/server/entries/pages/nuboard.svelte.js     0.41 KiB
+.svelte-kit/output/server/chunks/index-40eddd98.js            3.45 KiB
+.svelte-kit/output/server/chunks/tournaments-891467cb.js      15.83 KiB
+.svelte-kit/output/server/chunks/board-df4c0f27.js            2.98 KiB
+.svelte-kit/output/server/chunks/hooks-1c45ba0b.js            0.00 KiB

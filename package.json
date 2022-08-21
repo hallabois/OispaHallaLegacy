@@ -1,0 +1,43 @@
+{
+  "name": "oispahallanextgen",
+  "license": "MIT",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "package": "vite package",
+    "preview": "vite preview",
+    "netlify": "yarn install && vite build",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+    "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "^1.0.0-next.50",
+    "@sveltejs/adapter-netlify": "^1.0.0-next.58",
+    "@sveltejs/kit": "^1.0.0-next.350",
+    "@types/marked": "^4.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-svelte3": "^3.2.1",
+    "firebase": "^9.9.1",
+    "firebase-admin": "^11.0.0",
+    "marked": "^4.0.10",
+    "prettier": "^2.4.1",
+    "prettier-plugin-svelte": "^2.4.0",
+    "sass": "^1.48.0",
+    "svelte": "^3.44.0",
+    "svelte-check": "^2.2.6",
+    "svelte-gestures": "^1.4.1",
+    "svelte-preprocess": "^4.9.4",
+    "svelte2tsx": "^0.4.14",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.3",
+    "vite": "^3.0.0"
+  },
+  "type": "module",
+  "dependencies": {}
+}
